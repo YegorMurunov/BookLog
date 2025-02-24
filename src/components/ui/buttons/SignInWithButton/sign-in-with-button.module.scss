@@ -1,0 +1,25 @@
+.button {
+	@apply flex w-auto items-center justify-center rounded-md border border-gray p-2 text-base text-dark outline-none;
+
+	.icon {
+		@apply relative h-6 w-6;
+
+		img {
+			@apply h-full w-full;
+		}
+	}
+
+	&.animate {
+		@apply border-none;
+
+		.title {
+			@apply w-0 text-nowrap opacity-0 transition-all duration-500;
+		}
+
+		&:hover {
+			.title {
+				@apply ml-2 w-full opacity-100;
+			}
+		}
+	}
+}

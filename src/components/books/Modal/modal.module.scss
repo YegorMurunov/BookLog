@@ -1,0 +1,39 @@
+.modal {
+	@apply fixed bottom-0 left-0 z-50 h-[80dvh] w-full overflow-x-hidden border border-light-gray bg-white text-base text-dark;
+	border-radius: 24px 24px 0 0;
+
+	.content {
+		@apply relative h-full w-full overflow-y-auto p-container;
+
+		.title {
+			// @apply text-center text-xl font-bold;
+			@apply text-center text-3xl font-bold text-dark;
+		}
+
+		.close {
+			@apply absolute right-4 top-4;
+
+			> svg {
+				@apply h-8 w-8 text-dark transition-colors;
+			}
+
+			&:hover {
+				> svg {
+					@apply text-pink;
+				}
+			}
+		}
+	}
+}
+
+@media (max-height: 1000px) {
+	.modal {
+		@apply h-[95dvh];
+	}
+}
+
+@media (max-width: 768px) {
+	.modal {
+		@apply pb-[72px];
+	}
+}

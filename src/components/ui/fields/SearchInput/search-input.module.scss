@@ -1,0 +1,27 @@
+.label {
+	@apply relative w-full min-w-28 p-0;
+
+	.input {
+		@apply h-full w-full border-b-2 border-gray bg-transparent py-2 pr-9 text-base text-dark outline-none transition-all duration-300;
+
+		&:focus {
+			@apply border-pink;
+		}
+		&:placeholder {
+			@apply text-gray;
+		}
+	}
+	.clearBtn {
+		@apply absolute right-2 top-1/2 -translate-y-1/2;
+
+		> svg {
+			@apply h-6 w-6 text-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&:hover {
+			> svg {
+				@apply text-pink;
+			}
+		}
+	}
+}

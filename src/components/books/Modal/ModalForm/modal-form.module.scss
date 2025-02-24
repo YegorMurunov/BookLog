@@ -1,0 +1,79 @@
+.form {
+	@apply mx-auto mt-12 flex h-auto w-full max-w-[1000px] flex-wrap items-start justify-center gap-8;
+
+	.input {
+		@apply w-full max-w-[calc(500px-2rem)];
+	}
+
+	.select {
+		max-width: calc(500px - 2rem) !important;
+		width: 100% !important;
+	}
+
+	.datepicker {
+		@apply w-full max-w-[calc(500px-2rem)];
+	}
+
+	.rating {
+		@apply h-12 w-full max-w-[calc(500px-2rem)];
+	}
+
+	.textarea {
+		@apply w-full;
+
+		> textarea {
+			@apply min-h-24 resize-y;
+		}
+	}
+
+	.btnSubmit {
+		@apply w-full max-w-[calc(500px-2rem)];
+	}
+}
+
+@media (max-width: 1000px) {
+	.form {
+		@apply max-w-[600px] gap-4;
+
+		.input {
+			@apply max-w-[calc(300px-1rem)];
+		}
+		.btnSubmit {
+			@apply w-full max-w-[calc(300px-1rem)];
+		}
+		.datepicker {
+			@apply max-w-[calc(300px-1rem)];
+		}
+		.rating {
+			@apply max-w-[calc(300px-1rem)];
+		}
+	}
+}
+@media (max-width: 630px) {
+	.form {
+		@apply max-w-full;
+		.input {
+			@apply max-w-full;
+		}
+		.select {
+			max-width: 100% !important;
+		}
+		.datepicker {
+			@apply max-w-full;
+		}
+		.rating {
+			@apply w-full;
+		}
+
+		.textarea {
+			@apply w-full;
+
+			> textarea {
+				@apply min-h-24 resize-y;
+			}
+		}
+		.btnSubmit {
+			@apply w-full max-w-[300px];
+		}
+	}
+}

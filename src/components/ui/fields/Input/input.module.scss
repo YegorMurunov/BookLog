@@ -1,0 +1,46 @@
+.label {
+	@apply relative h-11 w-full;
+
+	.title {
+		@apply pointer-events-none absolute left-0 top-[15px] text-base text-gray transition-all duration-300;
+	}
+
+	.input {
+		@apply w-full border-b-2 border-gray bg-transparent px-0 pb-1 pt-[15px] text-base text-dark outline-none transition-all duration-300;
+	}
+
+	&.focus,
+	&.active {
+		.title {
+			@apply top-0 text-xs text-pink;
+		}
+		.input {
+			@apply border-b-2 border-pink;
+		}
+	}
+
+	&.active:not(.focus, .error) {
+		.title {
+			@apply text-gray;
+		}
+		.input {
+			@apply border-b-2 border-gray;
+		}
+	}
+
+	@media (max-width: 600px) {
+		@apply w-full;
+	}
+
+	&.error {
+		.title {
+			@apply text-red;
+		}
+		.input {
+			@apply border-red;
+		}
+	}
+	.errorMsg {
+		@apply pt-[2px] text-xs text-red;
+	}
+}

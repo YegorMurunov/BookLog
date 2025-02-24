@@ -1,0 +1,30 @@
+.dropdownMenu {
+	@apply pointer-events-none absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-md border border-light-gray bg-white shadow-lg;
+
+	@apply scale-95 transform opacity-0; /* Начальные стили */
+	@apply transition-all delay-0 duration-300 ease-in-out; /* Плавное изменение */
+
+	&.open {
+		@apply pointer-events-auto scale-100 transform opacity-100 shadow-xl;
+	}
+
+	.filterList {
+		@apply m-0 list-none p-0;
+	}
+
+	.filterItem {
+		@apply cursor-pointer px-4 py-2 transition-colors duration-300 ease-in-out hover:bg-gray;
+
+		.count {
+			@apply ml-1 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-dark p-1 text-sm text-light-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&.active {
+			@apply bg-pink text-white;
+
+			.count {
+				@apply bg-white/25;
+			}
+		}
+	}
+}

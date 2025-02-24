@@ -1,0 +1,15 @@
+.content {
+	@apply bg-white p-container text-dark;
+
+	.btnAdd {
+		@apply fixed bottom-5 right-8 z-20;
+	}
+}
+
+@media (max-width: 768px) {
+	.content {
+		.btnAdd {
+			@apply bottom-24 right-5;
+		}
+	}
+}

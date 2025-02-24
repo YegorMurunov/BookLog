@@ -1,0 +1,174 @@
+// Переменные для цветов
+$dark: #181818;
+$border-gray: rgb(210 209 209 / var(--tw-border-opacity, 1));
+$pink: #f97fbe;
+$gray: #d2d1d1;
+$error: red;
+$white: #fff;
+$background-hover: rgba(210, 209, 209, 0.2);
+$background-selected: rgba(210, 209, 209, 0.5);
+$background-active: rgba(210, 209, 209, 0.7);
+
+// Базовые стили контейнера
+.custom-select-container {
+	width: 100% !important;
+	background-color: transparent !important;
+	border: none !important;
+	min-height: 42.2px !important;
+
+	&.select-error {
+		.custom-select__control {
+			border-bottom: 2px solid $error !important;
+		}
+		.custom-select__placeholder {
+			color: $error !important;
+		}
+	}
+}
+
+// Основной селект
+.custom-select {
+	font-family: 'Inter', sans-serif !important;
+
+	// Control
+	&__control {
+		width: 100% !important;
+		background-color: $white !important;
+		border-radius: 0 !important;
+		border: none !important;
+		border-bottom: 2px solid $border-gray !important;
+		box-shadow: none !important;
+		transition: border-color 0.3s ease-in-out !important;
+		color: $dark !important;
+		padding: 0 0 1px 0 !important;
+
+		&--menu-is-open {
+			border-color: $pink !important;
+		}
+	}
+
+	// Placeholder
+	&__placeholder {
+		color: $border-gray !important;
+	}
+
+	// Value Container
+	&__value-container {
+		min-height: 42.2px !important;
+		// padding: 5px 0 !important;
+		padding: 0 8px 0 0 !important;
+		cursor: text !important;
+	}
+
+	// Input
+	&__input-container {
+		margin: 0 !important;
+		padding: 0 !important;
+		color: $dark !important;
+	}
+
+	// Indicators
+	&__indicator-separator {
+		background-color: $gray !important;
+	}
+
+	&__clear-indicator {
+		cursor: pointer !important;
+
+		svg {
+			fill: $gray !important;
+			transition: all 0.3s ease !important;
+		}
+
+		&:hover {
+			svg {
+				fill: $pink !important;
+			}
+		}
+	}
+
+	&__dropdown-indicator {
+		cursor: pointer !important;
+
+		svg {
+			fill: $gray !important;
+			transition: all 0.3s ease !important;
+		}
+
+		&:hover {
+			svg {
+				fill: $pink !important;
+			}
+		}
+	}
+
+	// Multi-value
+	&__multi-value {
+		color: $dark !important;
+		background-color: $background-selected !important;
+		border-radius: 10px !important;
+		overflow: hidden !important;
+
+		&__label {
+			color: $dark !important;
+		}
+
+		&__remove {
+			cursor: pointer !important;
+			transition: all 0.3s ease !important;
+		}
+	}
+
+	// Menu
+	&__menu {
+		background-color: $white !important;
+		padding: 10px !important;
+		border-radius: 8px !important;
+		border: 1px solid $gray !important;
+		box-shadow: 0 5px 10px 0 $border-gray !important;
+		color: $dark !important;
+		animation: scaleIn 0.35s ease-in-out !important;
+	}
+
+	// Options
+	&__option {
+		cursor: pointer !important;
+		border-radius: 10px !important;
+		transition: background-color 0.3s ease !important;
+		background-color: transparent !important;
+
+		&--is-focused,
+		&:hover {
+			background-color: $background-hover !important;
+		}
+
+		&:active {
+			background-color: $background-active !important;
+		}
+
+		&--is-selected {
+			background-color: $background-selected !important;
+			color: $dark !important;
+		}
+	}
+}
+
+// Анимация
+@keyframes scaleIn {
+	0% {
+		opacity: 0;
+		transform: scale(0.9);
+	}
+	50% {
+		opacity: 0.3;
+	}
+	100% {
+		opacity: 1;
+		transform: scale(1);
+	}
+}
+
+// Ошибка
+.errorMsg {
+	@apply pt-[2px] text-xs text-red;
+}

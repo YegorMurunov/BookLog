@@ -1,0 +1,44 @@
+.mobMenu {
+	@apply bottom-0 left-0 z-[999] h-[72px] w-full bg-dark px-container py-2 text-base text-white;
+
+	.menu {
+		.menu-ul {
+			@apply flex items-center justify-around gap-6;
+
+			.menu-li {
+				> a {
+					@apply relative flex flex-col items-center justify-center gap-1 p-1 text-center text-sm transition-transform duration-300 ease-in-out;
+
+					.menu-icon {
+						@apply rounded-full bg-transparent p-2 transition-all duration-300 ease-in-out;
+
+						> svg {
+							@apply h-8 w-8;
+						}
+					}
+
+					.menu-img {
+						@apply rounded-full bg-transparent p-2 transition-all duration-300 ease-in-out;
+
+						> img {
+							@apply h-8 w-8 rounded-full;
+						}
+					}
+
+					&.active {
+						.menu-icon {
+							@apply scale-110;
+						}
+						.menu-img {
+							@apply scale-110;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.activeItem {
+		@apply absolute left-0 top-0 z-[-1] h-full w-full rounded-full bg-pink;
+	}
+}

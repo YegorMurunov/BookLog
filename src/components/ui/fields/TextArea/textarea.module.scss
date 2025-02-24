@@ -1,0 +1,23 @@
+.label {
+	@apply relative min-h-12 w-full;
+
+	.textarea {
+		@apply w-full resize rounded-lg border-2 border-gray bg-transparent p-2 text-base text-dark outline-none transition-colors duration-300;
+
+		&:focus {
+			@apply border-pink;
+		}
+		&::placeholder {
+			@apply text-gray;
+		}
+	}
+
+	&.error {
+		.textarea {
+			@apply border-red;
+		}
+	}
+	.errorMsg {
+		@apply pt-[2px] text-xs text-red;
+	}
+}

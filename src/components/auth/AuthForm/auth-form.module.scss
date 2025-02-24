@@ -1,0 +1,44 @@
+@keyframes moveGradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+.container {
+	@apply relative flex min-h-dvh w-full items-center justify-center px-container;
+	&::before {
+		content: '';
+		@apply absolute -z-10 h-full w-full bg-pink bg-linear-primary;
+		background-size: 300% 300%;
+		animation: moveGradient 5s linear infinite;
+	}
+}
+
+.modal {
+	@apply relative flex min-w-96 flex-col items-center justify-start rounded-xl bg-white p-7 py-10;
+
+	.title {
+		@apply mb-4 text-4xl font-normal;
+	}
+
+	.form {
+		@apply flex w-full flex-col items-center justify-start gap-2;
+	}
+	.text {
+		@apply mt-5 text-sm;
+
+		> a {
+			@apply ml-1 text-sm text-skyblue underline;
+		}
+	}
+
+	@media (max-width: 768px) {
+		@apply min-w-60;
+	}
+}

@@ -1,0 +1,38 @@
+.wrapper {
+	@apply flex w-full;
+
+	&::before {
+		content: '';
+		@apply pointer-events-none absolute left-0 top-0 z-40 h-full w-full bg-dark/60 opacity-0 backdrop-blur-sm transition-all duration-300 ease-in-out;
+	}
+
+	&.blur {
+		&::before {
+			content: '';
+			@apply pointer-events-auto opacity-100;
+		}
+	}
+
+	.page {
+		@apply relative h-dvh w-full overflow-y-auto;
+
+		&.no-scroll {
+			overflow: hidden;
+		}
+
+		@media (max-width: 1024px) {
+			padding-left: 80px;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.wrapper {
+		@apply flex-col-reverse;
+
+		.page {
+			@apply p-0;
+			height: calc(100dvh - 72px);
+		}
+	}
+}

@@ -1,0 +1,43 @@
+.content {
+	@apply p-container;
+
+	.text {
+		.title {
+			@apply mb-2 text-2xl font-bold text-dark;
+		}
+		p:not(:last-child) {
+			@apply mb-1;
+		}
+	}
+
+	.currentUserData {
+		@apply mt-7;
+
+		.userImg {
+			@apply mb-2;
+
+			> img,
+			> svg {
+				@apply h-20 w-20 rounded-full text-dark;
+			}
+		}
+		.userName {
+			@apply mb-0 text-xl;
+		}
+		.userEmail {
+			@apply text-base;
+		}
+	}
+
+	.logout {
+		@apply mt-5 flex items-center justify-center gap-2;
+
+		> svg {
+			@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&:hover > svg {
+			@apply text-dark;
+		}
+	}
+}

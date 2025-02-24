@@ -1,0 +1,191 @@
+.sidebar {
+	@apply flex max-h-dvh flex-col overflow-y-auto overflow-x-hidden bg-dark px-container text-base text-white; // overflow-x-hidden
+
+	position: relative;
+
+	// Мобильная версия (адаптив)
+	&.absolute {
+		@apply left-0 top-0 z-10 h-full;
+		position: absolute;
+	}
+
+	// Иконка сворачивания
+	.collapse-icon {
+		@apply right-4 top-4 z-10;
+		position: absolute;
+
+		> svg {
+			@apply h-6 w-6 text-white transition-colors duration-300;
+		}
+
+		&:hover > svg {
+			@apply text-pink;
+		}
+	}
+
+	// Заголовок с логотипом
+	.header {
+		@apply mb-10 w-full py-container;
+
+		.logo {
+			@apply flex items-center;
+
+			img {
+				@apply h-16 w-16;
+			}
+
+			.appName {
+				@apply text-2xl font-bold;
+
+				span {
+					@apply text-pink;
+				}
+			}
+		}
+	}
+
+	// Меню навигации
+	.menu {
+		.menu-ul {
+			@apply flex flex-col gap-2;
+
+			.menu-li {
+				.menu-navLink {
+					@apply flex gap-5 rounded-lg p-4 transition-colors duration-300;
+
+					&.active {
+						@apply bg-light-dark;
+
+						.menu-icon > svg {
+							@apply text-pink;
+						}
+					}
+
+					&:hover {
+						@apply bg-light-dark/50;
+					}
+
+					.menu-icon > svg {
+						@apply h-6 w-6 text-white transition-colors duration-300;
+					}
+				}
+			}
+		}
+	}
+
+	// Нижняя часть сайдбара (профиль пользователя)
+	.footer {
+		@apply mt-auto flex flex-col gap-3 py-container;
+
+		.account {
+			@apply flex items-center gap-2 rounded-xl bg-white p-2 text-dark;
+
+			> a {
+				@apply flex items-center gap-2;
+
+				.photo {
+					img,
+					svg {
+						@apply h-10 w-10 rounded-full;
+					}
+				}
+
+				.user {
+					.name {
+						@apply text-base;
+					}
+
+					.email {
+						@apply text-xs text-light-dark/50;
+					}
+				}
+			}
+
+			.exit {
+				@apply ml-auto rounded-lg bg-light-gray p-2;
+
+				> svg {
+					@apply h-4 w-4 text-dark;
+				}
+			}
+		}
+	}
+
+	// Стили для свернутого состояния
+	&.menu-collapsed {
+		@apply w-20 px-2;
+
+		.collapse-icon {
+			@apply relative right-0 top-0 mx-auto mb-5;
+		}
+
+		.collapsed {
+			@apply hidden;
+		}
+
+		.header {
+			@apply text-center;
+
+			.logo {
+				@apply items-center justify-center;
+
+				img {
+					@apply h-14 w-14;
+				}
+
+				.appName {
+					@apply flex flex-col items-start text-xl;
+				}
+			}
+		}
+
+		.menu {
+			.menu-ul {
+				.menu-li {
+					@apply flex justify-center;
+
+					.menu-navLink {
+						@apply gap-0 p-3;
+					}
+				}
+			}
+		}
+
+		.footer {
+			@apply flex justify-center;
+
+			.account {
+				@apply justify-center gap-0;
+
+				.exit {
+					@apply hidden;
+				}
+			}
+		}
+	}
+}
+
+/* Стилизация скроллбара для sidebar */
+.sidebar::-webkit-scrollbar {
+	width: 8px; /* Ширина полосы прокрутки */
+	height: 8px; /* Высота полосы прокрутки (для горизонтальной прокрутки) */
+}
+
+.sidebar::-webkit-scrollbar-track {
+	background: #f0f0f0; /* Светлый фон для track (следа) */
+	border-radius: 4px; /* Скругление углов */
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+	background-color: #d1d1d1; /* Светлый цвет полосы прокрутки */
+	border-radius: 4px; /* Скругление углов полосы прокрутки */
+	border: 2px solid #f0f0f0; /* Легкая граница вокруг thumb */
+}
+
+.sidebar::-webkit-scrollbar-thumb:hover {
+	background-color: #a1a1a1; /* Цвет полосы прокрутки при наведении */
+}
+
+.sidebar::-webkit-scrollbar-corner {
+	background: #f0f0f0; /* Цвет угла для пересечения вертикальной и горизонтальной полосы */
+}

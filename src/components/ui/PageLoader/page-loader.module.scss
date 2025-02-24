@@ -1,0 +1,11 @@
+.container {
+	@apply relative flex min-h-dvh w-full items-center justify-center p-4;
+	&::before {
+		content: '';
+		@apply absolute -z-10 h-full w-full bg-white;
+	}
+
+	.icon {
+		@apply h-12 w-12 animate-spin;
+	}
+}

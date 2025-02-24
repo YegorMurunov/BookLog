@@ -1,0 +1,38 @@
+.button {
+	@apply min-w-[150px] overflow-hidden rounded-full bg-pink px-5 py-3 text-base text-white transition-all duration-300;
+
+	&:hover {
+		@apply -rotate-3 bg-pink-expressive;
+	}
+
+	&.dark {
+		@apply bg-dark text-white hover:bg-light-dark;
+	}
+	&.light {
+		@apply border border-light-gray bg-white text-dark hover:bg-light-gray;
+	}
+
+	&.outlined {
+		@apply border border-pink bg-white text-pink duration-300 hover:-rotate-0;
+
+		&:hover {
+			@apply bg-pink/70 text-white shadow-md shadow-pink-expressive;
+		}
+
+		&.light {
+			@apply border-dark text-dark;
+
+			&:hover {
+				@apply bg-light-dark text-white shadow-md shadow-dark;
+			}
+		}
+
+		&.dark {
+			@apply border-light-dark bg-light-dark text-white;
+
+			&:hover {
+				@apply bg-white text-dark shadow-md shadow-light-dark;
+			}
+		}
+	}
+}

@@ -1,0 +1,15 @@
+.banner {
+	@apply relative h-auto w-full overflow-hidden px-container py-10;
+
+	&::before {
+		content: '';
+		@apply absolute left-0 top-0 -z-10 h-full w-full bg-pink bg-linear-primary blur-sm;
+	}
+
+	.title {
+		@apply text-4xl font-bold text-dark;
+	}
+	.cards {
+		@apply mt-8 flex flex-nowrap gap-3 overflow-x-auto;
+	}
+}

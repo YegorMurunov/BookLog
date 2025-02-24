@@ -1,0 +1,19 @@
+.card {
+	@apply min-w-48 flex-auto rounded-xl bg-white/70 p-container;
+
+	.title {
+		@apply mb-5 text-base;
+	}
+
+	.value {
+		@apply text-2xl font-bold;
+	}
+
+	.subtext {
+		@apply mt-2 text-sm text-dark/40;
+
+		span {
+			@apply mr-1 text-sm text-dark;
+		}
+	}
+}

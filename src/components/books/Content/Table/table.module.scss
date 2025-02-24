@@ -1,0 +1,156 @@
+.wrapper {
+	@apply mt-5 w-full;
+
+	.loader {
+		@apply p-5 text-center font-normal;
+	}
+
+	.tableContainer {
+		@apply h-full w-full overflow-auto;
+	}
+
+	.table {
+		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark; // grid
+
+		.thead {
+			position: sticky;
+			top: 0;
+			background: white;
+			z-index: 10;
+
+			tr {
+				@apply border-b-2 border-b-light-gray;
+
+				th {
+					@apply whitespace-nowrap px-5 py-3 align-top font-normal text-dark-gray;
+				}
+			}
+		}
+		.tbody {
+			tr {
+				@apply relative;
+
+				td {
+					@apply max-w-[250px] px-5 pb-4 pt-3 align-top font-normal text-dark; // max-w-[200px]
+					word-wrap: break-word; // Перенос длинных слов
+					white-space: normal; // Разрешает перенос строк
+					overflow-wrap: break-word; // Совместимость с разными браузерами
+
+					&::last-child {
+						@apply pr-10;
+					}
+
+					> .shortComment {
+						@apply cursor-pointer;
+					}
+
+					&.genres {
+						@apply flex max-w-[300px] flex-wrap gap-2;
+
+						.genre {
+							@apply whitespace-nowrap rounded-full bg-gray/80 px-3 py-2 text-white;
+						}
+					}
+
+					&.moreTd {
+						@apply w-[24px] pb-0 pl-1 pr-0 text-right;
+						position: sticky;
+						right: 0;
+						background-color: white;
+						// z-index: 20;
+
+						.moreDiv {
+							@apply relative;
+
+							.moreBtn {
+								> svg {
+									@apply h-6 w-6 text-dark transition-all duration-300 ease-in-out;
+								}
+
+								&:hover {
+									> svg {
+										@apply scale-110 text-pink;
+									}
+								}
+							}
+
+							.moreUl {
+								@apply pointer-events-none absolute right-4 top-0 z-10 flex -translate-x-2 scale-75 list-none gap-3 rounded-xl border border-light-gray bg-white p-2 opacity-0 shadow-md transition-all ease-in-out;
+
+								&.show {
+									@apply pointer-events-auto scale-100 opacity-100;
+								}
+
+								li {
+									@apply flex items-center justify-center;
+
+									.ulBtn {
+										> svg {
+											@apply h-5 w-5 text-dark transition-all duration-300 ease-in-out;
+										}
+
+										&:hover {
+											> svg {
+												@apply scale-110 text-pink;
+											}
+										}
+
+										&.deleteBtn {
+											&:hover {
+												> svg {
+													@apply text-red;
+												}
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+
+					&.isTheBest {
+						@apply w-[24px] px-0 pb-0;
+
+						.isTheBestBtn {
+							> svg {
+								@apply h-6 w-6 px-0 pb-0 transition-colors duration-300 ease-in-out;
+
+								&.theBest {
+									@apply fill-yellow text-yellow;
+								}
+							}
+
+							&:disabled {
+								@apply cursor-not-allowed;
+
+								> svg {
+									@apply fill-light-gray text-light-gray;
+								}
+							}
+
+							@media (hover: hover) {
+								&:hover {
+									> svg {
+										@apply fill-yellow text-yellow;
+									}
+								}
+							}
+						}
+					}
+				}
+
+				&:not(:last-child) {
+					@apply border-b-2 border-b-light-gray;
+				}
+			}
+		}
+	}
+}
+
+.status {
+	@apply flex;
+
+	.statusItem {
+		@apply whitespace-nowrap rounded-full bg-gray/80 px-3 py-2 text-white;
+	}
+}

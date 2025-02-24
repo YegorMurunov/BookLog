@@ -1,0 +1,11 @@
+.test {
+	@apply p-container;
+}
+
+.label1 {
+	@apply relative block w-1/6;
+}
+
+.heading {
+	@apply text-7xl font-bold;
+}

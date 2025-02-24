@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+	@apply bg-white font-sans text-base text-dark;
+}
+
+body {
+	margin: 0;
+	min-width: 320px;
+	min-height: 100vh;
+	@apply font-sans text-base text-dark;
+}
+
+/* Стилизация scrollbar для всей страницы */
+::-webkit-scrollbar {
+	width: 8px; /* Ширина полосы прокрутки */
+	height: 8px; /* Высота полосы прокрутки (для горизонтальной прокрутки) */
+}
+
+::-webkit-scrollbar-track {
+	background: rgba(0, 0, 0, 0.1); /* Цвет фона для track (следа) */
+	border-radius: 4px; /* Скругление углов */
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: rgba(0, 0, 0, 0.3); /* Цвет самой полосы прокрутки */
+	border-radius: 4px; /* Скругление углов полосы прокрутки */
+	border: 2px solid rgba(0, 0, 0, 0.1); /* Легкая граница вокруг thumb */
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background-color: rgba(
+		0,
+		0,
+		0,
+		0.5
+	); /* Цвет полосы прокрутки при наведении */
+}
+
+::-webkit-scrollbar-corner {
+	background: rgba(
+		0,
+		0,
+		0,
+		0.1
+	); /* Цвет угла для пересечения вертикальной и горизонтальной полосы */
+}
