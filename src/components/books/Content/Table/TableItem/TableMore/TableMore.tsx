@@ -3,7 +3,6 @@ import { EllipsisVertical, Pencil, Trash2 } from 'lucide-react';
 import { useRef, useState } from 'react';
 
 import { useActions } from '@/hooks/useActions';
-import { useBooks } from '@/hooks/useBooks';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { ITableItemProps } from '@/types/ui/table.interface';
 
@@ -11,9 +10,8 @@ import styles from '../../table.module.scss';
 
 const TableMore = ({ book }: ITableItemProps) => {
 	const [isShow, setIsShow] = useState(false);
-	const { deleteBook } = useBooks();
 
-	const { openModal } = useActions();
+	const { openBookModal, openDeleteModal } = useActions();
 
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -22,10 +20,6 @@ const TableMore = ({ book }: ITableItemProps) => {
 	};
 
 	useOnClickOutside(ref, handleClickOutside);
-
-	const removeBook = (bookId: string) => {
-		deleteBook(bookId);
-	};
 
 	return (
 		<div className={styles.moreDiv} ref={ref}>
@@ -41,7 +35,7 @@ const TableMore = ({ book }: ITableItemProps) => {
 					<button
 						type='button'
 						className={styles.ulBtn}
-						onClick={() => openModal({ type: 'edit', book })}
+						onClick={() => openBookModal({ type: 'edit', book })}
 					>
 						<Pencil />
 					</button>
@@ -50,7 +44,7 @@ const TableMore = ({ book }: ITableItemProps) => {
 					<button
 						type='button'
 						className={clsx(styles.ulBtn, styles.deleteBtn)}
-						onClick={() => removeBook(book.id)}
+						onClick={() => openDeleteModal(book.id)}
 					>
 						<Trash2 />
 					</button>

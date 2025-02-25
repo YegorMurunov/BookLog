@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 
 import { actions as authActions } from '@/store/slices/auth/auth.slice';
 import { actions as booksActions } from '@/store/slices/books/books.slice';
+import { actions as deleteModalActions } from '@/store/slices/delete-modal/delete-modal.slice';
 import { actions as modalActions } from '@/store/slices/modal/modal.slice';
 import { actions as sidebarActions } from '@/store/slices/sidebar/sidebar.slice';
 import { bindActionCreators } from '@reduxjs/toolkit';
@@ -11,7 +12,8 @@ const rootActions = {
 	...authActions,
 	...sidebarActions,
 	...booksActions,
-	...modalActions
+	...modalActions,
+	...deleteModalActions
 };
 
 export const useActions = () => {

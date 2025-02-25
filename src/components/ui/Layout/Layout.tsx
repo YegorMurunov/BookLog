@@ -10,12 +10,20 @@ import Sidebar from './Sidebar/Sidebar';
 import styles from './layout.module.scss';
 
 const Layout = () => {
-	const { isOpen } = useTypedSelector(state => state.modal);
+	const { isOpen: isBookModal } = useTypedSelector(state => state.bookModal);
+	const { isOpen: isDeleteModal } = useTypedSelector(
+		state => state.deleteModal
+	);
 
 	return (
-		<div className={clsx(styles.wrapper, isOpen && styles.blur)}>
+		<div className={styles.wrapper}>
 			<Sidebar />
-			<main className={clsx(styles.page, isOpen && styles['no-scroll'])}>
+			<main
+				className={clsx(
+					styles.page,
+					(isBookModal || isDeleteModal) && styles['no-scroll']
+				)}
+			>
 				{
 					<Suspense fallback={<PageLoader />}>
 						<Outlet />

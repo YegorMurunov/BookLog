@@ -1,10 +1,12 @@
 import clsx from 'clsx';
+import { Bookmark } from 'lucide-react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import CustomDatepicker from '@/components/ui/CustomDatepicker/CustomDatepicker';
 import CustomSelect from '@/components/ui/Select/CustomSelect';
 import StarRating from '@/components/ui/StarRating/StarRating';
 import { Button } from '@/components/ui/buttons/Button/Button';
+import IconCheckbox from '@/components/ui/fields/IconCheckbox/IconCheckbox';
 import Input from '@/components/ui/fields/Input/Input';
 import TextArea from '@/components/ui/fields/TextArea/TextArea';
 import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
@@ -23,8 +25,8 @@ import { formatDate } from '@/utils/formate-date.utils';
 import styles from './modal-form.module.scss';
 
 function ModalForm() {
-	const { type, book } = useTypedSelector(state => state.modal);
-	const { closeModal } = useActions();
+	const { type, book } = useTypedSelector(state => state.bookModal);
+	const { closeBookModal } = useActions();
 
 	const { addBook, updateBook } = useBooks();
 
@@ -38,6 +40,7 @@ function ModalForm() {
 			status: getStatusDataByValue(book?.status),
 			date: book ? book.date : formatDate(new Date()),
 			rating: book ? book.rating : 0,
+			isTheBestBook: book ? book.isTheBestBook : false,
 			comment: book ? book.comment : ''
 		}
 	});
@@ -55,14 +58,14 @@ function ModalForm() {
 			status: data.status?.value!, // eslint-disable-line
 			date: formatDate(data.date),
 			rating: data.rating,
-			isTheBestBook: false,
+			isTheBestBook: data.isTheBestBook,
 			comment: data.comment
 		};
 
 		if (type === 'create') {
-			await addBook(bookData).then(() => closeModal());
+			await addBook(bookData).then(() => closeBookModal());
 		} else if (type === 'edit' && book) {
-			await updateBook(book?.id, bookData).then(() => closeModal());
+			await updateBook(book?.id, bookData).then(() => closeBookModal());
 		}
 	};
 
@@ -209,22 +212,43 @@ function ModalForm() {
 				)}
 			/>
 
-			{/* star rating */}
-			<Controller
-				control={control}
-				name='rating'
-				rules={{
-					required: false
-				}}
-				render={({ field: { onChange, value } }) => (
-					<StarRating
-						value={value}
-						onChange={onChange}
-						size={36}
-						className={styles.rating}
-					/>
-				)}
-			/>
+			{/* star rating and isTheBest */}
+			<div className={styles.ratingAndBest}>
+				<Controller
+					control={control}
+					name='rating'
+					rules={{
+						required: false
+					}}
+					render={({ field: { onChange, value } }) => (
+						<StarRating
+							value={value}
+							onChange={onChange}
+							size={36}
+							className={styles.rating}
+						/>
+					)}
+				/>
+				<Controller
+					control={control}
+					name='isTheBestBook'
+					rules={{ required: false }}
+					render={({ field }) => (
+						<IconCheckbox
+							name='isTheBest'
+							checked={field.value}
+							onChange={(checked: boolean) => field.onChange(checked)}
+							icon={Bookmark}
+							tooltipTitle='Лучшая книга?'
+							tooltipId='checkbox-isTheBest'
+							tooltipDelay={500}
+							className={styles.checkbox}
+							defaultClassname={styles.defaultCheckbox}
+							activeClassname={styles.activeCheckbox}
+						/>
+					)}
+				/>
+			</div>
 
 			{/* field comment */}
 			<Controller

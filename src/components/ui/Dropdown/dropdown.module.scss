@@ -1,5 +1,5 @@
 .dropdownMenu {
-	@apply pointer-events-none absolute left-0 right-0 top-full z-50 mt-2 overflow-hidden rounded-md border border-light-gray bg-white shadow-lg;
+	@apply pointer-events-none absolute left-0 right-0 top-full z-40 mt-2 overflow-hidden rounded-md border border-light-gray bg-white shadow-lg;
 
 	@apply scale-95 transform opacity-0; /* Начальные стили */
 	@apply transition-all delay-0 duration-300 ease-in-out; /* Плавное изменение */

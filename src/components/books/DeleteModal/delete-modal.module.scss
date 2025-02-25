@@ -1,0 +1,30 @@
+.modal {
+	@apply fixed left-0 top-0 z-50 flex h-full w-full items-center justify-center bg-dark/60 px-container py-6 opacity-100 backdrop-blur-sm transition-all duration-300 ease-in-out;
+
+	.content {
+		@apply rounded-lg bg-white p-6;
+
+		.title {
+			@apply text-xl text-dark;
+		}
+		.buttons {
+			@apply mt-4 flex gap-3;
+
+			.button {
+				@apply w-1/2 rounded-lg bg-light-gray px-6 py-container transition-colors duration-300 ease-in-out;
+
+				&:hover {
+					@apply bg-gray;
+				}
+
+				&.buttonDel {
+					@apply bg-red/70 text-white;
+
+					&:hover {
+						@apply bg-red;
+					}
+				}
+			}
+		}
+	}
+}

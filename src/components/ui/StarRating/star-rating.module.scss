@@ -1,5 +1,5 @@
 .star-rating-wrapper {
-	@apply flex w-full items-center justify-center;
+	@apply flex w-full items-center justify-center gap-1;
 
 	> div {
 		overflow: visible !important;
@@ -13,6 +13,12 @@
 	// Анимация для выбранных звезд
 	&.active span {
 		animation: pulse 0.5s ease; // Анимация, когда звезда активирована
+	}
+
+	.clear {
+		> svg {
+			@apply h-6 w-6 translate-y-[2px] text-gray transition-colors duration-300 ease-in-out hover:text-dark;
+		}
 	}
 }
 

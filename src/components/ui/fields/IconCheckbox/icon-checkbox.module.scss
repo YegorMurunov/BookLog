@@ -1,0 +1,19 @@
+.label {
+	@apply flex cursor-pointer select-none items-center justify-center;
+
+	.icon {
+		> svg {
+			@apply h-7 w-7 fill-white text-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&.active {
+			> svg {
+				@apply fill-gray text-gray;
+			}
+		}
+	}
+
+	.input {
+		@apply pointer-events-none hidden;
+	}
+}

@@ -14,8 +14,22 @@
 		@apply w-full max-w-[calc(500px-2rem)];
 	}
 
+	.ratingAndBest {
+		@apply flex items-center justify-center gap-8;
+	}
+
 	.rating {
-		@apply h-12 w-full max-w-[calc(500px-2rem)];
+		@apply h-12 w-full; // max-w-[calc(500px-2rem)]
+	}
+
+	.checkbox {
+		@apply h-7 w-7;
+
+		.activeCheckbox {
+			> svg {
+				@apply fill-yellow text-yellow;
+			}
+		}
 	}
 
 	.textarea {
@@ -45,7 +59,7 @@
 			@apply max-w-[calc(300px-1rem)];
 		}
 		.rating {
-			@apply max-w-[calc(300px-1rem)];
+			// @apply max-w-[calc(300px-1rem)];
 		}
 	}
 }

@@ -12,6 +12,8 @@
 
 .container {
 	@apply relative flex min-h-dvh w-full items-center justify-center px-container;
+	min-height: var(--app-height);
+
 	&::before {
 		content: '';
 		@apply absolute -z-10 h-full w-full bg-pink bg-linear-primary;

@@ -42,7 +42,7 @@ const manifest: Partial<ManifestOptions> | false = {
 	lang: 'ru-UA',
 	name: 'BookLog',
 	short_name: 'BookLog',
-	start_url: '/dashboard'
+	start_url: 'https://thebooklog.vercel.app/dashboard'
 };
 
 export default defineConfig({

@@ -10,13 +10,13 @@
 	}
 
 	.table {
-		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark; // grid
+		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark;
 
 		.thead {
-			position: sticky;
-			top: 0;
-			background: white;
-			z-index: 10;
+			// position: sticky;
+			// top: 0;
+			// background: white;
+			// z-index: 10;
 
 			tr {
 				@apply border-b-2 border-b-light-gray;
@@ -128,13 +128,13 @@
 								}
 							}
 
-							@media (hover: hover) {
-								&:hover {
-									> svg {
-										@apply fill-yellow text-yellow;
-									}
-								}
-							}
+							// @media (hover: hover) {
+							// 	&:hover {
+							// 		> svg {
+							// 			@apply fill-yellow text-yellow;
+							// 		}
+							// 	}
+							// }
 						}
 					}
 				}

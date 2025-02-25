@@ -2,6 +2,7 @@ import { AnimatePresence } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 
 import BooksContent from '@/components/books/Content/BooksContent';
+import DeleteModal from '@/components/books/DeleteModal/DeleteModal';
 import Header from '@/components/books/Header/Header';
 import Modal from '@/components/books/Modal/Modal';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -9,7 +10,10 @@ import { useTypedSelector } from '@/hooks/useTypedSelector';
 // import styles from './books.module.scss';
 
 const Books = () => {
-	const { isOpen } = useTypedSelector(state => state.modal);
+	const { isOpen: isBookModal } = useTypedSelector(state => state.bookModal);
+	const { isOpen: isDeleteModal } = useTypedSelector(
+		state => state.deleteModal
+	);
 
 	return (
 		<>
@@ -18,7 +22,8 @@ const Books = () => {
 			</Helmet>
 			<Header />
 			<BooksContent />
-			<AnimatePresence>{isOpen && <Modal />}</AnimatePresence>
+			<AnimatePresence>{isBookModal && <Modal />}</AnimatePresence>
+			<AnimatePresence>{isDeleteModal && <DeleteModal />}</AnimatePresence>
 		</>
 	);
 };

@@ -1,6 +1,8 @@
 .sidebar {
 	@apply flex max-h-dvh flex-col overflow-y-auto overflow-x-hidden bg-dark px-container text-base text-white; // overflow-x-hidden
 
+	max-height: var(--app-height);
+
 	position: relative;
 
 	// Мобильная версия (адаптив)

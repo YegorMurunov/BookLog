@@ -6,10 +6,7 @@ export default function useWindowDimensions() {
 	const getWindowDimensions = useCallback(() => {
 		const width = hasWindow ? window.innerWidth : null;
 		const height = hasWindow ? window.innerHeight : null;
-		return {
-			width,
-			height
-		};
+		return { width, height };
 	}, [hasWindow]);
 
 	const [windowDimensions, setWindowDimensions] = useState(
@@ -18,12 +15,20 @@ export default function useWindowDimensions() {
 
 	useEffect(() => {
 		if (hasWindow) {
-			function handleResize() {
+			const handleResize = () => setWindowDimensions(getWindowDimensions());
+			const handleOrientationChange = () =>
 				setWindowDimensions(getWindowDimensions());
-			}
 
 			window.addEventListener('resize', handleResize);
-			return () => window.removeEventListener('resize', handleResize);
+			window.addEventListener('orientationchange', handleOrientationChange);
+
+			return () => {
+				window.removeEventListener('resize', handleResize);
+				window.removeEventListener(
+					'orientationchange',
+					handleOrientationChange
+				);
+			};
 		}
 	}, [getWindowDimensions, hasWindow]);
 

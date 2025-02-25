@@ -10,10 +10,10 @@ import styles from './books-content.module.scss';
 
 const BooksContent = () => {
 	// const [searchTerm, setSearchTerm] = useState('');
-	const { openModal } = useActions();
+	const { openBookModal } = useActions();
 
 	const handleClick = () => {
-		openModal({ type: 'create' });
+		openBookModal({ type: 'create' });
 	};
 
 	return (

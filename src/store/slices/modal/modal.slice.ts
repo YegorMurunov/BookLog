@@ -12,7 +12,7 @@ const modalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		openModal: (
+		openBookModal: (
 			state,
 			action: PayloadAction<{
 				type: TModalType;
@@ -23,7 +23,7 @@ const modalSlice = createSlice({
 			state.book = action.payload.book || null;
 			state.isOpen = true;
 		},
-		closeModal: state => {
+		closeBookModal: state => {
 			state.isOpen = false;
 			state.book = null;
 		}

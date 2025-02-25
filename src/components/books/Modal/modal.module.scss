@@ -1,12 +1,11 @@
 .modal {
-	@apply fixed bottom-0 left-0 z-50 h-[80dvh] w-full overflow-x-hidden border border-light-gray bg-white text-base text-dark;
-	border-radius: 24px 24px 0 0;
+	@apply fixed left-0 top-0 z-50 flex h-full w-full items-end justify-center bg-dark/60 p-0 opacity-100 backdrop-blur-sm transition-all duration-300 ease-in-out;
 
 	.content {
-		@apply relative h-full w-full overflow-y-auto p-container;
+		@apply relative h-[90dvh] w-full overflow-y-auto overflow-x-hidden border border-light-gray bg-white p-container text-base text-dark;
+		border-radius: 24px 24px 0 0;
 
 		.title {
-			// @apply text-center text-xl font-bold;
 			@apply text-center text-3xl font-bold text-dark;
 		}
 
@@ -26,14 +25,10 @@
 	}
 }
 
-@media (max-height: 1000px) {
+@media (max-height: 600px) {
 	.modal {
-		@apply h-[95dvh];
-	}
-}
-
-@media (max-width: 768px) {
-	.modal {
-		@apply pb-[72px];
+		.content {
+			@apply h-[95dvh];
+		}
 	}
 }

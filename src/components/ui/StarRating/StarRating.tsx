@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ReactStars from 'react-stars';
 
@@ -41,6 +42,13 @@ const StarRating = ({
 				color1='#d2d1d1'
 				edit={!!onChange}
 			/>
+			<button
+				className={styles.clear}
+				type='button'
+				onClick={() => onChange && onChange(0)}
+			>
+				<X />
+			</button>
 		</div>
 	);
 };
