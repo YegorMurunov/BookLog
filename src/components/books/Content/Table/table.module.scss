@@ -10,7 +10,7 @@
 	}
 
 	.table {
-		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark;
+		@apply relative w-full min-w-max overflow-hidden border-none bg-white text-left text-base text-dark;
 
 		.thead {
 			// position: sticky;

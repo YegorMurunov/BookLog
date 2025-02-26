@@ -1,4 +1,5 @@
 import { Bookmark } from 'lucide-react';
+import * as m from 'motion/react-m';
 import { useState } from 'react';
 
 import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
@@ -9,7 +10,7 @@ import TableMore from './TableMore/TableMore';
 
 import styles from '../table.module.scss';
 
-export default function TableItem({ book }: ITableItemProps) {
+export default function TableItem({ book, index }: ITableItemProps) {
 	const [isCommentShow, setIsCommentShow] = useState(false);
 	const { updateBook } = useBooks();
 	const [isDisabled, setIsDisabled] = useState(false);
@@ -34,8 +35,30 @@ export default function TableItem({ book }: ITableItemProps) {
 		await updateBook(bookId, bookData).finally(() => setIsDisabled(false));
 	};
 
+	const listVariants = {
+		initial: {
+			y: 100,
+			opacity: 0
+		},
+		animate: (custom: number) => ({
+			y: 0,
+			opacity: 1,
+			transition: {
+				delay: custom * 0.05,
+				type: 'spring',
+				stiffness: 150,
+				damping: 15
+			}
+		})
+	};
+
 	return (
-		<tr>
+		<m.tr
+			variants={listVariants}
+			initial='initial'
+			animate='animate'
+			custom={index}
+		>
 			<td className={styles.isTheBest}>
 				<button
 					className={styles.isTheBestBtn}
@@ -97,7 +120,7 @@ export default function TableItem({ book }: ITableItemProps) {
 			<td className={styles.moreTd}>
 				<TableMore book={book} />
 			</td>
-		</tr>
+		</m.tr>
 	);
 }
 
