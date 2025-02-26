@@ -13,11 +13,6 @@
 		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark;
 
 		.thead {
-			// position: sticky;
-			// top: 0;
-			// background: white;
-			// z-index: 10;
-
 			tr {
 				@apply border-b-2 border-b-light-gray;
 
@@ -56,9 +51,7 @@
 						@apply w-[24px] pb-0 pl-0 pr-0 text-right;
 						position: sticky;
 						right: 0;
-						background-color: transparent;
-						animation: fadeInBackground 1s ease-in-out forwards;
-						// z-index: 20;
+						background-color: white;
 
 						.moreDiv {
 							@apply relative;
@@ -128,14 +121,6 @@
 									@apply fill-light-gray text-light-gray;
 								}
 							}
-
-							// @media (hover: hover) {
-							// 	&:hover {
-							// 		> svg {
-							// 			@apply fill-yellow text-yellow;
-							// 		}
-							// 	}
-							// }
 						}
 					}
 				}
@@ -153,14 +138,5 @@
 
 	.statusItem {
 		@apply whitespace-nowrap rounded-full bg-gray/80 px-3 py-2 text-white;
-	}
-}
-
-@keyframes fadeInBackground {
-	0% {
-		background-color: transparent;
-	}
-	100% {
-		background-color: white;
 	}
 }

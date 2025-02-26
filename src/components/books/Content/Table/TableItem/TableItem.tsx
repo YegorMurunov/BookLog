@@ -45,9 +45,7 @@ export default function TableItem({ book, index }: ITableItemProps) {
 			opacity: 1,
 			transition: {
 				delay: custom * 0.05,
-				type: 'spring',
-				stiffness: 150,
-				damping: 15
+				duration: 0.3
 			}
 		})
 	};
