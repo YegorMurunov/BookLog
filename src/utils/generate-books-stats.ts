@@ -96,7 +96,7 @@ export const calculatePercentageDifference = (
 	newRating: number
 ) => {
 	if (oldRating === 0) {
-		throw new Error('Старый рейтинг не может быть нулем');
+		return `+${newRating.toFixed(2)}%`;
 	}
 	const difference: number = ((newRating - oldRating) / oldRating) * 100;
 	const differenceStr: string = `${difference >= 0 ? '+' : ''}${difference.toFixed(2)}%`;
