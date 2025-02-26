@@ -6,11 +6,11 @@
 	}
 
 	.tableContainer {
-		@apply h-full w-full overflow-auto;
+		@apply h-full w-full overflow-x-auto overflow-y-hidden;
 	}
 
 	.table {
-		@apply relative w-full min-w-max overflow-hidden border-none bg-white text-left text-base text-dark;
+		@apply relative w-full min-w-max border-none bg-white text-left text-base text-dark;
 
 		.thead {
 			// position: sticky;
@@ -53,10 +53,11 @@
 					}
 
 					&.moreTd {
-						@apply w-[24px] pb-0 pl-1 pr-0 text-right;
+						@apply w-[24px] pb-0 pl-0 pr-0 text-right;
 						position: sticky;
 						right: 0;
-						background-color: white;
+						background-color: transparent;
+						animation: fadeInBackground 1s ease-in-out forwards;
 						// z-index: 20;
 
 						.moreDiv {
@@ -152,5 +153,14 @@
 
 	.statusItem {
 		@apply whitespace-nowrap rounded-full bg-gray/80 px-3 py-2 text-white;
+	}
+}
+
+@keyframes fadeInBackground {
+	0% {
+		background-color: transparent;
+	}
+	100% {
+		background-color: white;
 	}
 }
