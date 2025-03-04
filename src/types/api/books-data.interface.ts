@@ -10,3 +10,10 @@ export interface IBooksGenresData {
 	label: string;
 	color?: string;
 }
+
+export type filter = TStatus | 'all' | 'best';
+
+export interface IBooksFiltersData {
+	value: filter;
+	label: string;
+}

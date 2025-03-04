@@ -12,7 +12,8 @@ import FiltersItem from './FiltersItem/FiltersItem';
 import styles from './filters.module.scss';
 
 const Filters = () => {
-	const { stats } = useBooks();
+	const { stats, setFilters, clearFilters } = useBooks();
+	const { filters } = useTypedSelector(state => state.tableFilters);
 
 	const mainStats = stats.main;
 
@@ -41,18 +42,24 @@ const Filters = () => {
 
 	const [activeIndex, setActiveIndex] = useState(0);
 
-	const { isTablet, isMobile } = useTypedSelector(state => state.sidebar);
-
 	useEffect(() => {
-		// console.log('Filtered books', filteredBooks);
-		// логика обработки выбранного фильтра
-		const value = BooksFiltersData[activeIndex].value;
-		console.log(value);
-		// filterBooks(value);
-	}, [activeIndex]);
+		if (filters.search) {
+			setActiveIndex(0);
+		}
+	}, [filters]);
+
+	const { isTablet, isMobile } = useTypedSelector(state => state.sidebar);
 
 	const handleSelectFilter = (index: number) => {
 		setActiveIndex(index);
+		const value = BooksFiltersData[index].value;
+		if (value === 'best') {
+			return setFilters({ best: true });
+		}
+		if (value === 'all') {
+			return clearFilters();
+		}
+		return setFilters({ status: value });
 	};
 
 	return (

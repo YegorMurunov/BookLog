@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
+import Pagination from '@/components/ui/Pagination/Pagination';
 import { useBooks } from '@/hooks/useBooks';
 import { IBook } from '@/types/api/books.interface';
 
@@ -10,14 +11,28 @@ import styles from './table.module.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const Table = () => {
-	const { isLoading, filteredBooks } = useBooks();
+	const {
+		isLoading,
+		paginatedBooks,
+		totalPages,
+		currentPage,
+		setPage,
+		clearFilters
+	} = useBooks();
 
 	const tableContent = useMemo(() => {
-		return filteredBooks.map((book: IBook, index) => {
-			console.log('render item');
+		return paginatedBooks.map((book: IBook, index) => {
 			return <TableItem key={book.id} book={book} index={index} />;
 		});
-	}, [filteredBooks]);
+	}, [paginatedBooks]);
+
+	const handlePageChange = (page: number) => {
+		setPage(page);
+	};
+
+	useEffect(() => {
+		clearFilters();
+	}, []);
 
 	return (
 		<div className={styles.wrapper}>
@@ -74,6 +89,16 @@ const Table = () => {
 							: tableContent}
 					</tbody>
 				</table>
+			</div>
+			<div>
+				{totalPages > 1 && (
+					<Pagination
+						totalPages={totalPages}
+						currentPage={currentPage}
+						onPageChange={handlePageChange}
+						className={styles.pagination}
+					/>
+				)}
 			</div>
 		</div>
 	);

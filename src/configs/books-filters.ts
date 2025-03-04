@@ -1,4 +1,4 @@
-import { IBooksFiltersData } from '@/types/api/books-filter.interface';
+import { IBooksFiltersData } from '@/types/api/books-data.interface';
 
 export const BooksFiltersData: IBooksFiltersData[] = [
 	{

@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo } from 'react';
 
 import { db } from '@/services/firebase/firebase';
 import {
@@ -8,13 +8,16 @@ import {
 	useGetBooksQuery,
 	useUpdateBookMutation
 } from '@/store/api/books-api';
-import { IBook } from '@/types/api/books.interface';
+import { IBook, IFilters } from '@/types/api/books.interface';
 import {
 	generateMainStats,
 	generateMonthlyStats
 } from '@/utils/generate-books-stats';
+import { filterBooks } from '@/utils/tableFilterBooks';
 
+import { useActions } from './useActions';
 import { useAuth } from './useAuth';
+import { useTypedSelector } from './useTypedSelector';
 
 export const useBooks = () => {
 	const { userData } = useAuth();
@@ -28,30 +31,40 @@ export const useBooks = () => {
 		skip: !userId // Не запрашивать, если юзер не авторизован
 	});
 
-	const [books, setBooks] = useState<IBook[]>(cachedBooks || []);
-	const [filteredBooks, setFilteredBooks] = useState<IBook[]>(books);
+	const { filters, currentPage, booksPerPage } = useTypedSelector(
+		state => state.tableFilters
+	);
 
-	const [stats, setStats] = useState({
-		main: {
-			all: 0,
-			read: 0,
-			bestCount: 0,
-			underread: 0,
-			reread: 0,
-			reading: 0,
-			avgRating: 0,
-			pagesSum: 0
-		},
-		monthly: {
-			booksReadThisMonth: 0,
-			pagesReadThisMonth: 0,
-			ratingDiff: '0%',
-			bestBookThisMonth: 0
-		}
-	});
+	const { setFilters, setCurrentPage, clearFilters } = useActions();
+
+	const filteredBooks = useMemo(() => {
+		return filterBooks(cachedBooks || [], filters);
+	}, [cachedBooks, filters]);
+
+	const paginatedBooks = useMemo(() => {
+		const startIndex = (currentPage - 1) * booksPerPage;
+		const endIndex = startIndex + booksPerPage;
+		return filteredBooks.slice(startIndex, endIndex);
+	}, [filteredBooks, currentPage, booksPerPage]);
+
+	const stats = useMemo(() => {
+		const mainStats = generateMainStats(cachedBooks || []);
+		const monthlyStats = generateMonthlyStats(cachedBooks || []);
+		return { main: mainStats, monthly: monthlyStats };
+	}, [cachedBooks]);
+
 	const [addBookMutation] = useAddBookMutation();
 	const [deleteBookMutation] = useDeleteBookMutation();
 	const [updateBookMutation] = useUpdateBookMutation();
+
+	// Функции для управления фильтрами и пагинацией
+	const handleSetFilters = (newFilters: IFilters) => {
+		setFilters(newFilters);
+	};
+
+	const handleSetPage = (page: number) => {
+		setCurrentPage(page);
+	};
 
 	// Подписка на обновления в Firestore
 	useEffect(() => {
@@ -66,18 +79,11 @@ export const useBooks = () => {
 				...doc.data()
 			})) as IBook[];
 
-			setBooks(booksData);
-
-			setFilteredBooks(booksData);
-
-			const mainStats = generateMainStats(booksData);
-			const monthlyStats = generateMonthlyStats(booksData);
-
-			setStats({ main: mainStats, monthly: monthlyStats });
+			// можно работать с данными booksData
 		});
 
 		return () => unsubscribe(); // Отписка при размонтировании
-	}, [userId, setFilteredBooks]);
+	}, [userId]);
 
 	// Функция добавления книги
 	const addBook = async (book: Omit<IBook, 'id'>) => {
@@ -97,13 +103,19 @@ export const useBooks = () => {
 	};
 
 	return {
-		books,
+		books: cachedBooks || [],
 		isLoading,
 		error,
 		addBook,
 		deleteBook,
 		updateBook,
 		filteredBooks,
-		stats
+		stats,
+		paginatedBooks,
+		totalPages: Math.ceil(filteredBooks.length / booksPerPage),
+		currentPage,
+		setFilters: handleSetFilters,
+		clearFilters,
+		setPage: handleSetPage
 	};
 };

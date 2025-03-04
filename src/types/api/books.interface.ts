@@ -34,3 +34,15 @@ export interface IBooksSlice {
 	books: IBook[];
 	filteredBooks: IBook[];
 }
+
+export interface IFilters {
+	search?: string;
+	status?: TStatus;
+	best?: boolean;
+}
+
+export interface ITableFiltersState {
+	filters: IFilters;
+	currentPage: number;
+	booksPerPage: number;
+}

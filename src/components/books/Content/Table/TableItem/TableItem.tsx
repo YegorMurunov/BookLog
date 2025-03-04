@@ -28,11 +28,18 @@ export default function TableItem({ book, index }: ITableItemProps) {
 
 	const toggleIsTheBest = async () => {
 		setIsDisabled(true);
-		const bookId = book.id;
-		const bookData = book;
-		bookData.isTheBestBook = !book.isTheBestBook;
-
-		await updateBook(bookId, bookData).finally(() => setIsDisabled(false));
+		try {
+			const bookId = book.id;
+			const updatedBookData = {
+				...book,
+				isTheBestBook: !book.isTheBestBook
+			};
+			await updateBook(bookId, updatedBookData);
+		} catch (error) {
+			console.error('Ошибка при обновлении книги:', error);
+		} finally {
+			setIsDisabled(false);
+		}
 	};
 
 	const listVariants = {

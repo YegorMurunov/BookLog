@@ -98,6 +98,9 @@ export const calculatePercentageDifference = (
 	if (oldRating === 0) {
 		return `+${newRating.toFixed(2)}%`;
 	}
+	if (newRating === 0) {
+		return `+${newRating.toFixed(2)}%`;
+	}
 	const difference: number = ((newRating - oldRating) / oldRating) * 100;
 	const differenceStr: string = `${difference >= 0 ? '+' : ''}${difference.toFixed(2)}%`;
 	return differenceStr;

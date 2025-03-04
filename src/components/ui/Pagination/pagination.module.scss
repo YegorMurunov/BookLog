@@ -1,0 +1,44 @@
+.pagination {
+	@apply mt-5 flex flex-wrap items-center justify-between gap-2; // pr-20
+
+	.pageBtns {
+		@apply relative flex border-collapse gap-0 overflow-hidden rounded-2xl border border-gray;
+
+		.button {
+			@apply min-w-10 cursor-pointer border-x-0 border-y-0 border-light-gray bg-white px-4 py-2 text-sm text-dark transition-colors duration-300 ease-in-out;
+
+			&.active {
+				@apply bg-dark text-white;
+			}
+
+			&:not(:last-child) {
+				border-right: 1px solid #d2d1d1; // #f0f0f0
+			}
+
+			&:not(:disabled):not(.notHover) {
+				&:hover {
+					@apply bg-light-gray;
+				}
+			}
+
+			&:disabled {
+				cursor: not-allowed;
+				// opacity: 0.5;
+			}
+		}
+
+		.navigation {
+			@apply flex gap-3;
+		}
+	}
+}
+
+.bg-dark-gray {
+	background-color: #333;
+	color: #fff;
+}
+
+.bg-pink {
+	background-color: #ff69b4;
+	color: #fff;
+}

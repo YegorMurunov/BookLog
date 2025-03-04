@@ -4,6 +4,10 @@
 	.btnAdd {
 		@apply fixed bottom-5 right-8 z-20;
 	}
+
+	.searchInput {
+		@apply mt-5 inline-flex max-w-80;
+	}
 }
 
 @media (max-width: 768px) {
