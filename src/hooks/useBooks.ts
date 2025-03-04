@@ -79,6 +79,8 @@ export const useBooks = () => {
 				...doc.data()
 			})) as IBook[];
 
+			console.log(booksData);
+
 			// можно работать с данными booksData
 		});
 
