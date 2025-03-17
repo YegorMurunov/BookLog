@@ -12,7 +12,7 @@ body {
 	min-width: 320px;
 	max-height: 100dvh;
 	max-height: var(--app-height);
-	@apply font-sans text-base text-dark;
+	@apply scroll-smooth font-sans text-base text-dark;
 }
 
 /* Стилизация scrollbar для всей страницы */

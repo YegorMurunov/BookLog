@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { useEffect, useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { db } from '@/services/firebase/firebase';
 import {
@@ -31,6 +31,8 @@ export const useBooks = () => {
 		skip: !userId // Не запрашивать, если юзер не авторизован
 	});
 
+	const [books, setBooks] = useState<IBook[]>(cachedBooks || []);
+
 	const { filters, currentPage, booksPerPage } = useTypedSelector(
 		state => state.tableFilters
 	);
@@ -38,8 +40,8 @@ export const useBooks = () => {
 	const { setFilters, setCurrentPage, clearFilters } = useActions();
 
 	const filteredBooks = useMemo(() => {
-		return filterBooks(cachedBooks || [], filters);
-	}, [cachedBooks, filters]);
+		return filterBooks(books, filters);
+	}, [books, filters]);
 
 	const paginatedBooks = useMemo(() => {
 		const startIndex = (currentPage - 1) * booksPerPage;
@@ -78,10 +80,7 @@ export const useBooks = () => {
 				id: doc.id,
 				...doc.data()
 			})) as IBook[];
-
-			console.log(booksData);
-
-			// можно работать с данными booksData
+			setBooks(booksData);
 		});
 
 		return () => unsubscribe(); // Отписка при размонтировании
@@ -105,7 +104,7 @@ export const useBooks = () => {
 	};
 
 	return {
-		books: cachedBooks || [],
+		books, // cachedBooks || []
 		isLoading,
 		error,
 		addBook,

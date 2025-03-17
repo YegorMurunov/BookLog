@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { PanelLeftClose, PanelLeftOpen } from 'lucide-react';
 import * as m from 'motion/react-m';
-import { useEffect } from 'react';
+import { useLayoutEffect } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
@@ -22,7 +22,7 @@ const Sidebar = () => {
 
 	const { width } = useWindowDimensions();
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		const storedState = localStorage.getItem('isCollapsed');
 		if (storedState !== null) {
 			setCollapsedState(JSON.parse(storedState));
