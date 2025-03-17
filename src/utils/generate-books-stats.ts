@@ -73,22 +73,23 @@ export const generateMonthlyStats = (booksData: IBook[]) => {
 
 	const avgRating =
 		round(
-			readBooksBeforeThisMonth.reduce((sum, book) => {
+			readBooks.reduce((sum, book) => {
 				return (sum += book.rating);
-			}, 0) / readBooksBeforeThisMonth.length,
+			}, 0) / readBooks.length,
 			1
 		) || 0;
-	const avgRatingThisMonth =
+
+	const avgRatingBeforeThisMonth =
 		round(
-			readBooksThisMonth.reduce((sum, book) => (sum += book.rating), 0) /
-				readBooksThisMonth.length,
+			readBooksBeforeThisMonth.reduce((sum, book) => (sum += book.rating), 0) /
+				readBooksBeforeThisMonth.length,
 			1
 		) || 0;
 
 	// rating diff
 	const ratingDiff = calculatePercentageDifference(
-		avgRating,
-		avgRatingThisMonth
+		avgRatingBeforeThisMonth,
+		avgRating
 	);
 
 	// Quantities of the best books this month
@@ -108,6 +109,8 @@ export const calculatePercentageDifference = (
 	oldRating: number,
 	newRating: number
 ) => {
+	console.log(oldRating, newRating);
+
 	if (newRating === 0) {
 		return '+0.00%';
 	}
