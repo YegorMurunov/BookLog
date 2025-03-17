@@ -50,10 +50,10 @@ export const useBooks = () => {
 	}, [filteredBooks, currentPage, booksPerPage]);
 
 	const stats = useMemo(() => {
-		const mainStats = generateMainStats(cachedBooks || []);
-		const monthlyStats = generateMonthlyStats(cachedBooks || []);
+		const mainStats = generateMainStats(books);
+		const monthlyStats = generateMonthlyStats(books);
 		return { main: mainStats, monthly: monthlyStats };
-	}, [cachedBooks]);
+	}, [books]);
 
 	const [addBookMutation] = useAddBookMutation();
 	const [deleteBookMutation] = useDeleteBookMutation();
