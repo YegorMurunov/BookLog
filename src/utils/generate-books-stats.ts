@@ -46,7 +46,6 @@ export const generateMonthlyStats = (booksData: IBook[]) => {
 		const bookDate = new Date(book.date);
 		const bookMonth = bookDate.getMonth();
 		const bookYear = bookDate.getFullYear();
-
 		if (bookMonth === currentMonth && bookYear === currentYear) return book;
 	});
 
@@ -59,10 +58,24 @@ export const generateMonthlyStats = (booksData: IBook[]) => {
 		0
 	);
 
+	// Filtering of books read before the current month
+	const readBooksBeforeThisMonth = readBooks.filter(book => {
+		const bookDate = new Date(book.date);
+		const bookMonth = bookDate.getMonth();
+		const bookYear = bookDate.getFullYear();
+
+		// Проверка на книги, прочитанные до текущего месяца
+		return (
+			bookYear < currentYear ||
+			(bookYear === currentYear && bookMonth < currentMonth)
+		);
+	});
+
 	const avgRating =
 		round(
-			readBooks.reduce((sum, book) => (sum += book.rating), 0) /
-				readBooks.length,
+			readBooksBeforeThisMonth.reduce((sum, book) => {
+				return (sum += book.rating);
+			}, 0) / readBooksBeforeThisMonth.length,
 			1
 		) || 0;
 	const avgRatingThisMonth =
@@ -95,12 +108,13 @@ export const calculatePercentageDifference = (
 	oldRating: number,
 	newRating: number
 ) => {
-	if (oldRating === 0) {
-		return `+${newRating.toFixed(2)}%`;
-	}
 	if (newRating === 0) {
-		return `+${newRating.toFixed(2)}%`;
+		return '+0.00%';
 	}
+	if (oldRating === 0) {
+		return '+100.00%';
+	}
+
 	const difference: number = ((newRating - oldRating) / oldRating) * 100;
 	const differenceStr: string = `${difference >= 0 ? '+' : ''}${difference.toFixed(2)}%`;
 	return differenceStr;
