@@ -1,5 +1,5 @@
 .mobMenu {
-	@apply bottom-0 left-0 z-40 h-[72px] w-full bg-dark px-container py-2 text-base text-white;
+	@apply bottom-0 left-0 z-40 h-[76px] w-full bg-dark px-container py-2 text-base text-white;
 
 	.menu {
 		.menu-ul {
@@ -13,7 +13,7 @@
 						@apply rounded-full bg-transparent p-2 transition-all duration-300 ease-in-out;
 
 						> svg {
-							@apply h-8 w-8;
+							@apply h-9 w-9;
 						}
 					}
 
@@ -21,7 +21,7 @@
 						@apply rounded-full bg-transparent p-2 transition-all duration-300 ease-in-out;
 
 						> img {
-							@apply h-8 w-8 rounded-full;
+							@apply h-9 w-9 rounded-full;
 						}
 					}
 

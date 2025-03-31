@@ -1,51 +1,37 @@
-import { CircleUserRound, LogOut } from 'lucide-react';
+import { CircleUserRound } from 'lucide-react';
+import { useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 
 import Banner from '@/components/ui/Banner/Banner';
-import { useAuth } from '@/hooks/useAuth';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
+
+import AccountContent from './AccountContent/AccountContent';
 
 import styles from './account.module.scss';
 
 const Account = () => {
-	const { logOut, userData } = useAuth();
-	const displayName = userData.user?.displayName;
-	const email = userData.user?.email;
-	const photoURL = userData.user?.photoURL;
+	const photoURL = useTypedSelector(state => state.auth.user?.photoURL);
+	const [errorImage, setErrorImage] = useState(false);
+	// const bannerImg =
 
 	return (
 		<>
 			<Helmet>
 				<title>Аккаунт | BookLog</title>
 			</Helmet>
-			<Banner pageTitle='Аккаунт' />
-			<div className={styles.content}>
-				<div className={styles.text}>
-					<h2 className={styles.title}>
-						Привет, {displayName ? displayName : email}
-					</h2>
-					<p>
-						Тут ты можешь поменять некоторые данные, такие как Имя и Аватар.
-					</p>
-					<p>
-						На данный момент этот функционал еще в разработке, оставайся с нами
-						:)
-					</p>
-				</div>
-				<div className={styles.currentUserData}>
-					<div className={styles.userImg}>
-						{photoURL ? (
-							<img className={styles.avatar} src={photoURL} />
-						) : (
-							<CircleUserRound />
-						)}
-					</div>
-					<div className={styles.userName}>{displayName || 'User'}</div>
-					<div className={styles.userEmail}>{email}</div>
-				</div>
-				<button onClick={logOut} className={styles.logout}>
-					Выйти <LogOut />
-				</button>
+			<Banner pageTitle='Аккаунт' type='empty' />
+			<div className={styles.accountAvatar}>
+				{photoURL && !errorImage ? (
+					<img
+						className={styles.avatar}
+						src={photoURL}
+						onError={() => setErrorImage(true)}
+					/>
+				) : (
+					<CircleUserRound />
+				)}
 			</div>
+			<AccountContent />
 		</>
 	);
 };

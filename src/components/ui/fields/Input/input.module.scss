@@ -1,5 +1,5 @@
 .label {
-	@apply relative h-11 w-full;
+	@apply relative flex h-11 w-full flex-col;
 
 	.title {
 		@apply pointer-events-none absolute left-0 top-[15px] text-base text-gray transition-all duration-300;

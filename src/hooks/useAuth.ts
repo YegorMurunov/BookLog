@@ -7,7 +7,8 @@ import {
 	firebaseSignIn,
 	firebaseSignInWithGoogle,
 	firebaseSignOut,
-	firebaseSignUp
+	firebaseSignUp,
+	firebaseUpdateProfile
 } from '@/services/firebase/auth';
 import { auth } from '@/services/firebase/firebase';
 import { IUser, IUserData } from '@/types/user.interface';
@@ -29,7 +30,8 @@ export const useAuth = () => {
 					uid: user.uid,
 					refreshToken: user.refreshToken,
 					displayName: user.displayName,
-					photoURL: user.photoURL
+					photoURL: user.photoURL,
+					creationTime: user.metadata.creationTime!
 				};
 
 				setUserData({
@@ -62,7 +64,8 @@ export const useAuth = () => {
 				email: user.email!,
 				uid: user.uid,
 				refreshToken: user.refreshToken,
-				displayName: user.displayName
+				displayName: user.displayName,
+				creationTime: user.metadata.creationTime!
 			};
 
 			setUserData({
@@ -99,7 +102,8 @@ export const useAuth = () => {
 				uid: user.uid,
 				refreshToken: user.refreshToken,
 				displayName: user.displayName,
-				photoURL: null
+				photoURL: null,
+				creationTime: user.metadata.creationTime!
 			};
 
 			setUserData({
@@ -154,7 +158,8 @@ export const useAuth = () => {
 				uid: user.uid,
 				refreshToken: user.refreshToken,
 				displayName: user.displayName,
-				photoURL: user.photoURL || null
+				photoURL: user.photoURL || null,
+				creationTime: user.metadata.creationTime!
 			};
 
 			setUserData({
@@ -173,11 +178,47 @@ export const useAuth = () => {
 		}
 	};
 
+	const updateProfile = async (displayName: string) => {
+		try {
+			if (!auth.currentUser) {
+				throw new Error('Пользователь не авторизован');
+			}
+
+			const updatePromise = firebaseUpdateProfile(auth.currentUser, {
+				displayName
+			});
+			toastWithPromise(() => updatePromise, 'updateProfile');
+
+			await updatePromise;
+
+			const updatedUserData: IUserData = {
+				...userData.user!,
+				displayName
+			};
+
+			setUserData({
+				...userData,
+				user: updatedUserData
+			});
+			setUser(updatedUserData);
+
+			await auth.currentUser!.reload();
+		} catch (error: unknown) {
+			if (error instanceof FirebaseError) {
+				console.error('Update profile error:', error.message);
+			} else {
+				console.error('Unknown error:', error);
+			}
+			throw error;
+		}
+	};
+
 	return {
 		userData,
 		signIn,
 		signUp,
 		logOut,
-		signInWithGoogle
+		signInWithGoogle,
+		updateProfile
 	};
 };

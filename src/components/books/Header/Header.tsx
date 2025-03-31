@@ -11,7 +11,7 @@ const Header = () => {
 
 	return (
 		<header>
-			<Banner pageTitle='Книги' className={styles.banner}>
+			<Banner pageTitle='Книги' type='default' className={styles.banner}>
 				<Card
 					mainValue={mainStats.read}
 					title='Прочитано книг'

@@ -1,0 +1,36 @@
+.editContainer {
+	@apply mt-10 block h-full w-full;
+
+	.editTitle {
+		@apply mb-4 text-lg font-semibold;
+	}
+}
+
+.form {
+	max-width: 500px;
+
+	.input {
+		width: 300px;
+	}
+
+	.buttons {
+		@apply mt-5;
+	}
+}
+
+.buttons {
+	@apply mt-0 flex flex-wrap items-center justify-start gap-x-4 gap-y-3;
+	justify-items: flex-end;
+}
+
+.button {
+	@apply flex items-center justify-center gap-2;
+
+	> svg {
+		@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
+	}
+
+	&:hover > svg {
+		@apply text-dark;
+	}
+}

@@ -17,7 +17,8 @@ const authSlice = createSlice({
 				uid: payload.uid,
 				refreshToken: payload.refreshToken,
 				displayName: payload.displayName,
-				photoURL: payload.photoURL || null
+				photoURL: payload.photoURL || null,
+				creationTime: payload.creationTime
 			};
 			state.isAuth = true;
 			state.isLoading = false;

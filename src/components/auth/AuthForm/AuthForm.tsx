@@ -73,6 +73,7 @@ const AuthForm = ({ type, navigateTo }: IAuthFormProps) => {
 									{...field}
 									label='Email'
 									type='text'
+									value={field.value ?? ''}
 									error={fieldState?.error?.message}
 									className={fieldState?.error?.message && 'mb-3'}
 								/>
@@ -84,10 +85,13 @@ const AuthForm = ({ type, navigateTo }: IAuthFormProps) => {
 						name='password'
 						rules={{
 							required: 'Поле Пароль обязательное!',
-							minLength: {
-								value: 6,
-								message: 'Пароль слишком слабый!'
-							}
+							minLength:
+								type === 'register'
+									? {
+											value: 6,
+											message: 'Пароль слишком слабый!'
+										}
+									: undefined
 						}}
 						render={({ field, fieldState }) => {
 							return (
@@ -96,6 +100,7 @@ const AuthForm = ({ type, navigateTo }: IAuthFormProps) => {
 									label='Пароль'
 									type='password'
 									error={fieldState?.error?.message}
+									value={field.value ?? ''}
 									className={
 										fieldState?.error?.message && !isLogin ? 'mb-3' : ''
 									}
@@ -117,6 +122,7 @@ const AuthForm = ({ type, navigateTo }: IAuthFormProps) => {
 										{...field}
 										label='Никнейм'
 										type='text'
+										value={field.value ?? ''}
 										error={fieldState?.error?.message}
 									/>
 								);

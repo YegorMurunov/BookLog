@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 import react from '@vitejs/plugin-react-swc';
 
 const manifest: Partial<ManifestOptions> | false = {
-	theme_color: '#f97fbe',
+	theme_color: '#181818',
 	background_color: '#ffffff',
 	icons: [
 		{

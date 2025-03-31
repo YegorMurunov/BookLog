@@ -1,43 +1,46 @@
+.accountAvatar {
+	@apply absolute -translate-y-14 translate-x-4 overflow-auto rounded-full bg-white p-1;
+
+	> img,
+	> svg {
+		@apply h-28 w-28 rounded-full text-dark;
+	}
+}
+
 .content {
-	@apply p-container;
+	@apply mt-16 flex flex-1 flex-col p-container;
+	// height: calc(var(--app-height) - 15rem - 4rem);
 
-	.text {
-		.title {
-			@apply mb-2 text-2xl font-bold text-dark;
+	.userInfo {
+		@apply flex-1;
+
+		.name {
+			@apply mb-1 text-2xl font-bold text-dark;
 		}
-		p:not(:last-child) {
-			@apply mb-1;
+		.email {
+			@apply text-base text-light-dark/70;
 		}
-	}
 
-	.currentUserData {
-		@apply mt-7;
+		.data {
+			@apply mt-5 flex gap-9 overflow-x-auto;
 
-		.userImg {
-			@apply mb-2;
+			&__item {
+				@apply relative min-w-fit max-w-56;
 
-			> img,
-			> svg {
-				@apply h-20 w-20 rounded-full text-dark;
+				&:not(:last-child) {
+					&::before {
+						content: '';
+						@apply absolute right-[-18px] top-0 h-full w-[1px] bg-light-dark/20;
+					}
+				}
 			}
-		}
-		.userName {
-			@apply mb-0 text-xl;
-		}
-		.userEmail {
-			@apply text-base;
-		}
-	}
 
-	.logout {
-		@apply mt-5 flex items-center justify-center gap-2;
-
-		> svg {
-			@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
-		}
-
-		&:hover > svg {
-			@apply text-dark;
+			&__title {
+				@apply text-sm text-light-dark/70;
+			}
+			&__text {
+				@apply mt-1 text-base text-dark;
+			}
 		}
 	}
 }

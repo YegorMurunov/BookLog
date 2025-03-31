@@ -4,13 +4,15 @@ import { useState } from 'react';
 import { Link } from 'react-router';
 
 import { useAuth } from '@/hooks/useAuth';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import styles from '../sidebar.module.scss';
 
 const SidebarAccount = () => {
-	const { userData, logOut } = useAuth();
-	const photoURL = userData.user?.photoURL;
-	const displayName = userData.user?.displayName || 'User';
+	const { logOut } = useAuth();
+	const userData = useTypedSelector(state => state.auth.user);
+	const photoURL = userData?.photoURL;
+	const displayName = userData?.displayName || 'User';
 	const [errorImage, setErrorImage] = useState(false);
 
 	return (

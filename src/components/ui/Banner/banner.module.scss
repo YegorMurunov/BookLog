@@ -13,3 +13,15 @@
 		@apply mt-8 flex flex-nowrap gap-3 overflow-x-auto;
 	}
 }
+
+.image-banner {
+	@apply relative aspect-auto h-60 w-full overflow-hidden;
+
+	img {
+		@apply absolute left-0 top-0 h-full w-full object-cover object-center;
+	}
+
+	@media (max-width: 768px) {
+		@apply h-48;
+	}
+}

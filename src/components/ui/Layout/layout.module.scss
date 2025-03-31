@@ -21,8 +21,8 @@
 
 		.page {
 			@apply p-0;
-			height: calc(100dvh - 72px);
-			height: calc(var(--app-height) - 72px);
+			height: calc(100dvh - 76px);
+			height: calc(var(--app-height) - 76px);
 		}
 	}
 }

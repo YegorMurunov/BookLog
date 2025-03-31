@@ -1,8 +1,12 @@
+import {
+	IBooksMainStats,
+	IBooksMonthlyStats
+} from '@/types/api/books-data.interface';
 import { IBook } from '@/types/api/books.interface';
 
 import { round } from './round.utils';
 
-export const generateMainStats = (booksData: IBook[]) => {
+export const generateMainStats = (booksData: IBook[]): IBooksMainStats => {
 	// main stats
 	const mainArr = booksData.filter(
 		book => book.status === 'read' || book.status === 'reread'
@@ -33,7 +37,9 @@ export const generateMainStats = (booksData: IBook[]) => {
 	};
 };
 
-export const generateMonthlyStats = (booksData: IBook[]) => {
+export const generateMonthlyStats = (
+	booksData: IBook[]
+): IBooksMonthlyStats => {
 	const now = new Date();
 	const currentMonth = now.getMonth();
 	const currentYear = now.getFullYear();
@@ -109,8 +115,6 @@ export const calculatePercentageDifference = (
 	oldRating: number,
 	newRating: number
 ) => {
-	console.log(oldRating, newRating);
-
 	if (newRating === 0) {
 		return '+0.00%';
 	}

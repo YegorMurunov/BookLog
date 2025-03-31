@@ -22,7 +22,7 @@ const baseMenu: Omit<IMenuItemProps, 'id'>[] = [
 
 export const sidebarMenu = [...baseMenu];
 
-export const mobileMenu = [
+export const mobileMenu: Omit<IMenuItemProps, 'id'>[] = [
 	...baseMenu,
 	{
 		title: 'Аккаунт',

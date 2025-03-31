@@ -1,4 +1,5 @@
 import {
+	User,
 	createUserWithEmailAndPassword,
 	signInWithEmailAndPassword,
 	signInWithPopup,
@@ -40,4 +41,12 @@ export const firebaseSignInWithGoogle = async () => {
 	const userCredential = await signInWithPopup(auth, provider);
 
 	return userCredential;
+};
+
+export const firebaseUpdateProfile = async (
+	user: User,
+	updates: { displayName?: string; photoURL?: string | null }
+) => {
+	await updateProfile(user, updates);
+	return user;
 };

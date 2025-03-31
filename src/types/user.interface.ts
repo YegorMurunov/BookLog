@@ -4,6 +4,7 @@ export interface IUserData {
 	refreshToken: string;
 	displayName: string | null;
 	photoURL?: string | null;
+	creationTime: string;
 }
 
 export interface IUser {

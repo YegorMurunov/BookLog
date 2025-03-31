@@ -15,6 +15,7 @@ export type TToastType =
 	| 'google'
 	| 'deleteBook'
 	| 'addBook'
-	| 'editBook';
+	| 'editBook'
+	| 'updateProfile';
 
 export type IToastsMessages = Record<TToastType, IToastsState>;

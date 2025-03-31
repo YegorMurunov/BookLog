@@ -1,5 +1,5 @@
 import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { db } from '@/services/firebase/firebase';
 import {
@@ -8,6 +8,10 @@ import {
 	useGetBooksQuery,
 	useUpdateBookMutation
 } from '@/store/api/books-api';
+import {
+	IBooksMainStats,
+	IBooksMonthlyStats
+} from '@/types/api/books-data.interface';
 import { IBook, IFilters } from '@/types/api/books.interface';
 import {
 	generateMainStats,
@@ -49,10 +53,40 @@ export const useBooks = () => {
 		return filteredBooks.slice(startIndex, endIndex);
 	}, [filteredBooks, currentPage, booksPerPage]);
 
+	const prevBooksRef = useRef<IBook[]>(books);
+	const prevStatsRef = useRef<{
+		main: IBooksMainStats;
+		monthly: IBooksMonthlyStats;
+	}>({
+		main: {
+			all: 0,
+			read: 0,
+			bestCount: 0,
+			underread: 0,
+			reread: 0,
+			reading: 0,
+			avgRating: 0,
+			pagesSum: 0
+		},
+		monthly: {
+			booksReadThisMonth: 0,
+			pagesReadThisMonth: 0,
+			ratingDiff: '0%',
+			bestBookThisMonth: 0
+		}
+	});
+
 	const stats = useMemo(() => {
+		if (prevBooksRef.current === books) {
+			return prevStatsRef.current;
+		}
+
 		const mainStats = generateMainStats(books);
 		const monthlyStats = generateMonthlyStats(books);
-		return { main: mainStats, monthly: monthlyStats };
+
+		prevBooksRef.current = books;
+		prevStatsRef.current = { main: mainStats, monthly: monthlyStats };
+		return prevStatsRef.current;
 	}, [books]);
 
 	const [addBookMutation] = useAddBookMutation();

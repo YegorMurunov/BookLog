@@ -17,3 +17,21 @@ export interface IBooksFiltersData {
 	value: filter;
 	label: string;
 }
+
+export interface IBooksMainStats {
+	all: number;
+	read: number;
+	bestCount: number;
+	underread: number;
+	reread: number;
+	reading: number;
+	avgRating: number;
+	pagesSum: number;
+}
+
+export interface IBooksMonthlyStats {
+	booksReadThisMonth: number;
+	pagesReadThisMonth: number;
+	ratingDiff: string;
+	bestBookThisMonth: number;
+}

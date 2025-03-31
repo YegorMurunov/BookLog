@@ -28,8 +28,7 @@
     "react-select": "^5.10.0",
     "react-stars": "^2.2.5",
     "react-tooltip": "^5.28.0",
-    "sass": "^1.83.4",
-    "swiper": "^11.2.3"
+    "sass": "^1.83.4"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
