@@ -10,9 +10,9 @@ import AccountContent from './AccountContent/AccountContent';
 import styles from './account.module.scss';
 
 const Account = () => {
-	const photoURL = useTypedSelector(state => state.auth.user?.photoURL);
+	const userData = useTypedSelector(state => state.auth.user);
+	const photoURL = userData?.photoURL;
 	const [errorImage, setErrorImage] = useState(false);
-	// const bannerImg =
 
 	return (
 		<>

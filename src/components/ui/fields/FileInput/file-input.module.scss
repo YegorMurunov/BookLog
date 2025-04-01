@@ -1,0 +1,47 @@
+.label {
+	@apply inline-flex;
+
+	input.input {
+		display: none;
+		user-select: none;
+	}
+
+	.customInput {
+		@apply flex w-full min-w-60 cursor-pointer items-center justify-start gap-2 border-b-2 border-gray px-3 py-2 pl-0 transition-colors duration-300 ease-in-out;
+
+		.icon {
+			> svg {
+				@apply h-5 w-5 text-dark transition-colors duration-300 ease-in-out;
+			}
+		}
+
+		.clearBtn {
+			> svg {
+				@apply h-5 w-5 text-dark transition-colors duration-300 ease-in-out;
+			}
+
+			&:hover {
+				> svg {
+					@apply text-red;
+				}
+			}
+
+			&.hidden {
+				display: none;
+				pointer-events: none;
+			}
+		}
+
+		&:hover {
+			@apply border-pink;
+		}
+		&:active {
+			@apply border-pink;
+			.icon {
+				> svg {
+					@apply text-pink;
+				}
+			}
+		}
+	}
+}

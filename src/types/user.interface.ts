@@ -12,3 +12,8 @@ export interface IUser {
 	isAuth: boolean;
 	isLoading: boolean;
 }
+
+export interface IUserUpdateProfile {
+	displayName: string;
+	photoURL: string | null;
+}

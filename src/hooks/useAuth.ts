@@ -7,11 +7,11 @@ import {
 	firebaseSignIn,
 	firebaseSignInWithGoogle,
 	firebaseSignOut,
-	firebaseSignUp,
-	firebaseUpdateProfile
+	firebaseSignUp
 } from '@/services/firebase/auth';
 import { auth } from '@/services/firebase/firebase';
-import { IUser, IUserData } from '@/types/user.interface';
+import { firebaseUpdateProfile } from '@/services/firebase/profile';
+import { IUser, IUserData, IUserUpdateProfile } from '@/types/user.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 
 export const useAuth = () => {
@@ -23,6 +23,7 @@ export const useAuth = () => {
 	});
 	useEffect(() => {
 		setLoading(true);
+
 		const unsubscribe = onAuthStateChanged(auth, user => {
 			if (user) {
 				const userData: IUserData = {
@@ -178,22 +179,29 @@ export const useAuth = () => {
 		}
 	};
 
-	const updateProfile = async (displayName: string) => {
+	const updateProfile = async ({
+		displayName,
+		photoURL
+	}: IUserUpdateProfile) => {
 		try {
 			if (!auth.currentUser) {
 				throw new Error('Пользователь не авторизован');
 			}
 
 			const updatePromise = firebaseUpdateProfile(auth.currentUser, {
-				displayName
+				displayName,
+				photoURL
 			});
+			console.log('useAuth ', photoURL);
+
 			toastWithPromise(() => updatePromise, 'updateProfile');
 
 			await updatePromise;
 
 			const updatedUserData: IUserData = {
 				...userData.user!,
-				displayName
+				displayName,
+				photoURL
 			};
 
 			setUserData({

@@ -5,6 +5,10 @@
 	> svg {
 		@apply h-28 w-28 rounded-full text-dark;
 	}
+
+	> img {
+		@apply object-cover object-center;
+	}
 }
 
 .content {

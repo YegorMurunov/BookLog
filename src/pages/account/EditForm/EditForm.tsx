@@ -6,6 +6,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import Input from '@/components/ui/fields/Input/Input';
 import { useAuth } from '@/hooks/useAuth';
 import { IProfileForm } from '@/types/ui/profile-form.interface';
+import { IUserUpdateProfile } from '@/types/user.interface';
 
 import styles from './edit-form.module.scss';
 
@@ -13,25 +14,35 @@ const EditForm = () => {
 	const { logOut, userData, updateProfile } = useAuth();
 	const isLoading = userData.isLoading;
 	const displayName = userData.user?.displayName;
+	const photoURL = userData.user?.photoURL;
 
 	const [isEdit, setIsEdit] = useState(false);
 
 	const { handleSubmit, control, reset } = useForm<IProfileForm>({
 		mode: 'onSubmit',
 		defaultValues: {
-			displayName: displayName || 'User'
+			displayName: displayName || 'User',
+			photoURL: photoURL || ''
 		}
 	});
 
 	// Обновляем форму, когда данные загружены
 	useEffect(() => {
 		if (!isLoading && displayName) {
-			reset({ displayName });
+			reset({ displayName, photoURL: photoURL || '' });
 		}
-	}, [isLoading, displayName, reset]);
+	}, [isLoading, displayName, photoURL, reset]);
 
 	const onSubmit: SubmitHandler<IProfileForm> = async data => {
-		await updateProfile(data.displayName).then(() => setIsEdit(false));
+		const photoURL = data.photoURL || null;
+		console.log(photoURL);
+
+		const newProfileData: IUserUpdateProfile = {
+			displayName: data.displayName,
+			photoURL: photoURL
+		};
+
+		await updateProfile(newProfileData).then(() => setIsEdit(false));
 	};
 
 	return (
@@ -52,6 +63,45 @@ const EditForm = () => {
 									label='Никнейм'
 									type='text'
 									error={fieldState?.error?.message}
+									value={field.value ?? ''}
+									className={clsx(
+										styles.input,
+										fieldState?.error?.message && 'mb-5'
+									)}
+								/>
+							);
+						}}
+					/>
+					{/* <Controller
+						control={control}
+						name='photoURL'
+						render={({ field, fieldState }) => (
+							<FileInput
+								// {...field}
+								onChange={field.onChange}
+								ref={field.ref}
+								name='avatar'
+								placeholder='Загрузите аватар'
+								error={fieldState?.error?.message}
+								accept='image/*'
+								className='mt-5 w-full max-w-[300px]'
+							/>
+						)}
+					/> */}
+					<Controller
+						control={control}
+						name='photoURL'
+						rules={{
+							required: false
+						}}
+						render={({ field, fieldState }) => {
+							return (
+								<Input
+									{...field}
+									label='Ссылка на аватар'
+									type='text'
+									error={fieldState?.error?.message}
+									value={field.value ?? ''}
 									className={clsx(
 										styles.input,
 										fieldState?.error?.message && 'mb-5'

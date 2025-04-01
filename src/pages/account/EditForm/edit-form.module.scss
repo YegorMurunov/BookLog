@@ -11,6 +11,9 @@
 
 	.input {
 		width: 300px;
+		&:not(:last-child) {
+			@apply mb-5;
+		}
 	}
 
 	.buttons {
