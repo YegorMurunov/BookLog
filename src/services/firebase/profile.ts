@@ -7,7 +7,6 @@ export const firebaseUpdateProfile = async (
 		photoURL?: string | null;
 	}
 ) => {
-	console.log('profile.ts', updates.photoURL);
 	const updatedData: { displayName?: string; photoURL?: string } = {
 		...updates,
 		photoURL: updates.photoURL ? updates.photoURL : ''

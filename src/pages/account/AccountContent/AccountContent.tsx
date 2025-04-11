@@ -33,7 +33,7 @@ const AccountContent = () => {
 
 				<div className={styles.data}>
 					<div className={styles.data__item}>
-						<div className={styles.data__title}>Зарегистрирован</div>
+						<div className={styles.data__title}>Дата регистрации</div>
 						<div className={styles.data__text}>{createdAt}</div>
 					</div>
 					<div className={styles.data__item}>

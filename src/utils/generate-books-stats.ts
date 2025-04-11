@@ -9,7 +9,8 @@ import { round } from './round.utils';
 export const generateMainStats = (booksData: IBook[]): IBooksMainStats => {
 	// main stats
 	const mainArr = booksData.filter(
-		book => book.status === 'read' || book.status === 'reread'
+		book =>
+			(book.status === 'read' || book.status === 'reread') && book.rating !== 0
 	);
 	const all = booksData.length;
 
@@ -45,7 +46,8 @@ export const generateMonthlyStats = (
 	const currentYear = now.getFullYear();
 
 	const readBooks = booksData.filter(
-		book => book.status === 'read' || book.status === 'reread'
+		book =>
+			(book.status === 'read' || book.status === 'reread') && book.rating !== 0
 	);
 
 	const readBooksThisMonth = readBooks.filter(book => {
@@ -82,14 +84,14 @@ export const generateMonthlyStats = (
 			readBooks.reduce((sum, book) => {
 				return (sum += book.rating);
 			}, 0) / readBooks.length,
-			1
+			2
 		) || 0;
 
 	const avgRatingBeforeThisMonth =
 		round(
 			readBooksBeforeThisMonth.reduce((sum, book) => (sum += book.rating), 0) /
 				readBooksBeforeThisMonth.length,
-			1
+			2
 		) || 0;
 
 	// rating diff

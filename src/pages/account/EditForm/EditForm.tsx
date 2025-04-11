@@ -35,7 +35,6 @@ const EditForm = () => {
 
 	const onSubmit: SubmitHandler<IProfileForm> = async data => {
 		const photoURL = data.photoURL || null;
-		console.log(photoURL);
 
 		const newProfileData: IUserUpdateProfile = {
 			displayName: data.displayName,

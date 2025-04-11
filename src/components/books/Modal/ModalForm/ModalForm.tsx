@@ -1,5 +1,6 @@
 import clsx from 'clsx';
 import { Bookmark } from 'lucide-react';
+import { useState } from 'react';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 
 import CustomDatepicker from '@/components/ui/CustomDatepicker/CustomDatepicker';
@@ -27,6 +28,8 @@ import styles from './modal-form.module.scss';
 function ModalForm() {
 	const { type, book } = useTypedSelector(state => state.bookModal);
 	const { closeBookModal } = useActions();
+
+	const [isDateReq, setIsDateReq] = useState(true);
 
 	const { addBook, updateBook } = useBooks();
 
@@ -184,6 +187,17 @@ function ModalForm() {
 						<div className={styles.input}>
 							<CustomSelect
 								{...field}
+								onChange={newValue => {
+									if (
+										!Array.isArray(newValue) &&
+										newValue?.value === 'reading'
+									) {
+										setIsDateReq(false);
+									} else {
+										setIsDateReq(true);
+									}
+									field.onChange(newValue);
+								}}
 								error={fieldState?.error?.message}
 								isSearchable
 								options={BooksStatusData}
@@ -199,7 +213,7 @@ function ModalForm() {
 				control={control}
 				name='date'
 				rules={{
-					required: 'Поле Дата обязательное!'
+					required: isDateReq ? 'Поле Дата обязательное!' : false
 				}}
 				render={({ field: { onChange, value }, fieldState }) => (
 					<CustomDatepicker

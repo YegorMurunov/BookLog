@@ -192,7 +192,6 @@ export const useAuth = () => {
 				displayName,
 				photoURL
 			});
-			console.log('useAuth ', photoURL);
 
 			toastWithPromise(() => updatePromise, 'updateProfile');
 
