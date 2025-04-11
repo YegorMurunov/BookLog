@@ -29,7 +29,7 @@ function ModalForm() {
 	const { type, book } = useTypedSelector(state => state.bookModal);
 	const { closeBookModal } = useActions();
 
-	const [isDateReq, setIsDateReq] = useState(true);
+	const [isDateReq, setIsDateReq] = useState(book?.status !== 'reading');
 
 	const { addBook, updateBook } = useBooks();
 
