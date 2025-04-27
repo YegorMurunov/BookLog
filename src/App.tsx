@@ -10,6 +10,7 @@ import useWindowDimensions from './hooks/useWindowDimensions';
 import Account from './pages/account/Account';
 import Login from './pages/auth/Login/Login';
 import SignUp from './pages/auth/Sign-Up/SignUp';
+import Goals from './pages/goals/Goals';
 
 const Dashboard = lazy(() => import('./pages/dashboard/Dashboard'));
 const Books = lazy(() => import('./pages/books/Books'));
@@ -27,7 +28,6 @@ function App() {
 			<Routes>
 				{/* index page - in future preview landing page */}
 				<Route
-					index
 					element={
 						<AuthGuard redirectTo='/login'>
 							<Navigate to='/dashboard' replace />
@@ -46,15 +46,11 @@ function App() {
 					{/* Dashboard page */}
 					<Route path='dashboard' index element={<Dashboard />} />
 					{/* Books page */}
-					<Route path='books' index element={<Books />} />
+					<Route path='books' element={<Books />} />
 					{/* Goals page */}
-					<Route
-						path='goals'
-						index
-						element={<Navigate to='/dashboard' replace />}
-					/>
+					<Route path='goals' element={<Goals />} />
 					{/* Account page */}
-					<Route path='account' index element={<Account />} />
+					<Route path='account' element={<Account />} />
 				</Route>
 
 				{/* Login page */}

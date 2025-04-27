@@ -4,6 +4,7 @@ import { useRef } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import { useBooks } from '@/hooks/useBooks';
+import { useGoals } from '@/hooks/useGoals';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 
@@ -12,8 +13,9 @@ import styles from './delete-modal.module.scss';
 function DeleteModal() {
 	const { closeDeleteModal } = useActions();
 	const { deleteBook } = useBooks();
+	const { deleteGoal } = useGoals();
 
-	const { bookId } = useTypedSelector(state => state.deleteModal);
+	const { id, typeOfObject } = useTypedSelector(state => state.deleteModal);
 
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -24,8 +26,12 @@ function DeleteModal() {
 	useOnClickOutside(ref, handleClickOutside);
 
 	const confirmDeleteBook = () => {
-		if (bookId) {
-			deleteBook(bookId).then(() => closeDeleteModal());
+		if (id) {
+			if (typeOfObject === 'table') {
+				deleteBook(id).then(() => closeDeleteModal());
+			} else {
+				deleteGoal(id).then(() => closeDeleteModal());
+			}
 		}
 	};
 
@@ -47,7 +53,10 @@ function DeleteModal() {
 			}}
 		>
 			<div className={styles.content} ref={ref}>
-				<div className={styles.title}>Вы уверены что хотите удалить книгу?</div>
+				<div className={styles.title}>
+					Вы уверены что хотите удалить{' '}
+					{typeOfObject === 'table' ? 'книгу' : 'цель'}?
+				</div>
 				<div className={styles.buttons}>
 					<button
 						type='button'

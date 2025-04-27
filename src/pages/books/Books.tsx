@@ -2,9 +2,9 @@ import { AnimatePresence } from 'motion/react';
 import { Helmet } from 'react-helmet-async';
 
 import BooksContent from '@/components/books/Content/BooksContent';
-import DeleteModal from '@/components/books/DeleteModal/DeleteModal';
-import Header from '@/components/books/Header/Header';
+import BooksHeader from '@/components/books/Header/BooksHeader';
 import Modal from '@/components/books/Modal/Modal';
+import DeleteModal from '@/components/ui/DeleteModal/DeleteModal';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 // import styles from './books.module.scss';
@@ -20,7 +20,7 @@ const Books = () => {
 			<Helmet>
 				<title>Книги | BookLog</title>
 			</Helmet>
-			<Header />
+			<BooksHeader />
 			<BooksContent />
 			<AnimatePresence>{isBookModal && <Modal />}</AnimatePresence>
 			<AnimatePresence>{isDeleteModal && <DeleteModal />}</AnimatePresence>

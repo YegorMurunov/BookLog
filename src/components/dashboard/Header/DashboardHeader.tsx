@@ -2,16 +2,14 @@ import Banner from '@/components/ui/Banner/Banner';
 import Card from '@/components/ui/Card/Card';
 import { useBooks } from '@/hooks/useBooks';
 
-import styles from './header.module.scss';
-
-const Header = () => {
+const DashboardHeader = () => {
 	const { stats } = useBooks();
 	const mainStats = stats.main;
 	const monthlyStats = stats.monthly;
 
 	return (
 		<header>
-			<Banner pageTitle='Книги' type='default' className={styles.banner}>
+			<Banner pageTitle='Дашбоард' type='default'>
 				<Card
 					mainValue={mainStats.read}
 					title='Прочитано книг'
@@ -40,4 +38,4 @@ const Header = () => {
 		</header>
 	);
 };
-export default Header;
+export default DashboardHeader;

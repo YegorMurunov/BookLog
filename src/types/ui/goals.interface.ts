@@ -1,0 +1,12 @@
+export interface IGoal {
+	title: string;
+	index: number;
+	id: string;
+	isCompleted: boolean;
+}
+
+export interface IGoalsItemProps {
+	goal: IGoal;
+}
+
+export type TGoalForm = Omit<IGoal, 'id'>;

@@ -1,0 +1,26 @@
+.goalsForm {
+	@apply flex flex-nowrap items-center gap-3;
+
+	&__input {
+		@apply flex-auto;
+
+		&.error {
+			@apply mb-4;
+		}
+	}
+
+	&__btn {
+		@apply mt-2 flex items-center justify-center rounded-lg bg-light-gray p-1 transition-all duration-300 ease-in-out; // mt-2
+
+		> svg {
+			@apply h-8 w-8 text-dark transition-colors duration-300 ease-in-out;
+		}
+
+		&:hover {
+			@apply rounded-3xl bg-pink;
+			> svg {
+				@apply text-white;
+			}
+		}
+	}
+}

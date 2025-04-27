@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
+import { IDeleteModal } from '@/types/ui/delete-modal.interface';
 import { ITableItemProps } from '@/types/ui/table.interface';
 
 import styles from '../../table.module.scss';
@@ -20,6 +21,11 @@ const TableMore = ({ book }: ITableItemProps) => {
 	};
 
 	useOnClickOutside(ref, handleClickOutside);
+
+	const modalData: Omit<IDeleteModal, 'isOpen'> = {
+		id: book.id,
+		typeOfObject: 'table'
+	};
 
 	return (
 		<div className={styles.moreDiv} ref={ref}>
@@ -44,7 +50,7 @@ const TableMore = ({ book }: ITableItemProps) => {
 					<button
 						type='button'
 						className={clsx(styles.ulBtn, styles.deleteBtn)}
-						onClick={() => openDeleteModal(book.id)}
+						onClick={() => openDeleteModal(modalData)}
 					>
 						<Trash2 />
 					</button>

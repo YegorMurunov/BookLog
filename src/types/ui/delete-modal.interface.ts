@@ -1,4 +1,7 @@
+type TtypeOfObject = 'table' | 'goals';
+
 export interface IDeleteModal {
-	bookId: string | null;
+	id: string | null;
 	isOpen: boolean;
+	typeOfObject: TtypeOfObject | null;
 }

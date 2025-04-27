@@ -1,27 +1,19 @@
 import { Helmet } from 'react-helmet-async';
 
-import { useAuth } from '@/hooks/useAuth';
+import DashboardContent from '@/components/dashboard/Content/DashboardContent';
+import DashboardHeader from '@/components/dashboard/Header/DashboardHeader';
 
-import styles from './dashboard.module.scss';
-
-// TODO: Конфиг тайтлов приложения!
+// import styles from './dashboard.module.scss';
 
 const Dashboard = () => {
-	const { userData } = useAuth();
-
-	return userData.isLoading ? (
-		<div>Loading........</div>
-	) : (
-		<div className={styles.test}>
+	return (
+		<>
 			<Helmet>
 				<title>Дашбоард | BookLog</title>
 			</Helmet>
-
-			<h1 className='text-xl font-bold'>Dashboard page:</h1>
-			<h3 className='text-md font-bold'>
-				Welcome: {userData.user?.displayName}
-			</h3>
-		</div>
+			<DashboardHeader />
+			<DashboardContent />
+		</>
 	);
 };
 

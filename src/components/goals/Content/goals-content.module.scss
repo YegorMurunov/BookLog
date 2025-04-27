@@ -1,0 +1,23 @@
+.content {
+	@apply bg-white p-container text-dark;
+
+	.goals {
+		@apply flex flex-wrap gap-6;
+
+		&__item {
+			@apply w-1/2;
+		}
+	}
+}
+
+@media (max-width: 768px) {
+	.content {
+		.goals {
+			@apply flex-col;
+
+			&__item {
+				@apply w-full;
+			}
+		}
+	}
+}

@@ -16,6 +16,10 @@ export type TToastType =
 	| 'deleteBook'
 	| 'addBook'
 	| 'editBook'
-	| 'updateProfile';
+	| 'updateProfile'
+	| 'deleteGoal'
+	| 'addGoal'
+	| 'editGoal'
+	| 'reorderGoals';
 
 export type IToastsMessages = Record<TToastType, IToastsState>;

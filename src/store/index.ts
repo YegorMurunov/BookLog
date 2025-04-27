@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { booksApi } from './api/books-api';
+import { goalsApi } from './api/goals-api';
 import authReducer from './slices/auth/auth.slice';
 import deleteModalReducer from './slices/delete-modal/delete-modal.slice';
 import modalReducer from './slices/modal/modal.slice';
@@ -15,11 +16,13 @@ export const store = configureStore({
 		[booksApi.reducerPath]: booksApi.reducer,
 		bookModal: modalReducer,
 		deleteModal: deleteModalReducer,
-		tableFilters: tableFiltersReducer
+		tableFilters: tableFiltersReducer,
+		[goalsApi.reducerPath]: goalsApi.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({ serializableCheck: false }).concat(
-			booksApi.middleware
+			booksApi.middleware,
+			goalsApi.middleware
 		),
 	devTools: true
 });

@@ -2,21 +2,23 @@ import { IDeleteModal } from '@/types/ui/delete-modal.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IDeleteModal = {
-	bookId: null,
-	isOpen: false
+	id: null,
+	isOpen: false,
+	typeOfObject: null
 };
 
 const deleteModalSlice = createSlice({
 	name: 'modal',
 	initialState,
 	reducers: {
-		openDeleteModal: (state, action) => {
+		openDeleteModal: (state, { payload }) => {
 			state.isOpen = true;
-			state.bookId = action.payload;
+			state.id = payload.id;
+			state.typeOfObject = payload.typeOfObject;
 		},
 		closeDeleteModal: state => {
 			state.isOpen = false;
-			state.bookId = null;
+			state.id = null;
 		}
 	}
 });
