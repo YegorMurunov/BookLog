@@ -24,8 +24,7 @@ const GoalsForm = () => {
 			isCompleted: false,
 			title: data.title
 		};
-		await addGoal(goalData);
-		setValue('title', '');
+		await addGoal(goalData).then(() => setValue('title', ''));
 	};
 
 	return (

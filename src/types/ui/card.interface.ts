@@ -4,4 +4,11 @@ export interface ICardProps {
 	subtext: string;
 	subtextValue?: string;
 	className?: string;
+	tooltipText?: string;
+	index?: number;
+}
+
+export interface ICardInfo {
+	title: string;
+	index: number;
 }

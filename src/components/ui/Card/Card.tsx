@@ -3,6 +3,7 @@ import clsx from 'clsx';
 import { ICardProps } from '@/types/ui/card.interface';
 
 import AnimatedCounter from '../AnimatedCounter';
+import CardInfo from './CardInfo/CardInfo';
 
 import styles from './card.module.scss';
 
@@ -11,11 +12,16 @@ const Card = ({
 	mainValue,
 	subtext,
 	className,
-	subtextValue
+	subtextValue,
+	tooltipText,
+	index
 }: ICardProps) => {
 	return (
 		<div className={clsx(styles.card, className)}>
-			<div className={styles.title}>{title}</div>
+			<div className={styles.title}>
+				{title}
+				{tooltipText && index && <CardInfo title={tooltipText} index={index} />}
+			</div>
 			{
 				<AnimatedCounter
 					className={styles.value}

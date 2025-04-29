@@ -1,28 +1,11 @@
 import clsx from 'clsx';
-import { LucideIcon } from 'lucide-react';
-import { InputHTMLAttributes } from 'react';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { TPlaceTooltip } from '@/types/ui/tooltip.interface';
+import { IIconCheckbox } from '@/types/ui/icon-checkbox.interface';
 
 import CustomTooltip from '../../Tooltip/Tooltip';
 
 import styles from './icon-checkbox.module.scss';
-
-export interface IIconCheckbox
-	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'checked'> {
-	name: string;
-	tooltipTitle: string;
-	tooltipDelay?: number;
-	tooltipPos?: TPlaceTooltip;
-	tooltipId: string;
-	className?: string;
-	icon: LucideIcon;
-	defaultClassname?: string;
-	activeClassname?: string;
-	checked?: boolean;
-	onChange?: (checked: boolean) => void;
-}
 
 const IconCheckbox = ({
 	name,

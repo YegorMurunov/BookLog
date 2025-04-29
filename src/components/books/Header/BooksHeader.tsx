@@ -29,6 +29,8 @@ const BooksHeader = () => {
 					title='Средний рейтинг'
 					subtextValue={`${monthlyStats.ratingDiff}`}
 					subtext='за последний месяц'
+					tooltipText='Книги с рейтингом 0 не влияют на статистику'
+					index={1}
 				/>
 				<Card
 					mainValue={mainStats.bestCount}

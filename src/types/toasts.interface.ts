@@ -20,6 +20,7 @@ export type TToastType =
 	| 'deleteGoal'
 	| 'addGoal'
 	| 'editGoal'
-	| 'reorderGoals';
+	| 'reorderGoals'
+	| 'editGoalTitle';
 
 export type IToastsMessages = Record<TToastType, IToastsState>;

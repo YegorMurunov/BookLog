@@ -21,3 +21,56 @@
 		}
 	}
 }
+
+.GoalTitle {
+	@apply mb-2 flex items-center gap-2 text-2xl text-dark;
+
+	.titleForm {
+		@apply inline-flex items-center gap-2;
+	}
+
+	.titleInput {
+		@apply max-w-[200px];
+	}
+
+	.titleBtn {
+		@apply pointer-events-none opacity-75 transition-opacity duration-300 ease-in-out;
+
+		> svg {
+			@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&:hover {
+			> svg {
+				@apply text-dark;
+			}
+		}
+
+		&.edit,
+		&.saveBtn {
+			@apply opacity-100;
+
+			> svg {
+				@apply mt-3;
+			}
+
+			&:hover {
+				> svg {
+					@apply text-red;
+				}
+			}
+		}
+
+		&.saveBtn:hover {
+			> svg {
+				@apply text-green;
+			}
+		}
+	}
+
+	&:hover {
+		.titleBtn {
+			@apply pointer-events-auto opacity-100;
+		}
+	}
+}

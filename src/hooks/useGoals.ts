@@ -1,4 +1,10 @@
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import {
+	collection,
+	doc,
+	onSnapshot,
+	orderBy,
+	query
+} from 'firebase/firestore';
 import { useEffect, useState } from 'react';
 
 import { db } from '@/services/firebase/firebase';
@@ -6,10 +12,12 @@ import {
 	useAddGoalMutation,
 	useBatchUpdateGoalsMutation,
 	useDeleteGoalMutation,
+	useEditTitleMutation,
 	useGetGoalsQuery,
+	useGetTitleQuery,
 	useUpdateGoalMutation
 } from '@/store/api/goals-api';
-import { IGoal } from '@/types/ui/goals.interface';
+import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
 
 import { useAuth } from './useAuth';
 
@@ -17,6 +25,7 @@ export const useGoals = () => {
 	const { userData } = useAuth();
 	const userId = userData.user?.uid;
 
+	// Получение целей
 	const {
 		data: cachedGoals,
 		isLoading,
@@ -31,6 +40,23 @@ export const useGoals = () => {
 	const [deleteGoalMutation] = useDeleteGoalMutation();
 	const [updateGoalMutation] = useUpdateGoalMutation();
 	const [batchUpdateGoals] = useBatchUpdateGoalsMutation();
+
+	// goals list title
+	const {
+		data: cachedTitle,
+		isLoading: isLoadingTitle,
+		error: errorTitle,
+		refetch: refetchTitle
+	} = useGetTitleQuery(undefined, {
+		skip: !userId
+	});
+
+	// const [goalsTitle, setGoalsTitle] = useState<string | null>(
+	// 	cachedTitle?.title || null
+	// );
+	const goalsTitle = cachedTitle?.title || 'Цели на год';
+
+	const [editTitle] = useEditTitleMutation();
 
 	// Подписка на обновления в Firestore
 	useEffect(() => {
@@ -50,6 +76,19 @@ export const useGoals = () => {
 
 		return () => unsubscribe(); // Отписка при размонтировании
 	}, [userId]);
+
+	// Подписка на обновления в Firestore
+	useEffect(() => {
+		if (!userId) return;
+
+		const titleDoc = doc(db, 'users', userId, 'goalsMeta', 'title');
+
+		const unsubscribe = onSnapshot(titleDoc, () => {
+			refetchTitle(); // обновляем заголовок
+		});
+
+		return () => unsubscribe();
+	}, [userId, refetchTitle]);
 
 	// Функция добавления цели
 	const addGoal = async (goal: Omit<IGoal, 'id'>) => {
@@ -73,6 +112,11 @@ export const useGoals = () => {
 		await batchUpdateGoals(goals);
 	};
 
+	// Функция для изменения названия списка целей
+	const editGoalsTitle = async (data: IGoalsListTitle) => {
+		await editTitle(data.title);
+	};
+
 	return {
 		goals,
 		isLoading,
@@ -80,6 +124,10 @@ export const useGoals = () => {
 		addGoal,
 		deleteGoal,
 		updateGoal,
-		reorderGoals
+		reorderGoals,
+		editGoalsTitle,
+		goalsTitle,
+		isLoadingTitle,
+		errorTitle
 	};
 };

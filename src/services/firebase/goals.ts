@@ -3,14 +3,16 @@ import {
 	collection,
 	deleteDoc,
 	doc,
+	getDoc,
 	getDocs,
 	orderBy,
 	query,
+	setDoc,
 	updateDoc,
 	writeBatch
 } from 'firebase/firestore';
 
-import { IGoal } from '@/types/ui/goals.interface';
+import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
 
 import { auth, db } from './firebase';
 
@@ -71,4 +73,28 @@ export const batchUpdateGoals = async (goals: IGoal[]) => {
 	});
 
 	await batch.commit();
+};
+
+// Изменение названия списка целей
+export const firebaseUpdateGoalsTitle = async (title: string) => {
+	const userId = auth.currentUser?.uid;
+	if (!userId) throw new Error('User ID is undefined');
+
+	const titleRef = doc(db, 'users', userId, 'goalsMeta', 'title');
+	await setDoc(titleRef, { title }, { merge: true });
+};
+
+// Получение названия списка целей
+export const firebaseGetGoalsTitle = async (): Promise<IGoalsListTitle> => {
+	const userId = auth.currentUser?.uid;
+	if (!userId) throw new Error('User ID is undefined');
+
+	const titleRef = doc(db, 'users', userId, 'goalsMeta', 'title');
+	const snapshot = await getDoc(titleRef);
+
+	const data = {
+		title: snapshot.data()?.title
+	};
+
+	return data;
 };

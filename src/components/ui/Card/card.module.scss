@@ -2,7 +2,7 @@
 	@apply min-w-48 flex-auto rounded-xl bg-white/70 p-container;
 
 	.title {
-		@apply mb-5 text-base;
+		@apply mb-5 flex items-center gap-1 text-base;
 	}
 
 	.value {
@@ -14,6 +14,18 @@
 
 		span {
 			@apply mr-1 text-sm text-dark;
+		}
+	}
+}
+
+.cardInfoIcon {
+	> svg {
+		@apply h-5 w-5 rounded-full text-dark-gray transition-colors duration-300 ease-in-out;
+	}
+
+	&:hover {
+		> svg {
+			@apply text-dark;
 		}
 	}
 }

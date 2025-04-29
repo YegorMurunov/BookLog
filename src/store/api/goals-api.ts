@@ -3,9 +3,11 @@ import {
 	firebaseAddGoal,
 	firebaseDeleteGoal,
 	firebaseGetGoals,
-	firebaseUpdateGoal
+	firebaseGetGoalsTitle,
+	firebaseUpdateGoal,
+	firebaseUpdateGoalsTitle
 } from '@/services/firebase/goals';
-import { IGoal } from '@/types/ui/goals.interface';
+import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -80,6 +82,31 @@ export const goalsApi = createApi({
 				}
 			},
 			invalidatesTags: ['goals']
+		}),
+		editTitle: builder.mutation<void, string>({
+			async queryFn(title) {
+				try {
+					await toastWithPromise(
+						() => firebaseUpdateGoalsTitle(title),
+						'editGoalTitle'
+					);
+					return { data: undefined };
+				} catch (e) {
+					return { error: e };
+				}
+			},
+			invalidatesTags: ['goals']
+		}),
+		getTitle: builder.query<IGoalsListTitle, void>({
+			async queryFn() {
+				try {
+					const title = await firebaseGetGoalsTitle();
+					return { data: title };
+				} catch (e) {
+					return { error: e };
+				}
+			},
+			providesTags: ['goals']
 		})
 	})
 });
@@ -89,5 +116,7 @@ export const {
 	useAddGoalMutation,
 	useDeleteGoalMutation,
 	useUpdateGoalMutation,
-	useBatchUpdateGoalsMutation
+	useBatchUpdateGoalsMutation,
+	useEditTitleMutation,
+	useGetTitleQuery
 } = goalsApi;

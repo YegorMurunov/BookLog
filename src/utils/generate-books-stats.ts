@@ -9,8 +9,7 @@ import { round } from './round.utils';
 export const generateMainStats = (booksData: IBook[]): IBooksMainStats => {
 	// main stats
 	const mainArr = booksData.filter(
-		book =>
-			(book.status === 'read' || book.status === 'reread') && book.rating !== 0
+		book => book.status === 'read' || book.status === 'reread'
 	);
 	const all = booksData.length;
 
@@ -21,9 +20,15 @@ export const generateMainStats = (booksData: IBook[]): IBooksMainStats => {
 	).length;
 	const reread = booksData.filter(book => book.status === 'reread').length;
 	const reading = booksData.filter(book => book.status === 'reading').length;
+
+	// Rating
 	const avgRating =
-		round(mainArr.reduce((sum, book) => (sum += book.rating), 0) / read, 1) ||
-		0;
+		round(
+			mainArr
+				.filter(book => book.rating !== 0)
+				.reduce((sum, book) => (sum += book.rating), 0) / read,
+			1
+		) || 0;
 	const pagesSum = mainArr.reduce((sum, book) => (sum += book.pageCount), 0);
 
 	return {
@@ -46,8 +51,7 @@ export const generateMonthlyStats = (
 	const currentYear = now.getFullYear();
 
 	const readBooks = booksData.filter(
-		book =>
-			(book.status === 'read' || book.status === 'reread') && book.rating !== 0
+		book => book.status === 'read' || book.status === 'reread'
 	);
 
 	const readBooksThisMonth = readBooks.filter(book => {
@@ -66,8 +70,12 @@ export const generateMonthlyStats = (
 		0
 	);
 
-	// Filtering of books read before the current month
-	const readBooksBeforeThisMonth = readBooks.filter(book => {
+	// RATING
+	// Number of books that have been read but are worth a rating of 0
+	const readBookWithNoZeroRating = readBooks.filter(book => book.rating !== 0);
+
+	// Filtering of books read before the current month with 0 rating
+	const readBooksBeforeThisMonth = readBookWithNoZeroRating.filter(book => {
 		const bookDate = new Date(book.date);
 		const bookMonth = bookDate.getMonth();
 		const bookYear = bookDate.getFullYear();
@@ -81,9 +89,9 @@ export const generateMonthlyStats = (
 
 	const avgRating =
 		round(
-			readBooks.reduce((sum, book) => {
+			readBookWithNoZeroRating.reduce((sum, book) => {
 				return (sum += book.rating);
-			}, 0) / readBooks.length,
+			}, 0) / readBookWithNoZeroRating.length,
 			2
 		) || 0;
 

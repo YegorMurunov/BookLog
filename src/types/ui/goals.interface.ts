@@ -10,3 +10,7 @@ export interface IGoalsItemProps {
 }
 
 export type TGoalForm = Omit<IGoal, 'id'>;
+
+export interface IGoalsListTitle {
+	title: string;
+}
