@@ -5,7 +5,7 @@ import {
 	orderBy,
 	query
 } from 'firebase/firestore';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { db } from '@/services/firebase/firebase';
 import {
@@ -17,7 +17,12 @@ import {
 	useGetTitleQuery,
 	useUpdateGoalMutation
 } from '@/store/api/goals-api';
-import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
+import {
+	IGoal,
+	IGoalsListTitle,
+	IGoalsStats
+} from '@/types/ui/goals.interface';
+import { generateGoalsStats } from '@/utils/genetate-goals-stats';
 
 import { useAuth } from './useAuth';
 
@@ -51,12 +56,28 @@ export const useGoals = () => {
 		skip: !userId
 	});
 
-	// const [goalsTitle, setGoalsTitle] = useState<string | null>(
-	// 	cachedTitle?.title || null
-	// );
 	const goalsTitle = cachedTitle?.title || 'Цели на год';
 
 	const [editTitle] = useEditTitleMutation();
+
+	const prevGoalsRef = useRef<IGoal[]>(goals);
+	const prevStatsRef = useRef<IGoalsStats>({
+		all: 0,
+		completed: 0,
+		percent: 0
+	});
+
+	const stats = useMemo(() => {
+		if (prevGoalsRef.current === goals) {
+			return prevStatsRef.current;
+		}
+
+		const goalsStats = generateGoalsStats(goals);
+
+		prevGoalsRef.current = goals;
+		prevStatsRef.current = goalsStats;
+		return prevStatsRef.current;
+	}, [goals]);
 
 	// Подписка на обновления в Firestore
 	useEffect(() => {
@@ -128,6 +149,7 @@ export const useGoals = () => {
 		editGoalsTitle,
 		goalsTitle,
 		isLoadingTitle,
-		errorTitle
+		errorTitle,
+		stats
 	};
 };

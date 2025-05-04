@@ -1,0 +1,14 @@
+.progressbarContainer {
+	max-width: 150px;
+	min-width: 100px;
+	height: auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	@apply text-lg;
+}
+
+.progressbar {
+	width: 100%;
+	height: 100%;
+}
