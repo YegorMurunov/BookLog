@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { IIconButton } from '@/types/ui/button.interface';
+import type { IIconButton } from '@/types/ui/button.interface';
 
 import CustomTooltip from '../../Tooltip/Tooltip';
 

@@ -7,7 +7,7 @@ import {
 	firebaseUpdateGoal,
 	firebaseUpdateGoalsTitle
 } from '@/services/firebase/goals';
-import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
+import type { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 

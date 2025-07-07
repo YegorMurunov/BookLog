@@ -1,5 +1,6 @@
 import { CirclePlus } from 'lucide-react';
 import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 import { IconButton } from '@/components/ui/buttons/IconButton/IconButton';
 import SearchInput from '@/components/ui/fields/SearchInput/SearchInput';
@@ -18,13 +19,17 @@ const BooksContent = () => {
 		openBookModal({ type: 'create' });
 	};
 
-	useEffect(() => {
-		const Debounce = setTimeout(() => {
-			setFilters({ search: searchTerm });
-		}, 300);
+	const debouncedSetFilters = useDebouncedCallback(
+		(search: string) => {
+			setFilters({ search });
+		},
+		300,
+		{ leading: false, trailing: true }
+	);
 
-		return () => clearTimeout(Debounce);
-	}, [searchTerm, setFilters]);
+	useEffect(() => {
+		debouncedSetFilters(searchTerm);
+	}, [searchTerm, debouncedSetFilters]);
 
 	return (
 		<section className={styles.content}>

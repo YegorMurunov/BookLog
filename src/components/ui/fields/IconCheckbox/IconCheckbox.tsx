@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { IIconCheckbox } from '@/types/ui/icon-checkbox.interface';
+import type { IIconCheckbox } from '@/types/ui/icon-checkbox.interface';
 
 import CustomTooltip from '../../Tooltip/Tooltip';
 

@@ -1,4 +1,4 @@
-import { IUser } from '@/types/user.interface';
+import type { IUser } from '@/types/user.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IUser = {

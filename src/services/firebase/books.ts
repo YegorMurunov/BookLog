@@ -9,7 +9,7 @@ import {
 	updateDoc
 } from 'firebase/firestore';
 
-import { IBook } from '@/types/api/books.interface';
+import type { IBook } from '@/types/api/books.interface';
 
 import { auth, db } from './firebase';
 

@@ -17,7 +17,7 @@ import {
 	useGetTitleQuery,
 	useUpdateGoalMutation
 } from '@/store/api/goals-api';
-import {
+import type {
 	IGoal,
 	IGoalsListTitle,
 	IGoalsStats

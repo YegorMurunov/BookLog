@@ -3,7 +3,7 @@ import { X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import ReactStars from 'react-stars';
 
-import { IStarRatingProps } from '@/types/ui/star-rating.interface';
+import type { IStarRatingProps } from '@/types/ui/star-rating.interface';
 
 import styles from './star-rating.module.scss';
 

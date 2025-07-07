@@ -2,8 +2,8 @@ import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useGoals } from '@/hooks/useGoals';
-import { IGoal } from '@/types/ui/goals.interface';
-import { DndContext, DragEndEvent } from '@dnd-kit/core';
+import type { IGoal } from '@/types/ui/goals.interface';
+import { DndContext, type DragEndEvent } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';
 
@@ -75,7 +75,7 @@ const GoalsList = () => {
 							<div className='flex justify-between items-center w-full' key={i}>
 								<div className='flex gap-2 items-center'>
 									<Skeleton width={20} height={20} className='mr-1' />
-									<Skeleton width={350} height={20} />
+									<Skeleton height={20} className='w-[200px] md:w-[300px]' />
 								</div>
 								<Skeleton width={20} height={20} />
 							</div>

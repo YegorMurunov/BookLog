@@ -1,4 +1,4 @@
-import { PropsWithChildren } from 'react';
+import type { PropsWithChildren } from 'react';
 
 export interface IAuthGuardProps extends PropsWithChildren {
 	isProtected?: boolean; // Защищенный маршрут (если true, требует авторизацию)

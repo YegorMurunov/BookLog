@@ -1,4 +1,4 @@
-import { IDeleteModal } from '@/types/ui/delete-modal.interface';
+import type { IDeleteModal } from '@/types/ui/delete-modal.interface';
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState: IDeleteModal = {

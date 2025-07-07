@@ -1,6 +1,6 @@
 import { ChartArea, CircleUserRound, Goal, LibraryBig } from 'lucide-react';
 
-import { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
+import type { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
 
 const baseMenu: Omit<IMenuItemProps, 'id'>[] = [
 	{

@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { IButtonProps } from '@/types/ui/button.interface';
+import type { IButtonProps } from '@/types/ui/button.interface';
 
 import styles from './button.module.scss';
 

@@ -1,7 +1,7 @@
 import { animate } from 'framer-motion';
 import { useEffect, useMemo, useState } from 'react';
 
-import { IAnimatedCounterProps } from '@/types/ui/animated-counter.interface';
+import type { IAnimatedCounterProps } from '@/types/ui/animated-counter.interface';
 
 export const AnimatedCounter = ({
 	from,

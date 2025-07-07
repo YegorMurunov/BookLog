@@ -45,4 +45,18 @@ export interface ITableFiltersState {
 	filters: IFilters;
 	currentPage: number;
 	booksPerPage: number;
+	currentSort: TSortState;
+}
+
+export type TSortState = {
+	type: string;
+	direction: 'asc' | 'desc';
+};
+
+export interface ISortParams {
+	date?: 'asc' | 'desc';
+	rating?: 'asc' | 'desc';
+	pageCount?: 'asc' | 'desc';
+	author?: 'asc' | 'desc';
+	title?: 'asc' | 'desc';
 }

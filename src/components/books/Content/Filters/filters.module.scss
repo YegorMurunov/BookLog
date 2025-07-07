@@ -35,8 +35,31 @@
 			@apply w-full;
 		}
 	}
+	.dropdownContent {
+		@apply w-full;
+	}
 
 	.activeLine {
 		@apply absolute bottom-0 left-0 z-[-1] h-full w-full rounded-full bg-pink;
+	}
+
+	.filterList {
+		@apply m-0 list-none p-0;
+	}
+
+	.filterItem {
+		@apply cursor-pointer px-4 py-2 transition-colors duration-300 ease-in-out hover:bg-gray;
+
+		.count {
+			@apply ml-1 inline-flex h-6 min-w-6 items-center justify-center rounded-full bg-dark p-1 text-sm text-light-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&.active {
+			@apply bg-pink text-white;
+
+			.count {
+				@apply bg-white/25;
+			}
+		}
 	}
 }

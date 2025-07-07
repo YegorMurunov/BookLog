@@ -4,8 +4,8 @@ import { useRef, useState } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import useOnClickOutside from '@/hooks/useOnClickOutside';
-import { IDeleteModal } from '@/types/ui/delete-modal.interface';
-import { ITableItemProps } from '@/types/ui/table.interface';
+import type { IDeleteModal } from '@/types/ui/delete-modal.interface';
+import type { ITableItemProps } from '@/types/ui/table.interface';
 
 import styles from '../../table.module.scss';
 

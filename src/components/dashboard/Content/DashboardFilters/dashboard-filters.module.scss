@@ -1,0 +1,53 @@
+.filters {
+	@apply relative mb-4 flex justify-start gap-4 pb-4; // sm:flex-row
+
+	&::before {
+		content: '';
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: 1px;
+		@apply rounded-full bg-gray;
+	}
+
+	&__title {
+		@apply text-base text-dark;
+		// @apply text-2xl text-dark;
+	}
+
+	&__items {
+		@apply flex flex-wrap gap-3;
+	}
+	&__item {
+		@apply rounded-lg bg-light-gray p-1.5 transition-colors duration-300 ease-in-out;
+
+		&.active {
+			@apply bg-pink/30;
+		}
+	}
+	.filter__content {
+		@apply flex flex-col gap-4;
+	}
+	.daterange {
+		@apply rounded-md bg-light-gray p-1;
+	}
+	.input {
+		@apply min-w-[300px] max-sm:min-w-60;
+	}
+}
+
+.dropdownContent {
+	@apply min-h-[300px] min-w-fit overflow-y-auto p-3;
+
+	&.dropdownContent__date {
+		@media (max-width: 400px) {
+			transform: scale(0.9) !important;
+			transform-origin: top left;
+		}
+		@media (max-width: 360px) {
+			transform: scale(0.85) !important;
+			transform-origin: top left;
+		}
+	}
+}

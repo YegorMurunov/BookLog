@@ -83,12 +83,31 @@ const Filters = () => {
 				<Dropdown
 					title='Фильтр'
 					icon={Filter}
-					items={BooksFiltersData}
-					counts={counts}
-					activeIndex={activeIndex}
-					onSelect={handleSelectFilter}
 					className={styles.filtersDropdown}
-				/>
+					dropdownContentClassName={styles.dropdownContent}
+				>
+					{close => (
+						<ul className={styles.filterList}>
+							{BooksFiltersData.map(({ label, value }, index) => (
+								<li
+									key={value}
+									className={clsx(styles.filterItem, {
+										[styles.active]: activeIndex === index
+									})}
+									onClick={() => {
+										handleSelectFilter(index);
+										close();
+									}}
+								>
+									{label}
+									<span className={styles.count}>
+										{counts.find(item => item.value === value)?.count || 0}
+									</span>
+								</li>
+							))}
+						</ul>
+					)}
+				</Dropdown>
 			)}
 		</div>
 	);

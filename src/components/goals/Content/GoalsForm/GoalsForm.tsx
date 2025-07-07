@@ -1,10 +1,10 @@
 import clsx from 'clsx';
 import { Plus } from 'lucide-react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import { TGoalForm } from '@/types/ui/goals.interface';
+import type { TGoalForm } from '@/types/ui/goals.interface';
 
 import styles from './goals-form.module.scss';
 

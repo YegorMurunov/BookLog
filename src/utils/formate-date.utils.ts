@@ -1,132 +1,54 @@
-export const formatDate = (
-	date: Date | string | undefined,
-	separator: string = '-'
+import {
+	type Locale,
+	differenceInCalendarDays,
+	formatDuration,
+	intervalToDuration,
+	startOfDay
+} from 'date-fns';
+import { ru } from 'date-fns/locale';
+
+export const formatAccountAge = (
+	creationTime: string,
+	locale: Locale
 ): string => {
-	if (!date) return '';
+	const createdDate = startOfDay(new Date(creationTime));
+	const now = startOfDay(new Date());
 
-	const parsedDate = typeof date === 'string' ? new Date(date) : date;
+	const duration = intervalToDuration({
+		start: createdDate,
+		end: now
+	});
 
-	if (!(parsedDate instanceof Date) || isNaN(parsedDate.getTime())) {
-		return '';
-	}
+	const formatted = formatDuration(duration, {
+		format: ['years', 'months', 'days'],
+		locale,
+		delimiter: ', '
+	});
 
-	const year = parsedDate.getFullYear();
-	const month = (parsedDate.getMonth() + 1).toString().padStart(2, '0');
-	const day = parsedDate.getDate().toString().padStart(2, '0');
+	if (formatted) return formatted;
 
-	return `${year}${separator}${month}${separator}${day}`;
+	// Если результат пустой (например, в первый день), возвращаем сообщение по локали
+	if (locale === ru) return 'Первый день';
+
+	// Для других языков — универсально
+	return 'First day';
 };
 
-export const formatDateFromNum = ({
-	year,
-	month,
-	day
-}: {
-	year: number;
-	month: number;
-	day: number;
-}): string => {
-	const mm = month.toString().padStart(2, '0'); // "01", "02", ..., "12"
-	const dd = day.toString().padStart(2, '0'); // "01", "02", ..., "31"
-	return `${year}-${mm}-${dd}`;
+export const diffInDays = (
+	start: Date | number,
+	end: Date | number
+): number => {
+	return differenceInCalendarDays(end, start) + 1;
 };
 
-export const getDateString = (dateString: string, lang: string = 'ru') => {
-	const date = new Date(dateString);
-
-	const monthsShortRu = [
-		'Янв',
-		'Фев',
-		'Мар',
-		'Апр',
-		'Май',
-		'Июн',
-		'Июл',
-		'Авг',
-		'Сен',
-		'Окт',
-		'Ноя',
-		'Дек'
-	];
-	const monthsShortEn = [
-		'Jan',
-		'Feb',
-		'Mar',
-		'Apr',
-		'May',
-		'Jun',
-		'Jul',
-		'Aug',
-		'Sep',
-		'Oct',
-		'Nov',
-		'Dec'
-	];
-
-	const day = date.getUTCDate();
-	const monthIndex = date.getUTCMonth();
-	const year = date.getUTCFullYear();
-
-	const months = lang === 'en' ? monthsShortEn : monthsShortRu;
-
-	return `${day} ${months[monthIndex]}, ${year}`;
-};
-
-export const calculateAccountAge = (
-	creationTime: string
-): {
-	years: number;
-	months: number;
-	days: number;
-} => {
-	const createdDate = new Date(creationTime);
-	const now = new Date();
-
-	let years = now.getFullYear() - createdDate.getFullYear();
-	let months = now.getMonth() - createdDate.getMonth();
-	let days = now.getDate() - createdDate.getDate();
-
-	if (days < 0) {
-		const prevMonth = new Date(now.getFullYear(), now.getMonth(), 0);
-		days += prevMonth.getDate();
-		months--;
-	}
-
-	if (months < 0) {
-		months += 12;
-		years--;
-	}
-
-	return { years, months, days };
-};
-
-// Функции для правильного склонения слов
-const pluralize = (count: number, forms: [string, string, string]): string => {
-	const cases = [2, 0, 1, 1, 1, 2];
-	return `${count} ${
-		forms[
-			count % 100 > 4 && count % 100 < 20 ? 2 : cases[Math.min(count % 10, 5)]
-		]
-	}`;
-};
-
-export const formatAccountAge = (creationTime: string): string => {
-	const { years, months, days } = calculateAccountAge(creationTime);
-	const parts: string[] = [];
-
-	if (years > 0) {
-		parts.push(pluralize(years, ['год', 'года', 'лет']));
-	}
-	if (months > 0) {
-		parts.push(pluralize(months, ['месяц', 'месяца', 'месяцев']));
-	}
-	if (days > 0) {
-		parts.push(pluralize(days, ['день', 'дня', 'дней']));
-	}
-
-	if (parts.length === 0) {
-		return 'Первый день';
-	}
-
-	return parts.join(', ');
+export const declOfNum = (
+	number: number,
+	words: [string, string, string]
+): string => {
+	const n = Math.abs(number) % 100;
+	const n1 = n % 10;
+	if (n > 10 && n < 20) return words[2];
+	if (n1 > 1 && n1 < 5) return words[1];
+	if (n1 === 1) return words[0];
+	return words[2];
 };

@@ -11,7 +11,11 @@ import {
 } from '@/services/firebase/auth';
 import { auth } from '@/services/firebase/firebase';
 import { firebaseUpdateProfile } from '@/services/firebase/profile';
-import { IUser, IUserData, IUserUpdateProfile } from '@/types/user.interface';
+import type {
+	IUser,
+	IUserData,
+	IUserUpdateProfile
+} from '@/types/user.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 
 export const useAuth = () => {

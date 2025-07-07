@@ -1,6 +1,6 @@
 import { Tooltip } from 'react-tooltip';
 
-import { ITooltipProps } from '@/types/ui/tooltip.interface';
+import type { ITooltipProps } from '@/types/ui/tooltip.interface';
 
 const CustomTooltip = ({ id, title, place, delay = 0 }: ITooltipProps) => {
 	return (

@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
 import { useBooks } from '@/hooks/useBooks';
-import { ITableItemProps } from '@/types/ui/table.interface';
+import type { ITableItemProps } from '@/types/ui/table.interface';
 
 import TableMore from './TableMore/TableMore';
 

@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { Check, Pencil, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import Skeleton from 'react-loading-skeleton';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import { IGoalsListTitle } from '@/types/ui/goals.interface';
+import type { IGoalsListTitle } from '@/types/ui/goals.interface';
 
 import styles from '../goals-content.module.scss';
 

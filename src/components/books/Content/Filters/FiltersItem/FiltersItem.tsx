@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { AnimatePresence, motion } from 'motion/react';
 
-import { IBooksFiltersItemProps } from '@/types/ui/books-filters-item.interface';
+import type { IBooksFiltersItemProps } from '@/types/ui/books-filters-item.interface';
 
 import styles from '../filters.module.scss';
 

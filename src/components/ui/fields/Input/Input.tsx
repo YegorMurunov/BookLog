@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, useEffect, useState } from 'react';
 
-import { IInputProps } from '@/types/ui/fields.interface';
+import type { IInputProps } from '@/types/ui/fields.interface';
 
 import styles from './input.module.scss';
 

@@ -1,8 +1,9 @@
 import clsx from 'clsx';
-import { ru } from 'date-fns/locale/ru';
+import ru from 'date-fns/locale/ru';
+import { memo } from 'react';
 import DatePicker, { registerLocale } from 'react-datepicker';
 
-import { IDatepickerProps } from '@/types/ui/datepicker.interface';
+import type { IDatepickerProps } from '@/types/ui/datepicker.interface';
 
 import './datepicker.scss';
 import 'react-datepicker/dist/react-datepicker.css';
@@ -10,7 +11,7 @@ import 'react-datepicker/dist/react-datepicker.css';
 // Регистрируем русскую локализацию
 registerLocale('ru', ru);
 
-const CustomDatepicker = ({
+const CustomDatepickerComponent = ({
 	selected = null,
 	onChange,
 	onSelect,
@@ -40,5 +41,7 @@ const CustomDatepicker = ({
 		</div>
 	);
 };
+
+const CustomDatepicker = memo(CustomDatepickerComponent);
 
 export default CustomDatepicker;

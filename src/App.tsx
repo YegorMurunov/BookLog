@@ -28,6 +28,7 @@ function App() {
 			<Routes>
 				{/* index page - in future preview landing page */}
 				<Route
+					index
 					element={
 						<AuthGuard redirectTo='/login'>
 							<Navigate to='/dashboard' replace />
@@ -44,7 +45,7 @@ function App() {
 					}
 				>
 					{/* Dashboard page */}
-					<Route path='dashboard' index element={<Dashboard />} />
+					<Route path='dashboard' element={<Dashboard />} />
 					{/* Books page */}
 					<Route path='books' element={<Books />} />
 					{/* Goals page */}

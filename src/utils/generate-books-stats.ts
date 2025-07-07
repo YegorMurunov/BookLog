@@ -1,8 +1,8 @@
-import {
+import type {
 	IBooksMainStats,
 	IBooksMonthlyStats
 } from '@/types/api/books-data.interface';
-import { IBook } from '@/types/api/books.interface';
+import type { IBook } from '@/types/api/books.interface';
 
 import { round } from './round.utils';
 

@@ -1,10 +1,18 @@
-import { IFilters, ITableFiltersState } from '@/types/api/books.interface';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type {
+	IFilters,
+	ITableFiltersState,
+	TSortState
+} from '@/types/api/books.interface';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: ITableFiltersState = {
 	filters: {},
 	currentPage: 1,
-	booksPerPage: 15
+	booksPerPage: 15,
+	currentSort: {
+		type: 'date',
+		direction: 'desc'
+	}
 };
 
 const tableFilters = createSlice({
@@ -21,6 +29,10 @@ const tableFilters = createSlice({
 		},
 		setCurrentPage: (state, action: PayloadAction<number>) => {
 			state.currentPage = action.payload;
+		},
+		setCurrentSort: (state, action: PayloadAction<TSortState>) => {
+			state.currentSort = action.payload;
+			state.currentPage = 1;
 		}
 	}
 });

@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef } from 'react';
 
-import { ITextareaProps } from '@/types/ui/fields.interface';
+import type { ITextareaProps } from '@/types/ui/fields.interface';
 
 import styles from './textarea.module.scss';
 

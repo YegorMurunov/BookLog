@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { actions as authActions } from '@/store/slices/auth/auth.slice';
+import { actions as dashboardFiltersActions } from '@/store/slices/dashboard/dashboard-filters.slice';
 import { actions as deleteModalActions } from '@/store/slices/delete-modal/delete-modal.slice';
 import { actions as modalActions } from '@/store/slices/modal/modal.slice';
 import { actions as sidebarActions } from '@/store/slices/sidebar/sidebar.slice';
@@ -13,7 +14,8 @@ const rootActions = {
 	...sidebarActions,
 	...modalActions,
 	...deleteModalActions,
-	...tableFiltersActions
+	...tableFiltersActions,
+	...dashboardFiltersActions
 };
 
 export const useActions = () => {

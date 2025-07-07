@@ -1,4 +1,4 @@
-import { IToastsMessages } from '@/types/toasts.interface';
+import type { IToastsMessages } from '@/types/toasts.interface';
 
 export const toastsMessages: IToastsMessages = {
 	login: {

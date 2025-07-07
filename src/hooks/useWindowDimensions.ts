@@ -1,36 +1,44 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import { useDebouncedCallback } from 'use-debounce';
 
 export default function useWindowDimensions() {
 	const hasWindow = typeof window !== 'undefined';
 
-	const getWindowDimensions = useCallback(() => {
+	const getWindowDimensions = () => {
 		const width = hasWindow ? window.innerWidth : null;
 		const height = hasWindow ? window.innerHeight : null;
 		return { width, height };
-	}, [hasWindow]);
+	};
 
 	const [windowDimensions, setWindowDimensions] = useState(
 		getWindowDimensions()
 	);
 
+	const debouncedSetWindowDimensions = useDebouncedCallback(
+		() => {
+			setWindowDimensions(getWindowDimensions());
+		},
+		50,
+		{ leading: false, trailing: true }
+	);
+
 	useEffect(() => {
 		if (hasWindow) {
-			const handleResize = () => setWindowDimensions(getWindowDimensions());
-			const handleOrientationChange = () =>
-				setWindowDimensions(getWindowDimensions());
-
-			window.addEventListener('resize', handleResize);
-			window.addEventListener('orientationchange', handleOrientationChange);
+			window.addEventListener('resize', debouncedSetWindowDimensions);
+			window.addEventListener(
+				'orientationchange',
+				debouncedSetWindowDimensions
+			);
 
 			return () => {
-				window.removeEventListener('resize', handleResize);
+				window.removeEventListener('resize', debouncedSetWindowDimensions);
 				window.removeEventListener(
 					'orientationchange',
-					handleOrientationChange
+					debouncedSetWindowDimensions
 				);
 			};
 		}
-	}, [getWindowDimensions, hasWindow]);
+	}, [debouncedSetWindowDimensions, hasWindow]);
 
 	return windowDimensions;
 }

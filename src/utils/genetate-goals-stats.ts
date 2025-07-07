@@ -1,4 +1,4 @@
-import { IGoal, IGoalsStats } from '@/types/ui/goals.interface';
+import type { IGoal, IGoalsStats } from '@/types/ui/goals.interface';
 
 import { round } from './round.utils';
 

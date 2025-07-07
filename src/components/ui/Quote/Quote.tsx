@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { IQuoteProps } from '@/types/ui/quote.interface';
+import type { IQuoteProps } from '@/types/ui/quote.interface';
 
 import styles from './quote.module.scss';
 

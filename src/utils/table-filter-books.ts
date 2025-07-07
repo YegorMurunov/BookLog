@@ -1,4 +1,4 @@
-import { IBook, IFilters } from '@/types/api/books.interface';
+import type { IBook, IFilters } from '@/types/api/books.interface';
 
 export const filterBooks = (books: IBook[], filters: IFilters): IBook[] => {
 	let filtered = [...books];

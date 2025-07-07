@@ -1,8 +1,6 @@
 import clsx from 'clsx';
 
-// import { ChevronLeft, ChevronRight } from 'lucide-react';
-
-import { IPaginationProps } from '@/types/ui/pagination.interface';
+import type { IPaginationProps } from '@/types/ui/pagination.interface';
 
 import styles from './pagination.module.scss';
 
@@ -15,18 +13,6 @@ const Pagination = ({
 	activeButtonClassName,
 	disabledButtonClassName
 }: IPaginationProps) => {
-	// const handlePrevious = () => {
-	// 	if (currentPage > 1) {
-	// 		onPageChange(currentPage - 1);
-	// 	}
-	// };
-
-	// const handleNext = () => {
-	// 	if (currentPage < totalPages) {
-	// 		onPageChange(currentPage + 1);
-	// 	}
-	// };
-
 	return (
 		<div className={clsx(styles.pagination, className)}>
 			<div className={styles.pageBtns}>

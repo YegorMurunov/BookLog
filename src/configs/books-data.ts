@@ -1,4 +1,4 @@
-import {
+import type {
 	IBooksGenresData,
 	IBooksStatusData
 } from '@/types/api/books-data.interface';

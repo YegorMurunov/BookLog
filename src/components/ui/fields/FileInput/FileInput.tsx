@@ -1,8 +1,8 @@
 import clsx from 'clsx';
 import { Paperclip, X } from 'lucide-react';
-import { ChangeEvent, forwardRef, useState } from 'react';
+import { type ChangeEvent, forwardRef, useState } from 'react';
 
-import { IFileInputProps } from '@/types/ui/file-input.interface';
+import type { IFileInputProps } from '@/types/ui/file-input.interface';
 
 import styles from './file-input.module.scss';
 

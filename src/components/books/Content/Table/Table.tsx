@@ -3,8 +3,9 @@ import Skeleton from 'react-loading-skeleton';
 
 import Pagination from '@/components/ui/Pagination/Pagination';
 import { useBooks } from '@/hooks/useBooks';
-import { IBook } from '@/types/api/books.interface';
+import type { IBook } from '@/types/api/books.interface';
 
+import TableHeader from './TableHeader/TableHeader';
 import TableItem from './TableItem/TableItem';
 
 import styles from './table.module.scss';
@@ -17,7 +18,8 @@ const Table = () => {
 		totalPages,
 		currentPage,
 		setPage,
-		clearFilters
+		clearFilters,
+		setSort
 	} = useBooks();
 
 	const tableContent = useMemo(() => {
@@ -32,13 +34,20 @@ const Table = () => {
 
 	useEffect(() => {
 		clearFilters();
+		// Default filter to sort by date descending
+		setSort({
+			type: 'date',
+			direction: 'desc'
+		});
 	}, []);
 
 	return (
 		<div className={styles.wrapper}>
 			<div className={styles.tableContainer}>
 				<table className={styles.table}>
-					<thead className={styles.thead}>
+					<TableHeader />
+
+					{/* <thead className={styles.thead}>
 						<tr>
 							<th></th>
 							<th>Название</th>
@@ -48,11 +57,10 @@ const Table = () => {
 							<th>Статус</th>
 							<th>Дата</th>
 							<th>Оценка</th>
-							{/* <th>Лучшая книга</th> */}
 							<th>Примечания</th>
 							{!isLoading ? <th></th> : ''}
 						</tr>
-					</thead>
+					</thead> */}
 					<tbody className={styles.tbody}>
 						{isLoading
 							? [...Array(5)].map((_, i) => (

@@ -1,4 +1,4 @@
-import {
+import type {
 	ChangeEvent,
 	InputHTMLAttributes,
 	TextareaHTMLAttributes
@@ -29,4 +29,12 @@ export interface ITextareaProps
 	value: string;
 	disabled?: boolean;
 	onChange: (e: ChangeEvent<HTMLTextAreaElement>) => void;
+}
+
+export interface IRadioInputProps {
+	label: string;
+	checked: boolean;
+	onChange: () => void;
+	name: string;
+	className?: string;
 }

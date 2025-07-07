@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { forwardRef, useCallback, useMemo, useState } from 'react';
-import Select, {
+import Select from 'react-select';
+import type {
 	GroupBase,
 	MultiValue,
 	OnChangeValue,
@@ -9,7 +10,7 @@ import Select, {
 } from 'react-select';
 import makeAnimated from 'react-select/animated';
 
-import {
+import type {
 	ICustomSelectProps,
 	IOptions
 } from '@/types/ui/custom-select.interface';
@@ -31,6 +32,7 @@ const CustomSelect = forwardRef<any, ICustomSelectProps>(
 			onChange,
 			error,
 			className,
+			isMenuRelative = false,
 			...rest
 		},
 		ref // Ref passed from Controller
@@ -71,7 +73,8 @@ const CustomSelect = forwardRef<any, ICustomSelectProps>(
 					className={clsx(
 						'custom-select-container',
 						className,
-						error && 'select-error'
+						error && 'select-error',
+						isMenuRelative && 'menu-relative'
 					)}
 					classNamePrefix='custom-select'
 					components={animatedComponents}
@@ -115,7 +118,8 @@ const customStyles: StylesConfig<IOptions, boolean, GroupBase<IOptions>> = {
 };
 
 const formatOptionLabel = (option: IOptions) => (
-	<div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+	//  gap: '8px'
+	<div style={{ display: 'flex', alignItems: 'center' }}>
 		{option.color && (
 			<span
 				style={{
@@ -123,6 +127,8 @@ const formatOptionLabel = (option: IOptions) => (
 					width: '12px',
 					height: '12px',
 					borderRadius: '50%',
+					marginRight: 8,
+					flexShrink: 0,
 					backgroundColor: option.color
 				}}
 			></span>

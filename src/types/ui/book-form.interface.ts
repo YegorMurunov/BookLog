@@ -1,8 +1,8 @@
-import {
+import type {
 	IBooksGenresData,
 	IBooksStatusData
 } from '../api/books-data.interface';
-import { IBook } from '../api/books.interface';
+import type { IBook } from '../api/books.interface';
 
 export type formType = Pick<
 	IBook,

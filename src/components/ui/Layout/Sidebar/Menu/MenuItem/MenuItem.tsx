@@ -4,7 +4,7 @@ import { NavLink } from 'react-router';
 import CustomTooltip from '@/components/ui/Tooltip/Tooltip';
 import { useActions } from '@/hooks/useActions';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
+import type { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
 
 import styles from '../../sidebar.module.scss';
 

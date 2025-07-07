@@ -1,6 +1,6 @@
 import { Info } from 'lucide-react';
 
-import { ICardInfo } from '@/types/ui/card.interface';
+import type { ICardInfo } from '@/types/ui/card.interface';
 
 import CustomTooltip from '../../Tooltip/Tooltip';
 

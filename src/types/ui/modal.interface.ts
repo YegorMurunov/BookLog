@@ -1,4 +1,4 @@
-import { IBook } from '../api/books.interface';
+import type { IBook } from '../api/books.interface';
 
 export type TModalType = 'create' | 'edit';
 

@@ -1,11 +1,10 @@
-import { LucideIcon } from 'lucide-react';
+import type { LucideIcon } from 'lucide-react';
+import type { ReactNode } from 'react';
 
 export interface IDropdownProps {
 	title: string;
 	icon: LucideIcon;
-	items: { label: string; value: string }[];
-	counts?: { value: string; count: number }[];
-	activeIndex: number;
-	onSelect: (index: number) => void;
 	className?: string;
+	dropdownContentClassName?: string;
+	children: (close: () => void) => ReactNode;
 }

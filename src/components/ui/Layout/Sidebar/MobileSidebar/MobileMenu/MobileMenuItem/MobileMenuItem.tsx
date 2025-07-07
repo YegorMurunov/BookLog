@@ -3,7 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import { useEffect, useState } from 'react';
 import { NavLink, useLocation } from 'react-router';
 
-import { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
+import type { IMenuItemProps } from '@/types/ui/sidebar-menu-item.interface';
 
 import styles from '../../mobile-sidebar.module.scss';
 

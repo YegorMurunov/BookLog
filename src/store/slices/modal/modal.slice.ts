@@ -1,6 +1,6 @@
-import { IBook } from '@/types/api/books.interface';
-import { IModalSlice, TModalType } from '@/types/ui/modal.interface';
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import type { IBook } from '@/types/api/books.interface';
+import type { IModalSlice, TModalType } from '@/types/ui/modal.interface';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 const initialState: IModalSlice = {
 	book: null,

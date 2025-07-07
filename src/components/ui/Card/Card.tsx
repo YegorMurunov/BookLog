@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { ICardProps } from '@/types/ui/card.interface';
+import type { ICardProps } from '@/types/ui/card.interface';
 
 import AnimatedCounter from '../AnimatedCounter';
 import CardInfo from './CardInfo/CardInfo';

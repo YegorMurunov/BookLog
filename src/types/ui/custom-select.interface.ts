@@ -1,3 +1,5 @@
+import type { Control, FieldValues } from 'react-hook-form';
+
 export interface IOptions {
 	value: string;
 	label: string;
@@ -17,4 +19,15 @@ export interface ICustomSelectProps {
 	error?: string | null;
 	className?: string;
 	onChange?: (value: IOptions | IOptions[] | null) => void;
+	isMenuRelative?: boolean;
+}
+
+export interface DashboardFilterSelectProps<T extends FieldValues> {
+	control: Control<T>;
+	name: keyof T;
+	options: IOptions[];
+	placeholder?: string;
+	isMulti?: boolean;
+	isClearable?: boolean;
+	isSearchable?: boolean;
 }

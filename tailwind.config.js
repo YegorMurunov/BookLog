@@ -12,7 +12,7 @@ export default {
 			'dark-gray': '#bababa',
 			'light-gray': '#f0f0f0',
 			yellow: '#fbe338',
-			orange: '#ffa500', // Added orange color
+			orange: '#ffa500',
 			skyblue: '#75c4fc',
 			green: '#61ccad',
 			red: '#fb2c36',

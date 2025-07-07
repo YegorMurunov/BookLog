@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { IButtonWithIconProps } from '@/types/ui/button.interface';
+import type { IButtonWithIconProps } from '@/types/ui/button.interface';
 
 import styles from './button-with-icon.module.scss';
 
@@ -10,6 +10,7 @@ export const ButtonWithIcon = ({
 	title,
 	colorTheme = 'default',
 	icon: Icon,
+	iconLeft = false,
 	...rest
 }: IButtonWithIconProps) => {
 	return (
@@ -17,6 +18,7 @@ export const ButtonWithIcon = ({
 			className={clsx(
 				styles.button,
 				colorTheme === 'default' ? '' : styles[colorTheme],
+				iconLeft && styles.iconLeft,
 				className
 			)}
 			type={type}

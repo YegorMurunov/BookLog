@@ -2,7 +2,7 @@ import { Navigate, useLocation } from 'react-router';
 
 import PageLoader from '@/components/ui/PageLoader/PageLoader';
 import { useAuth } from '@/hooks/useAuth';
-import { IAuthGuardProps } from '@/types/ui/auth-guard.interface';
+import type { IAuthGuardProps } from '@/types/ui/auth-guard.interface';
 
 const AuthGuard = ({
 	children,

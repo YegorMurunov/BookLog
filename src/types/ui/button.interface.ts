@@ -1,7 +1,7 @@
-import { LucideIcon } from 'lucide-react';
-import { ButtonHTMLAttributes } from 'react';
+import type { LucideIcon } from 'lucide-react';
+import type { ButtonHTMLAttributes } from 'react';
 
-import { TPlaceTooltip } from './tooltip.interface';
+import type { TPlaceTooltip } from './tooltip.interface';
 
 // Button component
 export type TButtonType = 'submit' | 'reset' | 'button';
@@ -27,6 +27,7 @@ export interface ISignInWithButtonProps extends Omit<IButtonProps, 'type'> {
 
 export interface IButtonWithIconProps extends IButtonProps {
 	icon: LucideIcon;
+	iconLeft?: boolean;
 }
 
 export interface IIconButton extends IButtonWithIconProps {

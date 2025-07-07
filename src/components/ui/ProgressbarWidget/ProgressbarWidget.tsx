@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { IProgressbarWidgetProps } from '@/types/ui/progressbar.interface';
+import type { IProgressbarWidgetProps } from '@/types/ui/progressbar.interface';
 
 import Progressbar from '../Progressbar/Progressbar';
 

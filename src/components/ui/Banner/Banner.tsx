@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import { IBannerProps } from '@/types/ui/banner.interface';
+import type { IBannerProps } from '@/types/ui/banner.interface';
 
 import styles from './banner.module.scss';
 

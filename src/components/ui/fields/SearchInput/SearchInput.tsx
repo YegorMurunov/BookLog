@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { Eraser } from 'lucide-react';
 
-import { ISearchInputProps } from '@/types/ui/fields.interface';
+import type { ISearchInputProps } from '@/types/ui/fields.interface';
 
 import styles from './search-input.module.scss';
 

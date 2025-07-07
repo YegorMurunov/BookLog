@@ -1,0 +1,33 @@
+.radioLabel {
+	@apply inline-flex cursor-pointer items-center justify-center rounded-md border border-pink bg-white p-2 text-sm text-pink transition-all duration-300 ease-in-out;
+
+	span {
+		@apply relative pl-[24px];
+
+		&::before {
+			content: '';
+			@apply absolute left-0 top-1/2 h-[16px] w-[16px] -translate-y-1/2 rounded-full border border-pink bg-white transition-all duration-300 ease-in-out;
+		}
+		&::after {
+			content: '';
+			@apply absolute left-[4px] top-1/2 h-[8px] w-[8px] -translate-y-1/2 scale-0 rounded-full bg-pink transition-all duration-300 ease-in-out;
+		}
+	}
+
+	input {
+		@apply hidden;
+	}
+}
+
+.radioLabelSelected {
+	@apply bg-pink font-bold text-white;
+
+	span {
+		&::before {
+			@apply border-white;
+		}
+		&::after {
+			@apply scale-100;
+		}
+	}
+}

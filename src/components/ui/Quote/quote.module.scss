@@ -2,7 +2,7 @@
 	@apply border-l-4 border-l-pink/50 pl-4 text-base italic text-dark; // border-l-[#2b7efe]
 
 	.quote {
-		@apply mt-2;
+		@apply mt-2 text-left;
 	}
 	.author {
 		@apply block text-right text-light-dark/70;

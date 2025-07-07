@@ -1,4 +1,4 @@
-import { IQuote } from '@/types/ui/quote.interface';
+import type { IQuote } from '@/types/ui/quote.interface';
 
 const getQuote = (percent: number): IQuote => {
 	if (percent >= 100) {

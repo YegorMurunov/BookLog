@@ -1,7 +1,10 @@
+import { format } from 'date-fns';
+import ru from 'date-fns/locale/ru';
+
 import { useAuth } from '@/hooks/useAuth';
 import { useBooks } from '@/hooks/useBooks';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { formatAccountAge, getDateString } from '@/utils/formate-date.utils';
+import { formatAccountAge } from '@/utils/formate-date.utils';
 
 import EditForm from '../EditForm/EditForm';
 
@@ -18,8 +21,10 @@ const AccountContent = () => {
 	let createdAt = '';
 	let accountAge = '';
 	if (userData.user?.creationTime) {
-		createdAt = getDateString(userData.user?.creationTime || '', 'ru');
-		accountAge = formatAccountAge(userData.user?.creationTime);
+		createdAt = format(new Date(userData.user?.creationTime), 'dd MMM, yyyy', {
+			locale: ru
+		});
+		accountAge = formatAccountAge(userData.user?.creationTime, ru);
 	}
 
 	const { stats } = useBooks();

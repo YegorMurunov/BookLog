@@ -1,9 +1,9 @@
 import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
-import {
+import type {
 	IBooksGenresData,
 	IBooksStatusData
 } from '@/types/api/books-data.interface';
-import { TGenres, TStatus } from '@/types/api/books.interface';
+import type { TGenres, TStatus } from '@/types/api/books.interface';
 
 export const getGenreDataByValue = (
 	genres: TGenres[] | undefined,

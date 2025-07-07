@@ -8,16 +8,17 @@ import {
 	useGetBooksQuery,
 	useUpdateBookMutation
 } from '@/store/api/books-api';
-import {
+import type {
 	IBooksMainStats,
 	IBooksMonthlyStats
 } from '@/types/api/books-data.interface';
-import { IBook, IFilters } from '@/types/api/books.interface';
+import type { IBook, IFilters, TSortState } from '@/types/api/books.interface';
 import {
 	generateMainStats,
 	generateMonthlyStats
 } from '@/utils/generate-books-stats';
-import { filterBooks } from '@/utils/tableFilterBooks';
+import { filterBooks } from '@/utils/table-filter-books';
+import { sortBooks } from '@/utils/table-sort-books';
 
 import { useActions } from './useActions';
 import { useAuth } from './useAuth';
@@ -37,15 +38,22 @@ export const useBooks = () => {
 
 	const [books, setBooks] = useState<IBook[]>(cachedBooks || []);
 
-	const { filters, currentPage, booksPerPage } = useTypedSelector(
+	const { filters, currentPage, booksPerPage, currentSort } = useTypedSelector(
 		state => state.tableFilters
 	);
 
-	const { setFilters, setCurrentPage, clearFilters } = useActions();
+	const { setFilters, setCurrentPage, clearFilters, setCurrentSort } =
+		useActions();
+
+	const sortedBooks = useMemo(() => {
+		return sortBooks(books, {
+			[currentSort.type]: currentSort.direction
+		});
+	}, [books, currentSort]);
 
 	const filteredBooks = useMemo(() => {
-		return filterBooks(books, filters);
-	}, [books, filters]);
+		return filterBooks(sortedBooks, filters);
+	}, [sortedBooks, filters]);
 
 	const paginatedBooks = useMemo(() => {
 		const startIndex = (currentPage - 1) * booksPerPage;
@@ -115,16 +123,11 @@ export const useBooks = () => {
 				...doc.data()
 			})) as IBook[];
 
-			const sortedBooks = booksData.sort((a, b) => {
-				if (!a.date && !b.date) return 0;
-				if (!a.date) return -1;
-				if (!b.date) return 1;
+			// const sortedBooks = sortBooks(booksData, {
+			// 	date: 'desc'
+			// });
 
-				// Если дата есть у обеих книг — сортируем по убыванию
-				return new Date(b.date).getTime() - new Date(a.date).getTime();
-			});
-
-			setBooks(sortedBooks);
+			setBooks(booksData);
 		});
 
 		return () => unsubscribe(); // Отписка при размонтировании
@@ -147,6 +150,11 @@ export const useBooks = () => {
 		await updateBookMutation({ bookId, bookData });
 	};
 
+	// Функция для изменения сортировки
+	const handleSetSort = (sortParams: TSortState) => {
+		setCurrentSort(sortParams);
+	};
+
 	return {
 		books, // cachedBooks || []
 		isLoading,
@@ -161,6 +169,7 @@ export const useBooks = () => {
 		currentPage,
 		setFilters: handleSetFilters,
 		clearFilters,
-		setPage: handleSetPage
+		setPage: handleSetPage,
+		setSort: handleSetSort
 	};
 };

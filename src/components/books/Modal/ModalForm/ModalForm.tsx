@@ -1,7 +1,9 @@
 import clsx from 'clsx';
+import { format } from 'date-fns';
 import { Bookmark } from 'lucide-react';
 import { useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
+import type { SubmitHandler } from 'react-hook-form';
 
 import CustomDatepicker from '@/components/ui/CustomDatepicker/CustomDatepicker';
 import CustomSelect from '@/components/ui/Select/CustomSelect';
@@ -14,14 +16,13 @@ import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
 import { useActions } from '@/hooks/useActions';
 import { useBooks } from '@/hooks/useBooks';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
-import { IBook } from '@/types/api/books.interface';
-import { formType } from '@/types/ui/book-form.interface';
+import type { IBook } from '@/types/api/books.interface';
+import type { formType } from '@/types/ui/book-form.interface';
 import {
 	getGenreDataByValue,
 	getStatusDataByValue,
 	getValueByGenres
 } from '@/utils/book-form.utils';
-import { formatDate } from '@/utils/formate-date.utils';
 
 import styles from './modal-form.module.scss';
 
@@ -41,7 +42,7 @@ function ModalForm() {
 			pageCount: book ? book.pageCount : null,
 			genres: getGenreDataByValue(book?.genres),
 			status: getStatusDataByValue(book?.status),
-			date: book ? book.date : formatDate(new Date()),
+			date: book ? book.date : format(new Date(), 'yyyy-MM-dd'),
 			rating: book ? book.rating : 0,
 			isTheBestBook: book ? book.isTheBestBook : false,
 			comment: book ? book.comment : ''
@@ -59,7 +60,7 @@ function ModalForm() {
 			pageCount: Number(data.pageCount),
 			genres: genres,
 			status: data.status?.value!, // eslint-disable-line
-			date: formatDate(data.date),
+			date: data.date ? format(new Date(data.date), 'yyyy-MM-dd') : '',
 			rating: data.rating,
 			isTheBestBook: data.isTheBestBook,
 			comment: data.comment
@@ -199,7 +200,7 @@ function ModalForm() {
 									field.onChange(newValue);
 								}}
 								error={fieldState?.error?.message}
-								isSearchable
+								// isSearchable
 								options={BooksStatusData}
 								placeholder='Выберите статус...'
 							/>

@@ -12,7 +12,7 @@ import {
 	writeBatch
 } from 'firebase/firestore';
 
-import { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
+import type { IGoal, IGoalsListTitle } from '@/types/ui/goals.interface';
 
 import { auth, db } from './firebase';
 

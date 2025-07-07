@@ -1,0 +1,82 @@
+.rdrCalendarWrapper {
+	font-family: 'Inter', 'sans-serif' !important;
+	width: 100% !important;
+	background-color: transparent !important;
+}
+.rdrMonthAndYearWrapper {
+	border-radius: 8px 8px 0 0 !important;
+	background-color: #fff !important;
+}
+.rdrMonths {
+	border-radius: 0 0 8px 8px !important;
+	background-color: #fff !important;
+}
+
+.rdrInRange {
+	color: #f97fbe !important;
+}
+.rdrDayPassive .rdrInRange,
+.rdrDayPassive .rdrStartEdge,
+.rdrDayPassive .rdrEndEdge,
+.rdrDayPassive .rdrSelected,
+.rdrDayPassive .rdrDayStartPreview,
+.rdrDayPassive .rdrDayInPreview,
+.rdrDayPassive .rdrDayEndPreview {
+	display: block !important;
+	color: rgb(254, 170, 213, 0.4) !important;
+}
+.rdrDayPassive .rdrDayNumber > span {
+	color: #aeb9bf !important;
+}
+.rdrDayDisabled .rdrDayNumber > span {
+	color: #aeb9bf !important;
+}
+.rdrEndEdge {
+	color: #f97fbe !important;
+}
+.rdrStartEdge {
+	color: #f97fbe !important;
+}
+.rdrDayNumber > span::after {
+	background: #f97fbe !important;
+}
+.rdrDayToday:not(.rdrDayPassive) .rdrEndEdge ~ .rdrDayNumber span:after {
+	background: #fff !important;
+}
+.rdrDateDisplayItemActive {
+	border-color: #f97fbe !important;
+}
+.rdrNextPrevButton {
+	background: #f0f0f0 !important;
+}
+.rdrPprevButton i {
+	border-color: transparent rgba(249, 127, 190, 0.8) transparent transparent !important;
+	transition: all 0.3s ease-in-out !important;
+}
+.rdrNextButton i {
+	border-color: transparent transparent transparent rgba(249, 127, 190, 0.8) !important;
+	transition: all 0.3s ease-in-out !important;
+}
+.rdrPprevButton:hover i {
+	border-color: transparent rgba(249, 127, 190, 1) transparent transparent !important;
+	transform: translate(-3px, 0px) scale(1.1) !important;
+}
+.rdrNextButton:hover i {
+	border-color: transparent transparent transparent rgba(249, 127, 190, 1) !important;
+	transform: translate(3px, 0px) scale(1.1) !important;
+}
+.rdrDateDisplayWrapper {
+	background-color: #f0f0f0 !important;
+}
+.rdrMonthAndYearPickers select:hover {
+	background-color: #f0f0f0 !important;
+}
+.rdrYearPicker select:hover {
+	background-color: #f0f0f0 !important;
+}
+.rdrDayDisabled {
+	background-color: rgb(248, 248, 248) !important;
+}
+.rdrDateDisplay {
+	margin: 0.833em 0 !important;
+}

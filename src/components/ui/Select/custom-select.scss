@@ -172,3 +172,9 @@ $background-active: rgba(210, 209, 209, 0.7);
 .errorMsg {
 	@apply pt-[2px] text-xs text-red;
 }
+.menu-relative {
+	.custom-select__menu {
+		display: block !important;
+		position: relative !important;
+	}
+}

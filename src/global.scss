@@ -7,6 +7,10 @@
 	@apply bg-white font-sans text-base text-dark;
 }
 
+html {
+	overflow: hidden;
+}
+
 body {
 	margin: 0;
 	min-width: 320px;

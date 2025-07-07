@@ -1,4 +1,4 @@
-import { TGenres, TStatus } from './books.interface';
+import type { TGenres, TStatus } from './books.interface';
 
 export interface IBooksStatusData {
 	value: TStatus;

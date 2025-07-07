@@ -1,4 +1,4 @@
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router';
 
 import googleIcon from '@/assets/google.svg';
@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/buttons/Button/Button';
 import { SignInWithButton } from '@/components/ui/buttons/SignInWithButton/SignInWithButton';
 import Input from '@/components/ui/fields/Input/Input';
 import { useAuth } from '@/hooks/useAuth';
-import { IAuthForm, IAuthFormProps } from '@/types/ui/auth-form.interface';
+import type { IAuthForm, IAuthFormProps } from '@/types/ui/auth-form.interface';
 
 import styles from './auth-form.module.scss';
 

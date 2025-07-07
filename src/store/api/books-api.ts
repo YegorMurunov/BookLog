@@ -4,7 +4,7 @@ import {
 	firebaseGetBooks,
 	firebaseUpdateBook
 } from '@/services/firebase/books';
-import { IBook } from '@/types/api/books.interface';
+import type { IBook } from '@/types/api/books.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 

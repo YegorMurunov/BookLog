@@ -1,7 +1,7 @@
-import { LucideIcon } from 'lucide-react';
-import { InputHTMLAttributes } from 'react';
+import type { LucideIcon } from 'lucide-react';
+import type { InputHTMLAttributes } from 'react';
 
-import { TPlaceTooltip } from './tooltip.interface';
+import type { TPlaceTooltip } from './tooltip.interface';
 
 export interface IIconCheckbox
 	extends Omit<InputHTMLAttributes<HTMLInputElement>, 'onChange' | 'checked'> {

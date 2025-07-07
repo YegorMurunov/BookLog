@@ -1,12 +1,12 @@
 import clsx from 'clsx';
 import { LogOut, Save, SaveOff, UserRoundPen } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useAuth } from '@/hooks/useAuth';
-import { IProfileForm } from '@/types/ui/profile-form.interface';
-import { IUserUpdateProfile } from '@/types/user.interface';
+import type { IProfileForm } from '@/types/ui/profile-form.interface';
+import type { IUserUpdateProfile } from '@/types/user.interface';
 
 import styles from './edit-form.module.scss';
 

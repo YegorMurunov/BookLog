@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-import { ISignInWithButtonProps } from '@/types/ui/button.interface';
+import type { ISignInWithButtonProps } from '@/types/ui/button.interface';
 
 import styles from './sign-in-with-button.module.scss';
 

@@ -1,7 +1,7 @@
 import toast from 'react-hot-toast';
 
 import { toastsMessages } from '@/configs/toasts/toasts-messages';
-import { TToastType } from '@/types/toasts.interface';
+import type { TToastType } from '@/types/toasts.interface';
 
 export const toastWithPromise = async <T>(
 	promiseFun: () => Promise<T>,
