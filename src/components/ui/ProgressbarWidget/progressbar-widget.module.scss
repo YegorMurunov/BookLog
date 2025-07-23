@@ -1,10 +1,10 @@
 .widgetContainer {
-	@apply mt-8 flex h-full w-full bg-transparent;
+	@apply flex h-full w-full bg-transparent;
 
 	.widget {
 		// This is the width variant for the widget
 		&.widgetWidthVariant {
-			@apply flex w-full items-center justify-center gap-5 rounded-lg border border-light-gray bg-light-gray/20 p-4 shadow-md backdrop-blur-sm transition-all duration-300 ease-in-out;
+			@apply flex w-full items-center justify-center gap-5 rounded-lg border border-light-gray bg-light-gray/20 p-4 shadow-md transition-all duration-300 ease-in-out;
 
 			&:hover {
 				@apply -translate-y-2 shadow-lg;
@@ -25,7 +25,7 @@
 
 		// This is the height variant for the widget
 		&.widgetHeightVariant {
-			@apply flex flex-col items-center rounded-lg border border-light-gray bg-light-gray/20 p-4 shadow-md backdrop-blur-sm transition-all duration-300 ease-in-out;
+			@apply flex flex-col items-center rounded-lg border border-light-gray bg-light-gray/20 p-4 shadow-md transition-all duration-300 ease-in-out;
 
 			&:hover {
 				@apply -translate-y-2 shadow-lg;
@@ -38,6 +38,23 @@
 			.widgetDescription {
 				@apply mt-3 w-full text-center text-base text-dark;
 			}
+		}
+	}
+
+	&.verticalImportant {
+		@apply flex justify-center;
+
+		.widgetHeightVariant {
+			display: block !important;
+			pointer-events: all !important;
+
+			.widget__progressbar {
+				@apply relative left-1/2 -translate-x-1/2;
+			}
+		}
+		.widgetWidthVariant {
+			display: none !important;
+			pointer-events: none !important;
 		}
 	}
 }

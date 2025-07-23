@@ -46,21 +46,6 @@ const Table = () => {
 			<div className={styles.tableContainer}>
 				<table className={styles.table}>
 					<TableHeader />
-
-					{/* <thead className={styles.thead}>
-						<tr>
-							<th></th>
-							<th>Название</th>
-							<th>Автор</th>
-							<th>Жанры</th>
-							<th>Кол-во страниц</th>
-							<th>Статус</th>
-							<th>Дата</th>
-							<th>Оценка</th>
-							<th>Примечания</th>
-							{!isLoading ? <th></th> : ''}
-						</tr>
-					</thead> */}
 					<tbody className={styles.tbody}>
 						{isLoading
 							? [...Array(5)].map((_, i) => (

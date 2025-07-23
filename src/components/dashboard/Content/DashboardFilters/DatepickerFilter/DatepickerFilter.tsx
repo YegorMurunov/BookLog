@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { isEqual, startOfDay, subDays } from 'date-fns';
+import { isEqual, startOfDay, startOfYear, subDays } from 'date-fns';
 import { Calendar1 } from 'lucide-react';
 import { memo, useCallback, useMemo, useState } from 'react';
 import type { Range, RangeKeyDict } from 'react-date-range';
@@ -12,6 +12,7 @@ import { useDashboard } from '@/hooks/useDashboard';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 import type { IDashboardFilters } from '@/types/api/dashboard.interface';
 import type { DatepickerFilterComponentProps } from '@/types/ui/date-range-picker.interface';
+import { calcDefaultPeriod } from '@/utils/dashboard-filters.utils';
 import { declOfNum, diffInDays } from '@/utils/formate-date.utils';
 
 import { DateRangeRadioGroup } from './DateRangeRadioGroup/DateRangeRadioGroup';
@@ -24,17 +25,24 @@ const DatepickerFilterComponent = ({
 	const { updateDashboardFilters } = useDashboard();
 	const { filters } = useTypedSelector(state => state.dashboardFilters);
 
-	const [valueDateRangePicker, setValueDateRangePicker] = useState<Range[]>([
-		{
-			startDate: subDays(new Date(), DefaultPeriod - 1),
-			endDate: new Date(),
-			key: 'selection'
-		}
-	]);
+	const initialPeriod = useMemo(() => calcDefaultPeriod(filters), [filters]);
 
 	const [selectedPeriod, setSelectedPeriod] = useState<number | null>(
-		DefaultPeriod
+		initialPeriod
 	);
+
+	const initialDateRange: Range[] = useMemo(() => {
+		const endDate = new Date();
+		const startDate =
+			initialPeriod === -1
+				? startOfYear(endDate)
+				: subDays(endDate, initialPeriod - 1);
+
+		return [{ startDate, endDate, key: 'selection' }];
+	}, [initialPeriod]);
+
+	const [valueDateRangePicker, setValueDateRangePicker] =
+		useState<Range[]>(initialDateRange);
 
 	const debouncedUpdateFilters = useDebouncedCallback(
 		(newFilters: Partial<IDashboardFilters>) => {
@@ -57,6 +65,14 @@ const DatepickerFilterComponent = ({
 				setValueDateRangePicker([selection]);
 
 				const matchedPeriod = PREDEFINED_PERIODS.find(period => {
+					if (period.days === -1) {
+						const expectedStart = startOfYear(new Date());
+						return (
+							isEqual(startOfDay(selection.startDate!), expectedStart) &&
+							isEqual(startOfDay(selection.endDate!), startOfDay(new Date()))
+						);
+					}
+
 					const expectedStart = startOfDay(
 						subDays(new Date(), period.days - 1)
 					);
@@ -79,8 +95,9 @@ const DatepickerFilterComponent = ({
 
 	const handleSelectPeriod = useCallback(
 		(days: number) => {
-			const startDate = subDays(new Date(), days - 1);
 			const endDate = new Date();
+			const startDate =
+				days === -1 ? startOfYear(endDate) : subDays(endDate, days - 1);
 
 			setValueDateRangePicker([{ startDate, endDate, key: 'selection' }]);
 			setSelectedPeriod(days);

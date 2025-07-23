@@ -27,7 +27,7 @@ const GoalsContent = () => {
 					<GoalsList />
 				</div>
 				<div className={styles.goals__item}>
-					<ProgressbarWidget value={value}>
+					<ProgressbarWidget value={value} title='Прогресс' className='mt-8'>
 						<div>
 							<p>
 								Выполнено {completed} из {all} целей

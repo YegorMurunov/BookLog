@@ -1,4 +1,4 @@
-import { format, subDays } from 'date-fns';
+import { format, startOfYear } from 'date-fns';
 
 import type {
 	IDashboardFilters,
@@ -8,11 +8,14 @@ import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 
 // Вычисляем начальные даты
 const today = new Date();
-const thirtyDaysAgo = subDays(today, 29); // 30 дней включая сегодня
+// const thirtyDaysAgo = subDays(today, 29); // 30 дней включая сегодня
+
+// Дефолтное значение даты — с 01.01, текущего года, по сегодня
+const firstDayOfYear = startOfYear(today); // startOfYear(today)
 
 const initialState: IDashboardState = {
 	filters: {
-		dateFrom: format(thirtyDaysAgo, 'yyyy-MM-dd'),
+		dateFrom: format(firstDayOfYear, 'yyyy-MM-dd'), // thirtyDaysAgo
 		dateTo: format(today, 'yyyy-MM-dd'),
 		status: [],
 		genres: [],

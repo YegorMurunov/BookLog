@@ -61,6 +61,10 @@ export const generateMonthlyStats = (
 		if (bookMonth === currentMonth && bookYear === currentYear) return book;
 	});
 
+	const rereadBooksThisMonth = readBooksThisMonth.filter(
+		book => book.status === 'reread'
+	).length;
+
 	// The number of books read this month
 	const booksReadThisMonth = readBooksThisMonth.length;
 
@@ -117,7 +121,8 @@ export const generateMonthlyStats = (
 		booksReadThisMonth,
 		pagesReadThisMonth,
 		ratingDiff,
-		bestBookThisMonth
+		bestBookThisMonth,
+		rereadBooksThisMonth
 	};
 };
 

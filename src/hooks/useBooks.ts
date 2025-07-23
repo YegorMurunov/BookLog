@@ -80,7 +80,8 @@ export const useBooks = () => {
 			booksReadThisMonth: 0,
 			pagesReadThisMonth: 0,
 			ratingDiff: '0%',
-			bestBookThisMonth: 0
+			bestBookThisMonth: 0,
+			rereadBooksThisMonth: 0
 		}
 	});
 

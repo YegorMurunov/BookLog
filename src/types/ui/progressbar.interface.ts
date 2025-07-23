@@ -10,4 +10,6 @@ export interface IProgressbarWidgetProps {
 	value: number; // Progress value (0-100)
 	children?: ReactNode; // Optional children to render inside the widget
 	className?: string; // Optional class name for custom styling
+	vertical?: boolean; // Optional prop to render the widget vertically
+	title?: string; // Optional title for the widget
 }

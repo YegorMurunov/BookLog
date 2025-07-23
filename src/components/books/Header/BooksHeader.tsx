@@ -38,6 +38,12 @@ const BooksHeader = () => {
 					subtextValue={`+${monthlyStats.bestBookThisMonth}`}
 					subtext='за последний месяц'
 				/>
+				<Card
+					mainValue={mainStats.reread}
+					title='Перечитано книг'
+					subtextValue={`+${monthlyStats.rereadBooksThisMonth}`}
+					subtext='за последний месяц'
+				/>
 			</Banner>
 		</header>
 	);

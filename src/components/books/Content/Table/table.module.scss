@@ -37,7 +37,7 @@
 					width: 186px; /* Кол-во страниц */
 				}
 				th:nth-child(6) {
-					width: 170px; /* Статус */
+					width: 174px; /* Статус */
 				}
 				th:nth-child(7) {
 					width: 121px; /* Оценка */
@@ -50,7 +50,7 @@
 				}
 
 				.headerCell {
-					@apply flex cursor-pointer items-center justify-start gap-1;
+					@apply flex cursor-pointer select-none items-center justify-start gap-1;
 
 					.sortIcon > svg {
 						@apply h-5 w-5 text-dark-gray transition-all duration-300 ease-in-out;

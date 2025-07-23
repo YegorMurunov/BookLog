@@ -63,6 +63,8 @@ export default function TableItem({ book, index }: ITableItemProps) {
 			initial='initial'
 			animate='animate'
 			custom={index}
+			key={book.id}
+			layout
 		>
 			<td className={styles.isTheBest}>
 				<button

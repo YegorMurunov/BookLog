@@ -1,19 +1,20 @@
-import { useDashboard } from '@/hooks/useDashboard';
-
 import DashboardFilters from './DashboardFilters/DashboardFilters';
+import DashboardLeft from './DashboardLeft/DashboardLeft';
+import DashboardRight from './DashboardRight/DashboardRight';
 
 import styles from './dashboard-content.module.scss';
 
 const DashboardContent = () => {
-	const { dashboardBooks } = useDashboard();
-
 	return (
 		<section className={styles.content}>
 			<DashboardFilters />
-			<div>
-				{dashboardBooks.map(book => (
-					<div key={book.id}>{book.title}</div>
-				))}
+			<div className={styles.dashboard__items}>
+				<div className={styles.dashboard__left}>
+					<DashboardLeft />
+				</div>
+				<div className={styles.dashboard__right}>
+					<DashboardRight />
+				</div>
 			</div>
 		</section>
 	);
