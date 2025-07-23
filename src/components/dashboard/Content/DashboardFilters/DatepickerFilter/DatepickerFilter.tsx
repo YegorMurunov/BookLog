@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { isEqual, startOfDay, startOfYear, subDays } from 'date-fns';
+import { format, isEqual, startOfDay, startOfYear, subDays } from 'date-fns';
 import { Calendar1 } from 'lucide-react';
 import { memo, useCallback, useMemo, useState } from 'react';
 import type { Range, RangeKeyDict } from 'react-date-range';
@@ -83,10 +83,12 @@ const DatepickerFilterComponent = ({
 				});
 
 				setSelectedPeriod(matchedPeriod?.days || null);
+				const newDateFrom = format(selection.startDate, 'yyyy-MM-dd');
+				const newDateTo = format(selection.endDate, 'yyyy-MM-dd');
 
 				debouncedUpdateFilters({
-					dateFrom: selection.startDate.toISOString().slice(0, 10),
-					dateTo: selection.endDate.toISOString().slice(0, 10)
+					dateFrom: newDateFrom,
+					dateTo: newDateTo
 				});
 			}
 		},
@@ -95,16 +97,18 @@ const DatepickerFilterComponent = ({
 
 	const handleSelectPeriod = useCallback(
 		(days: number) => {
-			const endDate = new Date();
+			const endDate = startOfDay(new Date());
 			const startDate =
 				days === -1 ? startOfYear(endDate) : subDays(endDate, days - 1);
 
 			setValueDateRangePicker([{ startDate, endDate, key: 'selection' }]);
 			setSelectedPeriod(days);
+			const newDateFrom = format(startDate, 'yyyy-MM-dd');
+			const newDateTo = format(endDate, 'yyyy-MM-dd');
 
 			debouncedUpdateFilters({
-				dateFrom: startDate.toISOString().slice(0, 10),
-				dateTo: endDate.toISOString().slice(0, 10)
+				dateFrom: newDateFrom,
+				dateTo: newDateTo
 			});
 		},
 		[debouncedUpdateFilters]

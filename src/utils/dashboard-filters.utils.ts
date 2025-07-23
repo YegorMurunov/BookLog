@@ -9,10 +9,9 @@ export const calcDefaultPeriod = (filters: IDashboardFilters): number => {
 		const start = parseISO(filters.dateFrom);
 		const end = parseISO(filters.dateTo);
 
-		// проверяем, это ли текущий год
 		if (
-			isEqual(start, startOfYear(new Date())) &&
-			isEqual(end, startOfDay(new Date()))
+			isEqual(startOfDay(start), startOfYear(new Date())) &&
+			isEqual(startOfDay(end), startOfDay(new Date()))
 		) {
 			return -1; // "Этот год"
 		}
