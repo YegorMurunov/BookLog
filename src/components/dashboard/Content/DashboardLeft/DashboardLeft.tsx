@@ -1,12 +1,26 @@
 import { memo } from 'react';
 
-import BooksChart from './BooksChart/BooksChart';
+import Slider from '@/components/ui/Slider/Slider';
 
-// import GenresChart from './GenresChart/GenresChart';
+import BooksChart from './BooksChart/BooksChart';
+import GenresChart from './GenresChart/GenresChart';
+
+import styles from './dashboard-left.module.scss';
 
 const DashboardLeftComponent = () => {
-	return <BooksChart />;
-	// return <GenresChart />;
+	return (
+		<Slider
+			className={styles.slider}
+			pagination
+			autoplay
+			autoplayDelay={10000}
+			loop
+			autoHeight
+			animationDuration={600}
+		>
+			{[<BooksChart key='books-chart' />, <GenresChart key='genres-chart' />]}
+		</Slider>
+	);
 };
 
 const DashboardLeft = memo(DashboardLeftComponent);

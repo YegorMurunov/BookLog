@@ -97,13 +97,6 @@ const BarChartComponent = ({
 				},
 				ticks: {
 					display: false
-					// color: 'rgba(0,0,0,0.6)',
-					// stepSize: 1,
-					// font: {
-					// 	family: 'Inter',
-					// 	size: 12,
-					// 	weight: 'normal'
-					// }
 				}
 			}
 		}

@@ -38,6 +38,7 @@ const BooksChartComponent = () => {
 			className={styles.chart}
 			legendPosition='bottom'
 			displayLegend={false}
+			title='Количество книг'
 		/>
 	);
 };

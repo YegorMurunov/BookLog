@@ -13,12 +13,14 @@ function useOnClickOutside<T extends HTMLElement = HTMLElement>(
 			handler(event);
 		};
 
-		document.addEventListener('mousedown', listener);
-		document.addEventListener('touchstart', listener);
+		// document.addEventListener('mousedown', listener, true);
+		// document.addEventListener('touchstart', listener, true);
+		document.addEventListener('pointerdown', listener, true);
 
 		return () => {
-			document.removeEventListener('mousedown', listener);
-			document.removeEventListener('touchstart', listener);
+			// document.removeEventListener('mousedown', listener, true);
+			// document.removeEventListener('touchstart', listener, true);
+			document.removeEventListener('pointerdown', listener, true);
 		};
 	}, [ref, handler]);
 }

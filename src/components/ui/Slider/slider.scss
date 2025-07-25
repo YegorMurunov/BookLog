@@ -1,0 +1,31 @@
+.slider {
+	@apply w-full;
+}
+
+// navigation
+.swiper-button-prev {
+	@apply text-pink hover:text-pink-expressive;
+
+	&::after {
+		font-size: 30px;
+	}
+}
+.swiper-button-next {
+	@apply text-pink duration-300 hover:text-pink-expressive;
+
+	&::after {
+		font-size: 30px;
+	}
+}
+
+// pagination
+.swiper-pagination-bullet {
+	@apply bg-gray opacity-100;
+
+	&.swiper-pagination-bullet-active {
+		@apply w-6 rounded-lg bg-pink duration-500;
+	}
+}
+.swiper-pagination {
+	bottom: -2px !important;
+}
