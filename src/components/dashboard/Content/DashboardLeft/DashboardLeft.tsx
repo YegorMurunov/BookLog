@@ -13,9 +13,9 @@ const DashboardLeftComponent = () => {
 		<Slider
 			className={styles.slider}
 			pagination
-			// autoplay
-			// autoplayDelay={10000}
-			// loop
+			autoplay
+			autoplayDelay={10000}
+			loop
 			autoHeight
 			animationDuration={600}
 		>

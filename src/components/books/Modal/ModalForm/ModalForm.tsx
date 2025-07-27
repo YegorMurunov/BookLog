@@ -23,6 +23,7 @@ import {
 	getStatusDataByValue,
 	getValueByGenres
 } from '@/utils/book-form.utils';
+import { normalizeRaw } from '@/utils/normalize-raw';
 
 import styles from './modal-form.module.scss';
 
@@ -54,9 +55,12 @@ function ModalForm() {
 			? getValueByGenres(data.genres)
 			: getValueByGenres([data.genres]);
 
+		const normAuthor = normalizeRaw(data.author);
+		const normTitle = normalizeRaw(data.title);
+
 		const bookData: Omit<IBook, 'id'> = {
-			title: data.title,
-			author: data.author,
+			title: normTitle,
+			author: normAuthor,
 			pageCount: Number(data.pageCount),
 			genres: genres,
 			status: data.status?.value!, // eslint-disable-line

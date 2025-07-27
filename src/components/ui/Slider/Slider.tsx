@@ -2,15 +2,9 @@ import clsx from 'clsx';
 import { memo } from 'react';
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-import {
-	Autoplay,
-	EffectCoverflow,
-	Navigation,
-	Pagination
-} from 'swiper/modules';
+import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import type { ISliderProps } from '@/types/ui/slider.interface';
@@ -38,8 +32,7 @@ const SliderComponent = ({
 	const modules = [
 		...(navigation ? [Navigation] : []),
 		...(pagination ? [Pagination] : []),
-		...(autoplay ? [Autoplay] : []),
-		EffectCoverflow
+		...(autoplay ? [Autoplay] : [])
 	];
 
 	return (
@@ -70,7 +63,6 @@ const SliderComponent = ({
 			autoHeight={autoHeight}
 			observeParents={autoHeight}
 			observer={autoHeight}
-			// effect='coverflow'
 			speed={animationDuration}
 		>
 			{children.map((slide, index) => (
