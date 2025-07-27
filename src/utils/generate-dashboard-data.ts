@@ -2,6 +2,7 @@ import type { ChartData, ChartDataset } from 'chart.js';
 import { differenceInDays, format, parseISO, startOfWeek } from 'date-fns';
 
 import { BooksGenresData, BooksStatusData } from '@/configs/books-data';
+import { AuthorsChartColor, AuthorsChartOtherColor } from '@/configs/chart';
 import type { IBook, TStatus } from '@/types/api/books.interface';
 
 export const generateGenresData = (books: IBook[]) => {
@@ -96,3 +97,45 @@ export function generateStatusChartData(
 		datasets
 	};
 }
+
+export const generateAuthorsData = (books: IBook[]) => {
+	const authorCounts: Record<string, number> = {};
+
+	books.forEach(book => {
+		const author = book.author || 'Без автора';
+		authorCounts[author] = (authorCounts[author] || 0) + 1;
+	});
+
+	// Сортируем авторов по количеству книг
+	const sortedAuthors = Object.entries(authorCounts).sort(
+		(a, b) => b[1] - a[1]
+	);
+
+	// Разделяем топ-10 и остальных
+	const top10 = sortedAuthors.slice(0, 10);
+	const others = sortedAuthors.slice(10);
+
+	const labels: string[] = [];
+	const data: number[] = [];
+	const backgroundColor: string[] = [];
+
+	top10.forEach(([author, count], index) => {
+		labels.push(author);
+		data.push(count);
+		backgroundColor.push(AuthorsChartColor[index % AuthorsChartColor.length]);
+	});
+
+	// Добавляем "Остальные авторы", если такие есть
+	if (others.length > 0) {
+		const othersCount = others.reduce((sum, [, count]) => sum + count, 0);
+		labels.push('Остальные авторы');
+		data.push(othersCount);
+		backgroundColor.push(AuthorsChartOtherColor); // Цвет для "Остальных"
+	}
+
+	return {
+		data,
+		labels,
+		backgroundColor
+	};
+};

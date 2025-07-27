@@ -68,7 +68,9 @@ const SliderComponent = ({
 			onSlideChange={onSlideChange}
 			onSwiper={onSwiperInit}
 			autoHeight={autoHeight}
-			effect='coverflow'
+			observeParents={autoHeight}
+			observer={autoHeight}
+			// effect='coverflow'
 			speed={animationDuration}
 		>
 			{children.map((slide, index) => (

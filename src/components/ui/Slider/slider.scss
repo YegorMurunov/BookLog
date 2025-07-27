@@ -1,5 +1,10 @@
 .slider {
 	@apply w-full;
+
+	canvas {
+		display: block;
+		max-height: unset !important;
+	}
 }
 
 // navigation
@@ -28,4 +33,8 @@
 }
 .swiper-pagination {
 	bottom: -2px !important;
+}
+
+.swiper-slide {
+	@apply rounded-lg border border-light-gray bg-light-gray/20 p-2; // shadow-md
 }

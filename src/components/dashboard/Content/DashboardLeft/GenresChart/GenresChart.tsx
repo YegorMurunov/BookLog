@@ -23,7 +23,7 @@ const GenresChartComponent = () => {
 				data: dataNumbers,
 				backgroundColor: backgroundColor,
 				borderColor: 'rgba(255, 255, 255, 0.2)',
-				hoverBorderColor: '#bababa'
+				hoverBorderColor: '#d2d1d1'
 			}
 		]
 	};

@@ -2,6 +2,7 @@ import { memo } from 'react';
 
 import Slider from '@/components/ui/Slider/Slider';
 
+import AuthorsChart from './AuthorsChart/AuthorsChart';
 import BooksChart from './BooksChart/BooksChart';
 import GenresChart from './GenresChart/GenresChart';
 
@@ -12,13 +13,17 @@ const DashboardLeftComponent = () => {
 		<Slider
 			className={styles.slider}
 			pagination
-			autoplay
-			autoplayDelay={10000}
-			loop
+			// autoplay
+			// autoplayDelay={10000}
+			// loop
 			autoHeight
 			animationDuration={600}
 		>
-			{[<BooksChart key='books-chart' />, <GenresChart key='genres-chart' />]}
+			{[
+				<BooksChart key='books-chart' />,
+				<GenresChart key='genres-chart' />,
+				<AuthorsChart key='authors-chart' />
+			]}
 		</Slider>
 	);
 };

@@ -1,25 +1,30 @@
 import { Chart, type ChartOptions, registerables } from 'chart.js';
 import clsx from 'clsx';
 import { memo, useEffect, useRef } from 'react';
-import { PolarArea } from 'react-chartjs-2';
+import { Doughnut } from 'react-chartjs-2';
 
 import type { IChartProps } from '@/types/ui/charts.interface';
 
-import styles from './polar-area-chart.module.scss';
+import styles from './doughnut-chart.module.scss';
 
 Chart.register(...registerables);
 
-const PolarAreaChartComponent = ({
+const DoughnutChartComponent = ({
 	data,
 	title,
 	className,
-	legendPosition = 'top',
-	displayLegend = true
-}: IChartProps<'polarArea'>) => {
-	const chartRef = useRef<Chart<'polarArea'>>(null);
+	displayLegend = true,
+	legendPosition = 'top'
+}: IChartProps<'doughnut'>) => {
+	const chartRef = useRef<Chart<'doughnut'>>(null);
 
-	// Настройки графика PolarArea
-	const options: ChartOptions<'polarArea'> = {
+	// Настройки графика Doughnut
+	const options: ChartOptions<'doughnut'> = {
+		responsive: true,
+		layout: {
+			padding: 10
+		},
+		// cutout: '50%',
 		plugins: {
 			legend: {
 				display: displayLegend,
@@ -60,27 +65,6 @@ const PolarAreaChartComponent = ({
 				xAlign: 'center',
 				yAlign: 'bottom'
 			}
-		},
-		scales: {
-			r: {
-				ticks: {
-					color: '#181818',
-					stepSize: 1,
-					font: {
-						family: 'Inter',
-						size: 12,
-						weight: 'normal'
-					}
-				},
-				pointLabels: {
-					font: {
-						family: 'Inter',
-						size: 14,
-						weight: 'bold'
-					},
-					color: '#181818'
-				}
-			}
 		}
 	};
 
@@ -97,12 +81,12 @@ const PolarAreaChartComponent = ({
 
 	return (
 		<div className={clsx(styles.chartContainer, className)}>
-			<PolarArea ref={chartRef} data={data} options={options} title={title} />
+			<Doughnut ref={chartRef} data={data} options={options} title={title} />
 		</div>
 	);
 };
 
 // Мемоизация компонента для предотвращения лишних рендеров
-const PolarAreaChart = memo(PolarAreaChartComponent);
+const DoughnutChart = memo(DoughnutChartComponent);
 
-export default PolarAreaChart;
+export default DoughnutChart;
