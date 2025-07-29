@@ -21,6 +21,7 @@ const DoughnutChartComponent = ({
 	// Настройки графика Doughnut
 	const options: ChartOptions<'doughnut'> = {
 		responsive: true,
+		maintainAspectRatio: false,
 		layout: {
 			padding: 10
 		},

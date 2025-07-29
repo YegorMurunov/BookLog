@@ -20,6 +20,8 @@ const PolarAreaChartComponent = ({
 
 	// Настройки графика PolarArea
 	const options: ChartOptions<'polarArea'> = {
+		responsive: true,
+		maintainAspectRatio: false,
 		plugins: {
 			legend: {
 				display: displayLegend,

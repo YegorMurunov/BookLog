@@ -1,6 +1,8 @@
-import { memo } from 'react';
+import { memo, useEffect, useRef } from 'react';
+import { Swiper as SwiperType } from 'swiper';
 
 import Slider from '@/components/ui/Slider/Slider';
+import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import AuthorsChart from './AuthorsChart/AuthorsChart';
 import BooksChart from './BooksChart/BooksChart';
@@ -9,6 +11,18 @@ import GenresChart from './GenresChart/GenresChart';
 import styles from './dashboard-left.module.scss';
 
 const DashboardLeftComponent = () => {
+	const swiperRef = useRef<SwiperType | null>(null);
+
+	// Получаем фильтры
+	const { filters } = useTypedSelector(state => state.dashboardFilters);
+
+	// Сброс autoplay при смене фильтров
+	useEffect(() => {
+		if (!swiperRef.current) return;
+		swiperRef.current.autoplay.stop();
+		swiperRef.current.autoplay.start();
+	}, [filters]);
+
 	return (
 		<Slider
 			className={styles.slider}
@@ -18,6 +32,9 @@ const DashboardLeftComponent = () => {
 			loop
 			autoHeight
 			animationDuration={600}
+			onSwiperInit={swiper => {
+				swiperRef.current = swiper;
+			}}
 		>
 			{[
 				<BooksChart key='books-chart' />,

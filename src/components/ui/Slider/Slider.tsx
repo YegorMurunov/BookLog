@@ -61,8 +61,8 @@ const SliderComponent = ({
 			onSlideChange={onSlideChange}
 			onSwiper={onSwiperInit}
 			autoHeight={autoHeight}
-			observeParents={autoHeight}
-			observer={autoHeight}
+			observeParents={true}
+			observer={true}
 			speed={animationDuration}
 		>
 			{children.map((slide, index) => (

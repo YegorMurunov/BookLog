@@ -23,6 +23,7 @@ const BarChartComponent = ({
 	const options: ChartOptions<'bar'> = {
 		indexAxis: isHorizontal ? 'y' : 'x',
 		responsive: true,
+		maintainAspectRatio: false,
 		plugins: {
 			legend: {
 				display: displayLegend,
