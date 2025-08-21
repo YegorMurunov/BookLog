@@ -4,7 +4,7 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import type { TGoalForm } from '@/types/ui/goals.interface';
+import type { TGoalForm } from '@/types/api/goals.interface';
 
 import styles from './goals-form.module.scss';
 

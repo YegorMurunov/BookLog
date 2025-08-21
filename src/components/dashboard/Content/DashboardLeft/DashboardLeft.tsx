@@ -1,7 +1,9 @@
 import { memo, useEffect, useRef } from 'react';
+import { Link } from 'react-router';
 import { Swiper as SwiperType } from 'swiper';
 
 import Slider from '@/components/ui/Slider/Slider';
+import { useBooks } from '@/hooks/useBooks';
 import { useTypedSelector } from '@/hooks/useTypedSelector';
 
 import AuthorsChart from './AuthorsChart/AuthorsChart';
@@ -12,6 +14,7 @@ import styles from './dashboard-left.module.scss';
 
 const DashboardLeftComponent = () => {
 	const swiperRef = useRef<SwiperType | null>(null);
+	const { books } = useBooks();
 
 	// Получаем фильтры
 	const { filters } = useTypedSelector(state => state.dashboardFilters);
@@ -23,7 +26,19 @@ const DashboardLeftComponent = () => {
 		swiperRef.current.autoplay.start();
 	}, [filters]);
 
-	return (
+	return books.length === 0 ? (
+		<div className={styles.empty}>
+			<p>Вы не добавили еще не одной книги.</p>
+			<p>
+				Это можно сдлать на странице{' '}
+				{
+					<Link to='/books' className='text-skyblue underline'>
+						Книги
+					</Link>
+				}
+			</p>
+		</div>
+	) : (
 		<Slider
 			className={styles.slider}
 			pagination

@@ -14,10 +14,6 @@ import './global.scss';
 
 registerSW({ immediate: true });
 
-// TODO:
-// [] Переделать DeleteModal, на общий компонент, который будет принимать props
-// [] Сделать оптимзацию memo, usememo, usecallback
-
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<HelmetProvider>

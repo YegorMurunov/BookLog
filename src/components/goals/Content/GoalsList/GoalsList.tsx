@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import Skeleton from 'react-loading-skeleton';
 
 import { useGoals } from '@/hooks/useGoals';
-import type { IGoal } from '@/types/ui/goals.interface';
+import type { IGoal } from '@/types/api/goals.interface';
 import { DndContext, type DragEndEvent } from '@dnd-kit/core';
 import { restrictToVerticalAxis } from '@dnd-kit/modifiers';
 import { SortableContext, arrayMove } from '@dnd-kit/sortable';

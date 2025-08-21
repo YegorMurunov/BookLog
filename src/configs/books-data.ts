@@ -122,5 +122,11 @@ export const BooksGenresData: IBooksGenresData[] = [
 		label: 'Комедия',
 		color: 'rgb(219, 159, 3)',
 		chartColor: 'rgba(219, 159, 3, 0.6)'
+	},
+	{
+		value: 'contemporary',
+		label: 'Современная проза',
+		color: 'rgb(89, 125, 206)',
+		chartColor: 'rgba(89, 125, 206, 0.6)'
 	}
 ];

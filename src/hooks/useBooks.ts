@@ -124,10 +124,6 @@ export const useBooks = () => {
 				...doc.data()
 			})) as IBook[];
 
-			// const sortedBooks = sortBooks(booksData, {
-			// 	date: 'desc'
-			// });
-
 			setBooks(booksData);
 		});
 

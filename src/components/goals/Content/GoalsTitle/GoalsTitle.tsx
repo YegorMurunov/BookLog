@@ -6,7 +6,7 @@ import Skeleton from 'react-loading-skeleton';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import type { IGoalsListTitle } from '@/types/ui/goals.interface';
+import type { IGoalsListTitle } from '@/types/api/goals.interface';
 
 import styles from '../goals-content.module.scss';
 

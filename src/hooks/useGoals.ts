@@ -21,7 +21,7 @@ import type {
 	IGoal,
 	IGoalsListTitle,
 	IGoalsStats
-} from '@/types/ui/goals.interface';
+} from '@/types/api/goals.interface';
 import { generateGoalsStats } from '@/utils/genetate-goals-stats';
 
 import { useAuth } from './useAuth';

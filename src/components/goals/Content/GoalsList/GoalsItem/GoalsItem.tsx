@@ -4,8 +4,8 @@ import { useState } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import { useGoals } from '@/hooks/useGoals';
+import type { IGoal, IGoalsItemProps } from '@/types/api/goals.interface';
 import type { IDeleteModal } from '@/types/ui/delete-modal.interface';
-import type { IGoal, IGoalsItemProps } from '@/types/ui/goals.interface';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 

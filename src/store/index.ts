@@ -1,6 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
+import { achievementsApi } from './api/achievements-api';
 import { booksApi } from './api/books-api';
 import { goalsApi } from './api/goals-api';
 import authReducer from './slices/auth/auth.slice';
@@ -19,12 +20,14 @@ export const store = configureStore({
 		deleteModal: deleteModalReducer,
 		tableFilters: tableFiltersReducer,
 		[goalsApi.reducerPath]: goalsApi.reducer,
-		dashboardFilters: dashboardFiltersReducer
+		dashboardFilters: dashboardFiltersReducer,
+		[achievementsApi.reducerPath]: achievementsApi.reducer
 	},
 	middleware: getDefaultMiddleware =>
 		getDefaultMiddleware({ serializableCheck: false }).concat(
 			booksApi.middleware,
-			goalsApi.middleware
+			goalsApi.middleware,
+			achievementsApi.middleware
 		),
 	devTools: true
 });
