@@ -1,25 +1,20 @@
-import {
-	collection,
-	doc,
-	onSnapshot,
-	orderBy,
-	query
-} from 'firebase/firestore';
+import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
 import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { db } from '@/services/firebase/firebase';
 import {
 	useAddGoalMutation,
+	useAddGoalsListMutation,
 	useBatchUpdateGoalsMutation,
 	useDeleteGoalMutation,
-	useEditTitleMutation,
-	useGetGoalsQuery,
-	useGetTitleQuery,
+	useDeleteGoalsListMutation,
+	useGetGoalsListsQuery,
+	useRenameGoalsListMutation,
 	useUpdateGoalMutation
 } from '@/store/api/goals-api';
 import type {
 	IGoal,
-	IGoalsListTitle,
+	IGoalsList,
 	IGoalsStats
 } from '@/types/api/goals.interface';
 import { generateGoalsStats } from '@/utils/genetate-goals-stats';
@@ -32,35 +27,25 @@ export const useGoals = () => {
 
 	// Получение целей
 	const {
-		data: cachedGoals,
+		data: cachedLists,
 		isLoading,
 		error
-	} = useGetGoalsQuery(undefined, {
+	} = useGetGoalsListsQuery(undefined, {
 		skip: !userId // Не запрашивать, если юзер не авторизован
 	});
 
-	const [goals, setGoals] = useState<IGoal[]>(cachedGoals || []);
+	const [lists, setLists] = useState<IGoalsList[]>(cachedLists || []);
+
+	const [addGoalsListMutation] = useAddGoalsListMutation();
+	const [deleteGoalsListMutation] = useDeleteGoalsListMutation();
+	const [renameGoalsListMutation] = useRenameGoalsListMutation();
 
 	const [addGoalMutation] = useAddGoalMutation();
 	const [deleteGoalMutation] = useDeleteGoalMutation();
 	const [updateGoalMutation] = useUpdateGoalMutation();
 	const [batchUpdateGoals] = useBatchUpdateGoalsMutation();
 
-	// goals list title
-	const {
-		data: cachedTitle,
-		isLoading: isLoadingTitle,
-		error: errorTitle,
-		refetch: refetchTitle
-	} = useGetTitleQuery(undefined, {
-		skip: !userId
-	});
-
-	const goalsTitle = cachedTitle?.title || 'Цели на год';
-
-	const [editTitle] = useEditTitleMutation();
-
-	const prevGoalsRef = useRef<IGoal[]>(goals);
+	const prevGoalsListRef = useRef<IGoalsList[]>(lists);
 	const prevStatsRef = useRef<IGoalsStats>({
 		all: 0,
 		completed: 0,
@@ -68,88 +53,91 @@ export const useGoals = () => {
 	});
 
 	const stats = useMemo(() => {
-		if (prevGoalsRef.current === goals) {
+		if (prevGoalsListRef.current === lists) {
 			return prevStatsRef.current;
 		}
 
-		const goalsStats = generateGoalsStats(goals);
+		const goalsStats = generateGoalsStats(lists);
 
-		prevGoalsRef.current = goals;
+		prevGoalsListRef.current = lists;
 		prevStatsRef.current = goalsStats;
 		return prevStatsRef.current;
-	}, [goals]);
+	}, [lists]);
 
 	// Подписка на обновления в Firestore
 	useEffect(() => {
 		if (!userId) return;
 
-		const goalsRef = collection(db, 'users', userId, 'goals');
-		const q = query(goalsRef, orderBy('index', 'asc'));
+		const listsRef = collection(db, 'users', userId, 'goalsLists');
+		const q = query(listsRef, orderBy('createdAt', 'asc'));
 
 		const unsubscribe = onSnapshot(q, snapshot => {
-			const goalsData = snapshot.docs.map(doc => ({
+			const listData = snapshot.docs.map(doc => ({
 				id: doc.id,
 				...doc.data()
-			})) as IGoal[];
+			})) as IGoalsList[];
 
-			setGoals(goalsData);
+			setLists(listData);
 		});
 
 		return () => unsubscribe(); // Отписка при размонтировании
 	}, [userId]);
 
-	// Подписка на обновления в Firestore
-	useEffect(() => {
+	// Добавить новый список
+	const addGoalsList = async (title: string) => {
+		if (!userId) return null;
+
+		await addGoalsListMutation(title);
+	};
+
+	// Удалить список
+	const deleteGoalsList = async (listId: string) => {
 		if (!userId) return;
 
-		const titleDoc = doc(db, 'users', userId, 'goalsMeta', 'title');
+		await deleteGoalsListMutation(listId);
+	};
 
-		const unsubscribe = onSnapshot(titleDoc, () => {
-			refetchTitle(); // обновляем заголовок
-		});
+	// Переименовать список
+	const editTitle = async (listId: string, title: string) => {
+		if (!userId) return;
 
-		return () => unsubscribe();
-	}, [userId, refetchTitle]);
+		await renameGoalsListMutation({ listId, title });
+	};
 
 	// Функция добавления цели
-	const addGoal = async (goal: Omit<IGoal, 'id'>) => {
-		await addGoalMutation(goal);
+	const addGoal = async (listId: string, goal: Omit<IGoal, 'id'>) => {
+		await addGoalMutation({ listId, goal });
 	};
 	// Функция удаления цели
-	const deleteGoal = async (goalId: string) => {
-		await deleteGoalMutation(goalId);
+	const deleteGoal = async (listId: string, goalId: string) => {
+		await deleteGoalMutation({ listId, goalId });
 	};
 
 	// Функция обновления цели
 	const updateGoal = async (
+		listId: string,
 		goalId: string,
 		goalData: Partial<Omit<IGoal, 'id'>>
 	) => {
-		await updateGoalMutation({ goalId, goalData });
+		await updateGoalMutation({ listId, goalId, goalData });
 	};
 
 	// Функция переупорядочивания целей
-	const reorderGoals = async (goals: IGoal[]) => {
-		await batchUpdateGoals(goals);
-	};
-
-	// Функция для изменения названия списка целей
-	const editGoalsTitle = async (data: IGoalsListTitle) => {
-		await editTitle(data.title);
+	const reorderGoals = async (listId: string, goals: IGoal[]) => {
+		await batchUpdateGoals({ listId, goals });
 	};
 
 	return {
-		goals,
+		lists, // goals
 		isLoading,
 		error,
+		addGoalsList,
+		deleteGoalsList,
 		addGoal,
 		deleteGoal,
 		updateGoal,
 		reorderGoals,
-		editGoalsTitle,
-		goalsTitle,
-		isLoadingTitle,
-		errorTitle,
+		editTitle,
 		stats
 	};
 };

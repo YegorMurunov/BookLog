@@ -4,7 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState: IDeleteModal = {
 	id: null,
 	isOpen: false,
-	typeOfObject: null
+	typeOfObject: null,
+	listId: undefined
 };
 
 const deleteModalSlice = createSlice({
@@ -15,10 +16,12 @@ const deleteModalSlice = createSlice({
 			state.isOpen = true;
 			state.id = payload.id;
 			state.typeOfObject = payload.typeOfObject;
+			state.listId = payload.listId;
 		},
 		closeDeleteModal: state => {
 			state.isOpen = false;
 			state.id = null;
+			state.listId = undefined;
 		}
 	}
 });

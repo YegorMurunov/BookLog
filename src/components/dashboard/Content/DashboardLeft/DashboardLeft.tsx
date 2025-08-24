@@ -28,7 +28,7 @@ const DashboardLeftComponent = () => {
 
 	return books.length === 0 ? (
 		<div className={styles.empty}>
-			<p>Вы не добавили еще не одной книги.</p>
+			<p>Вы не добавили еще ни одной книги.</p>
 			<p>
 				Это можно сдлать на странице{' '}
 				{

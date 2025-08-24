@@ -4,12 +4,15 @@ import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import type { TGoalForm } from '@/types/api/goals.interface';
+import type { IListTitleProps, TGoalForm } from '@/types/api/goals.interface';
 
 import styles from './goals-form.module.scss';
 
-const GoalsForm = () => {
-	const { addGoal, goals } = useGoals();
+const GoalsForm = ({ list }: IListTitleProps) => {
+	const { addGoal } = useGoals();
+
+	const listId = list.id;
+	const goals = list?.goals || [];
 
 	const { handleSubmit, control, formState, setValue } = useForm<TGoalForm>({
 		mode: 'onSubmit',
@@ -24,7 +27,7 @@ const GoalsForm = () => {
 			isCompleted: false,
 			title: data.title
 		};
-		await addGoal(goalData).then(() => setValue('title', ''));
+		await addGoal(listId, goalData).then(() => setValue('title', ''));
 	};
 
 	return (

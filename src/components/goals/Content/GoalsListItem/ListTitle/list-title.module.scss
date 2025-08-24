@@ -1,0 +1,63 @@
+.ListTitle {
+	@apply mb-2 flex items-center gap-2 text-2xl text-dark;
+
+	.titleForm {
+		@apply inline-flex items-center gap-2;
+	}
+
+	.titleInput {
+		@apply max-w-[200px];
+	}
+
+	.titleBtns {
+		@apply flex items-center gap-1;
+	}
+
+	.titleBtn {
+		@apply pointer-events-none opacity-75 transition-opacity duration-300 ease-in-out;
+
+		> svg {
+			@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
+		}
+
+		&:hover {
+			> svg {
+				@apply text-dark;
+			}
+		}
+
+		&.edit,
+		&.saveBtn,
+		&.delete {
+			@apply opacity-100;
+
+			> svg {
+				@apply mt-3;
+			}
+
+			&:hover {
+				> svg {
+					@apply text-red;
+				}
+			}
+		}
+
+		&.delete {
+			> svg {
+				@apply mt-0;
+			}
+		}
+
+		&.saveBtn:hover {
+			> svg {
+				@apply text-green;
+			}
+		}
+	}
+
+	&:hover {
+		.titleBtn {
+			@apply pointer-events-auto opacity-100;
+		}
+	}
+}

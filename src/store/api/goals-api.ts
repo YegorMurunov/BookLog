@@ -1,13 +1,14 @@
 import {
 	batchUpdateGoals,
 	firebaseAddGoal,
+	firebaseAddGoalsList,
 	firebaseDeleteGoal,
-	firebaseGetGoals,
-	firebaseGetGoalsTitle,
-	firebaseUpdateGoal,
-	firebaseUpdateGoalsTitle
+	firebaseDeleteGoalsList,
+	firebaseGetGoalsLists,
+	firebaseRenameGoalsList,
+	firebaseUpdateGoal
 } from '@/services/firebase/goals';
-import type { IGoal, IGoalsListTitle } from '@/types/api/goals.interface';
+import type { IGoal, IGoalsList } from '@/types/api/goals.interface';
 import { toastWithPromise } from '@/utils/toast.utils';
 import { createApi, fakeBaseQuery } from '@reduxjs/toolkit/query/react';
 
@@ -16,21 +17,24 @@ export const goalsApi = createApi({
 	baseQuery: fakeBaseQuery(),
 	tagTypes: ['goals'],
 	endpoints: builder => ({
-		getGoals: builder.query<IGoal[], void>({
+		// Получить все списки
+		getGoalsLists: builder.query<IGoalsList[], void>({
 			async queryFn() {
 				try {
-					const goals = await firebaseGetGoals();
-					return { data: goals };
+					const lists = await firebaseGetGoalsLists();
+					return { data: lists };
 				} catch (e) {
 					return { error: e };
 				}
 			},
 			providesTags: ['goals']
 		}),
-		addGoal: builder.mutation<void, Omit<IGoal, 'id'>>({
-			async queryFn(goal) {
+
+		// Добавить новый список
+		addGoalsList: builder.mutation<IGoalsList, string>({
+			async queryFn(title) {
 				try {
-					await toastWithPromise(() => firebaseAddGoal(goal), 'addGoal');
+					await toastWithPromise(() => firebaseAddGoalsList(title), 'addGoal');
 					return { data: undefined };
 				} catch (e) {
 					return { error: e };
@@ -38,11 +42,13 @@ export const goalsApi = createApi({
 			},
 			invalidatesTags: ['goals']
 		}),
-		deleteGoal: builder.mutation<void, string>({
-			async queryFn(goalId) {
+
+		// Удалить список
+		deleteGoalsList: builder.mutation<void, string>({
+			async queryFn(listId) {
 				try {
 					await toastWithPromise(
-						() => firebaseDeleteGoal(goalId),
+						() => firebaseDeleteGoalsList(listId),
 						'deleteGoal'
 					);
 					return { data: undefined };
@@ -52,42 +58,13 @@ export const goalsApi = createApi({
 			},
 			invalidatesTags: ['goals']
 		}),
-		updateGoal: builder.mutation<
-			void,
-			{
-				goalId: string;
-				goalData: Partial<Omit<IGoal, 'id'>>;
-			}
-		>({
-			async queryFn({ goalId, goalData }) {
+
+		// Переименовать список
+		renameGoalsList: builder.mutation<void, { listId: string; title: string }>({
+			async queryFn({ listId, title }) {
 				try {
 					await toastWithPromise(
-						() => firebaseUpdateGoal(goalId, goalData),
-						'editGoal'
-					);
-					return { data: undefined };
-				} catch (e) {
-					return { error: e };
-				}
-			},
-			invalidatesTags: ['goals']
-		}),
-		batchUpdateGoals: builder.mutation<void, IGoal[]>({
-			async queryFn(goals) {
-				try {
-					await toastWithPromise(() => batchUpdateGoals(goals), 'reorderGoals');
-					return { data: undefined };
-				} catch (e) {
-					return { error: e };
-				}
-			},
-			invalidatesTags: ['goals']
-		}),
-		editTitle: builder.mutation<void, string>({
-			async queryFn(title) {
-				try {
-					await toastWithPromise(
-						() => firebaseUpdateGoalsTitle(title),
+						() => firebaseRenameGoalsList(listId, title),
 						'editGoalTitle'
 					);
 					return { data: undefined };
@@ -97,26 +74,93 @@ export const goalsApi = createApi({
 			},
 			invalidatesTags: ['goals']
 		}),
-		getTitle: builder.query<IGoalsListTitle, void>({
-			async queryFn() {
+
+		// Добавить цель в конкретный список
+		addGoal: builder.mutation<
+			void,
+			{ listId: string; goal: Omit<IGoal, 'id'> }
+		>({
+			async queryFn({ listId, goal }) {
 				try {
-					const title = await firebaseGetGoalsTitle();
-					return { data: title };
+					await toastWithPromise(
+						() => firebaseAddGoal(listId, goal),
+						'addGoal'
+					);
+					return { data: undefined };
 				} catch (e) {
 					return { error: e };
 				}
 			},
-			providesTags: ['goals']
+			invalidatesTags: ['goals']
+		}),
+
+		// Удалить цель из конкретного списка
+		deleteGoal: builder.mutation<void, { listId: string; goalId: string }>({
+			async queryFn({ listId, goalId }) {
+				try {
+					await toastWithPromise(
+						() => firebaseDeleteGoal(listId, goalId),
+						'deleteGoal'
+					);
+					return { data: undefined };
+				} catch (e) {
+					return { error: e };
+				}
+			},
+			invalidatesTags: ['goals']
+		}),
+
+		// Изменить цель в конкретном списке
+		updateGoal: builder.mutation<
+			void,
+			{
+				listId: string;
+				goalId: string;
+				goalData: Partial<Omit<IGoal, 'id'>>;
+			}
+		>({
+			async queryFn({ listId, goalId, goalData }) {
+				try {
+					await toastWithPromise(
+						() => firebaseUpdateGoal(listId, goalId, goalData),
+						'editGoal'
+					);
+					return { data: undefined };
+				} catch (e) {
+					return { error: e };
+				}
+			},
+			invalidatesTags: ['goals']
+		}),
+
+		// Переупорядочить цели в конкретном списке
+		batchUpdateGoals: builder.mutation<
+			void,
+			{ listId: string; goals: IGoal[] }
+		>({
+			async queryFn({ listId, goals }) {
+				try {
+					await toastWithPromise(
+						() => batchUpdateGoals(listId, goals),
+						'reorderGoals'
+					);
+					return { data: undefined };
+				} catch (e) {
+					return { error: e };
+				}
+			},
+			invalidatesTags: ['goals']
 		})
 	})
 });
 
 export const {
-	useGetGoalsQuery,
+	useGetGoalsListsQuery,
+	useAddGoalsListMutation,
+	useDeleteGoalsListMutation,
+	useRenameGoalsListMutation,
 	useAddGoalMutation,
 	useDeleteGoalMutation,
 	useUpdateGoalMutation,
-	useBatchUpdateGoalsMutation,
-	useEditTitleMutation,
-	useGetTitleQuery
+	useBatchUpdateGoalsMutation
 } = goalsApi;

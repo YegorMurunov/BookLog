@@ -4,4 +4,5 @@ export interface IDeleteModal {
 	id: string | null;
 	isOpen: boolean;
 	typeOfObject: TtypeOfObject | null;
+	listId?: string; // Добавлено для целей
 }

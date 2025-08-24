@@ -5,15 +5,30 @@ export interface IGoal {
 	isCompleted: boolean;
 }
 
-export interface IGoalsItemProps {
-	goal: IGoal;
+export interface IGoalsList {
+	id: string;
+	title: string;
+	createdAt: string; // ISO дата создания
+	goals: IGoal[];
 }
 
-export type TGoalForm = Omit<IGoal, 'id'>;
+export interface GoalsListItemProps {
+	list: IGoalsList;
+}
 
+export interface IListTitleProps {
+	list: IGoalsList;
+}
 export interface IGoalsListTitle {
 	title: string;
 }
+
+export interface IGoalsItemProps {
+	goal: IGoal;
+	listId: string;
+}
+
+export type TGoalForm = Omit<IGoal, 'id'>;
 
 export interface IGoalsStats {
 	all: number;

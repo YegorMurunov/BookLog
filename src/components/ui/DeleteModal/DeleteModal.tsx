@@ -15,7 +15,9 @@ function DeleteModal() {
 	const { deleteBook } = useBooks();
 	const { deleteGoal } = useGoals();
 
-	const { id, typeOfObject } = useTypedSelector(state => state.deleteModal);
+	const { id, typeOfObject, listId } = useTypedSelector(
+		state => state.deleteModal
+	);
 
 	const ref = useRef<HTMLDivElement>(null);
 
@@ -30,7 +32,7 @@ function DeleteModal() {
 			if (typeOfObject === 'table') {
 				deleteBook(id).then(() => closeDeleteModal());
 			} else {
-				deleteGoal(id).then(() => closeDeleteModal());
+				deleteGoal(listId!, id).then(() => closeDeleteModal());
 			}
 		}
 	};

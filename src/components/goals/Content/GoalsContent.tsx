@@ -3,15 +3,13 @@ import QuoteCard from '@/components/ui/Quote/Quote';
 import { useGoals } from '@/hooks/useGoals';
 import getQuote from '@/utils/get-quote';
 
-import GoalsForm from './GoalsForm/GoalsForm';
-import GoalsList from './GoalsList/GoalsList';
-import GoalsTitle from './GoalsTitle/GoalsTitle';
+import GoalsListItem from './GoalsListItem/GoalsListItem';
 
 import styles from './goals-content.module.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
 
 const GoalsContent = () => {
-	const { stats } = useGoals();
+	const { stats, lists, addGoalsList } = useGoals();
 
 	const { all, completed } = stats;
 	const value = stats.percent;
@@ -22,9 +20,15 @@ const GoalsContent = () => {
 		<section className={styles.content}>
 			<div className={styles.goals}>
 				<div className={styles.goals__item}>
-					<GoalsTitle />
-					<GoalsForm />
-					<GoalsList />
+					{lists.map(list => (
+						<GoalsListItem list={list} key={list.id} />
+					))}
+					<button
+						onClick={() => addGoalsList('Новый список')}
+						className={styles.addButton}
+					>
+						Создать список
+					</button>
 				</div>
 				<div className={styles.goals__item}>
 					<ProgressbarWidget value={value} title='Прогресс' className='mt-8'>

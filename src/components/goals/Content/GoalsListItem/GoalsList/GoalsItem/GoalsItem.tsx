@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { GripVertical, Square, SquareCheckBig, Trash2 } from 'lucide-react';
-import { useState } from 'react';
+import { memo, useState } from 'react';
 
 import { useActions } from '@/hooks/useActions';
 import { useGoals } from '@/hooks/useGoals';
@@ -11,13 +11,14 @@ import { CSS } from '@dnd-kit/utilities';
 
 import styles from '../goals-list.module.scss';
 
-const GoalsItem = ({ goal }: IGoalsItemProps) => {
+const GoalsItemComponent = ({ goal, listId }: IGoalsItemProps) => {
 	const { updateGoal } = useGoals();
 	const { openDeleteModal } = useActions();
 
 	const modalData: Omit<IDeleteModal, 'isOpen'> = {
 		id: goal.id,
-		typeOfObject: 'goals'
+		typeOfObject: 'goals',
+		listId: listId
 	};
 
 	const [isDisabled, setIsDisabled] = useState(false);
@@ -38,7 +39,7 @@ const GoalsItem = ({ goal }: IGoalsItemProps) => {
 				...goal,
 				isCompleted: !goal.isCompleted
 			};
-			await updateGoal(goal.id, goalData);
+			await updateGoal(listId, goal.id, goalData);
 		} catch (error) {
 			console.error('Error to edit goal:', error);
 		} finally {
@@ -74,5 +75,7 @@ const GoalsItem = ({ goal }: IGoalsItemProps) => {
 		</li>
 	);
 };
+
+const GoalsItem = memo(GoalsItemComponent);
 
 export default GoalsItem;

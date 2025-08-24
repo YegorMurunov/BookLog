@@ -5,8 +5,22 @@
 		@apply flex flex-wrap gap-6;
 
 		&__item {
-			@apply flex-1;
+			@apply flex-1 self-start;
 		}
+	}
+}
+
+.addButton {
+	@apply mt-4 w-full rounded-lg border-4 border-pink/20 bg-pink/10 p-2 text-dark transition-colors;
+
+	&:hover {
+		@apply border-gray/40 bg-pink text-white;
+	}
+}
+
+.listItem {
+	&:not(:first-child) {
+		@apply mt-8;
 	}
 }
 
@@ -18,59 +32,6 @@
 			&__item {
 				@apply w-full;
 			}
-		}
-	}
-}
-
-.GoalTitle {
-	@apply mb-2 flex items-center gap-2 text-2xl text-dark;
-
-	.titleForm {
-		@apply inline-flex items-center gap-2;
-	}
-
-	.titleInput {
-		@apply max-w-[200px];
-	}
-
-	.titleBtn {
-		@apply pointer-events-none opacity-75 transition-opacity duration-300 ease-in-out;
-
-		> svg {
-			@apply h-5 w-5 text-gray transition-colors duration-300 ease-in-out;
-		}
-
-		&:hover {
-			> svg {
-				@apply text-dark;
-			}
-		}
-
-		&.edit,
-		&.saveBtn {
-			@apply opacity-100;
-
-			> svg {
-				@apply mt-3;
-			}
-
-			&:hover {
-				> svg {
-					@apply text-red;
-				}
-			}
-		}
-
-		&.saveBtn:hover {
-			> svg {
-				@apply text-green;
-			}
-		}
-	}
-
-	&:hover {
-		.titleBtn {
-			@apply pointer-events-auto opacity-100;
 		}
 	}
 }

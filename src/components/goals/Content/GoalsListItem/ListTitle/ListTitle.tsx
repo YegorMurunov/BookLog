@@ -1,47 +1,39 @@
 import clsx from 'clsx';
-import { Check, Pencil, X } from 'lucide-react';
-import { useEffect, useState } from 'react';
+import { Check, Pencil, Trash2, X } from 'lucide-react';
+import { memo, useState } from 'react';
 import { Controller, type SubmitHandler, useForm } from 'react-hook-form';
-import Skeleton from 'react-loading-skeleton';
 
 import Input from '@/components/ui/fields/Input/Input';
 import { useGoals } from '@/hooks/useGoals';
-import type { IGoalsListTitle } from '@/types/api/goals.interface';
+import type {
+	IGoalsListTitle,
+	IListTitleProps
+} from '@/types/api/goals.interface';
 
-import styles from '../goals-content.module.scss';
+import styles from './list-title.module.scss';
 
-const GoalsTitle = () => {
-	const { editGoalsTitle, goalsTitle, isLoadingTitle } = useGoals();
+const ListTitleComponent = ({ list }: IListTitleProps) => {
+	const listTitle = list?.title;
+	const listId = list?.id;
+
+	const { editTitle, deleteGoalsList } = useGoals();
 
 	const [isEdit, setIsEdit] = useState(false);
 
-	const { handleSubmit, control, reset } = useForm<IGoalsListTitle>({
+	const { handleSubmit, control } = useForm<IGoalsListTitle>({
 		mode: 'onSubmit',
 		defaultValues: {
-			title: goalsTitle || 'Цели на год'
+			title: listTitle || 'Новый список'
 		}
 	});
 
-	// Обновляем форму, когда данные загружены
-	useEffect(() => {
-		if (!isLoadingTitle && goalsTitle) {
-			reset({ title: goalsTitle });
-		}
-	}, [isLoadingTitle, goalsTitle, reset]);
-
 	const onSubmit: SubmitHandler<IGoalsListTitle> = async data => {
-		const titleData: IGoalsListTitle = {
-			title: data.title
-		};
-
-		await editGoalsTitle(titleData).finally(() => setIsEdit(false));
+		await editTitle(listId, data.title).finally(() => setIsEdit(false));
 	};
 
 	return (
-		<h2 className={styles.GoalTitle}>
-			{isLoadingTitle ? (
-				<Skeleton width={200} />
-			) : isEdit ? (
+		<h2 className={styles.ListTitle}>
+			{isEdit ? (
 				<form className={styles.titleForm} onSubmit={handleSubmit(onSubmit)}>
 					<Controller
 						control={control}
@@ -74,9 +66,9 @@ const GoalsTitle = () => {
 					</button>
 				</form>
 			) : (
-				goalsTitle || 'Цели на год'
+				listTitle || 'Новый список'
 			)}
-			{!isLoadingTitle && (
+			<div className={styles.titleBtns}>
 				<button
 					type='button'
 					className={clsx(styles.titleBtn, isEdit && styles.edit)}
@@ -84,9 +76,20 @@ const GoalsTitle = () => {
 				>
 					{isEdit ? <X /> : <Pencil />}
 				</button>
-			)}
+				{!isEdit && (
+					<button
+						type='button'
+						className={clsx(styles.titleBtn, styles.delete)}
+						onClick={() => deleteGoalsList(listId)}
+					>
+						<Trash2 />
+					</button>
+				)}
+			</div>
 		</h2>
 	);
 };
 
-export default GoalsTitle;
+const ListTitle = memo(ListTitleComponent);
+
+export default ListTitle;
