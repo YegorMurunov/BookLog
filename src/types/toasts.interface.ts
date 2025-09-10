@@ -21,6 +21,8 @@ export type TToastType =
 	| 'addGoal'
 	| 'editGoal'
 	| 'reorderGoals'
-	| 'editGoalTitle';
+	| 'editGoalTitle'
+	| 'addGoalsList'
+	| 'deleteGoalsList';
 
 export type IToastsMessages = Record<TToastType, IToastsState>;

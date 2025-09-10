@@ -34,7 +34,10 @@ export const goalsApi = createApi({
 		addGoalsList: builder.mutation<IGoalsList, string>({
 			async queryFn(title) {
 				try {
-					await toastWithPromise(() => firebaseAddGoalsList(title), 'addGoal');
+					await toastWithPromise(
+						() => firebaseAddGoalsList(title),
+						'addGoalsList'
+					);
 					return { data: undefined };
 				} catch (e) {
 					return { error: e };
@@ -49,7 +52,7 @@ export const goalsApi = createApi({
 				try {
 					await toastWithPromise(
 						() => firebaseDeleteGoalsList(listId),
-						'deleteGoal'
+						'deleteGoalsList'
 					);
 					return { data: undefined };
 				} catch (e) {
