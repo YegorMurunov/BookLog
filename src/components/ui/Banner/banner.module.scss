@@ -12,6 +12,21 @@
 	.cards {
 		@apply mt-8 flex flex-nowrap gap-3 overflow-x-auto;
 	}
+
+	.bannerInfo {
+		@apply mb-1 ml-2 inline-block align-middle text-base font-normal text-dark;
+
+		&__icon {
+			> svg {
+				@apply h-6 w-6 rounded-full text-dark-gray transition-colors duration-300 ease-in-out;
+			}
+			&:hover {
+				> svg {
+					@apply text-dark;
+				}
+			}
+		}
+	}
 }
 
 .image-banner {

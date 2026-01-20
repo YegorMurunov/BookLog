@@ -1,7 +1,10 @@
 import clsx from 'clsx';
+import { Info } from 'lucide-react';
 import { useState } from 'react';
 
 import type { IBannerProps } from '@/types/ui/banner.interface';
+
+import CustomTooltip from '../Tooltip/Tooltip';
 
 import styles from './banner.module.scss';
 
@@ -10,7 +13,8 @@ const Banner = ({
 	children,
 	className,
 	bannerImg,
-	type = 'default'
+	type = 'default',
+	tooltipText
 }: IBannerProps) => {
 	const [errorImage, setErrorImage] = useState(false);
 
@@ -30,7 +34,21 @@ const Banner = ({
 		)
 	) : (
 		<div className={clsx(styles.banner, className)}>
-			<h1 className={styles.title}>{pageTitle}</h1>
+			<h1 className={styles.title}>
+				{pageTitle}
+				{tooltipText && (
+					<span className={styles.bannerInfo}>
+						<i className={styles.bannerInfo__icon} id='Banner-Tooltip'>
+							<Info />
+						</i>
+						<CustomTooltip
+							id='Banner-Tooltip'
+							title={tooltipText}
+							place='right'
+						/>
+					</span>
+				)}
+			</h1>
 			{children && <div className={styles.cards}>{children}</div>}
 		</div>
 	);

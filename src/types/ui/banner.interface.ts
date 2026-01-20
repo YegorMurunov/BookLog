@@ -7,4 +7,5 @@ export interface IBannerProps extends PropsWithChildren {
 	className?: string;
 	bannerImg?: string | null;
 	type?: bannerType;
+	tooltipText?: string;
 }
