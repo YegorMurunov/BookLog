@@ -24,10 +24,32 @@ const manifest: Partial<ManifestOptions> | false = {
 	],
 	screenshots: [
 		{
-			src: '/screenshots/desktop.png',
+			src: '/screenshots/dashboard.png',
 			type: 'image/png',
-			sizes: '1919x869',
-			form_factor: 'wide'
+			sizes: '1920x1016',
+			form_factor: 'wide',
+			label: 'Дашбоард со статистикой'
+		},
+		{
+			src: '/screenshots/books.png',
+			type: 'image/png',
+			sizes: '1920x1055',
+			form_factor: 'wide',
+			label: 'Коллекция книг'
+		},
+		{
+			src: '/screenshots/goals.png',
+			type: 'image/png',
+			sizes: '1920x1006',
+			form_factor: 'wide',
+			label: 'Цели'
+		},
+		{
+			src: '/screenshots/add_book.png',
+			type: 'image/png',
+			sizes: '1920x1006',
+			form_factor: 'wide',
+			label: 'Добавление книги в библиотеку'
 		},
 		{
 			src: '/screenshots/mobile.png',
