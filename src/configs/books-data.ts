@@ -52,6 +52,12 @@ export const BooksGenresData: IBooksGenresData[] = [
 		chartColor: 'rgba(74, 189, 195, 0.6)'
 	},
 	{
+		value: 'non-fiction',
+		label: 'Нон-фикшн',
+		color: 'rgb(231, 111, 81)',
+		chartColor: 'rgba(231, 111, 81, 0.6)'
+	},
+	{
 		value: 'mystery',
 		label: 'Мистика',
 		color: 'rgb(65, 99, 108)',

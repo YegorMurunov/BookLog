@@ -4,6 +4,7 @@ export type TGenres =
 	| 'fiction'
 	| 'detective'
 	| 'science-fiction'
+	| 'non-fiction'
 	| 'mystery'
 	| 'romance'
 	| 'thriller'
