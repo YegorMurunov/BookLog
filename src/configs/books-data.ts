@@ -134,5 +134,17 @@ export const BooksGenresData: IBooksGenresData[] = [
 		label: 'Современная проза',
 		color: 'rgb(89, 125, 206)',
 		chartColor: 'rgba(89, 125, 206, 0.6)'
+	},
+	{
+		value: 'poetry',
+		label: 'Поэзия',
+		color: 'rgb(218, 112, 214)',
+		chartColor: 'rgba(218, 112, 214, 0.6)'
+	},
+	{
+		value: 'fairy-tales',
+		label: 'Сказки',
+		color: 'rgb(244, 164, 96)',
+		chartColor: 'rgba(244, 164, 96, 0.6)'
 	}
 ];

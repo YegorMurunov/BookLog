@@ -17,7 +17,9 @@ export type TGenres =
 	| 'adventure'
 	| 'classics'
 	| 'comedy'
-	| 'contemporary';
+	| 'contemporary'
+	| 'poetry'
+	| 'fairy-tales';
 
 export interface IBook {
 	id: string;
