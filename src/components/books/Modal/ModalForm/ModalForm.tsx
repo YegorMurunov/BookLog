@@ -145,6 +145,7 @@ function ModalForm() {
 								{...field}
 								error={fieldState?.error?.message}
 								isSearchable
+								isMulti
 								options={BooksGenresData}
 								placeholder='Выберите жанр...'
 							/>
